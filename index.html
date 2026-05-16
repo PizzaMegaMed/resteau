@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MegaMed Snack – Fast, Delicious & Affordable</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0a;
@@ -16,16 +16,15 @@
     --gold: #f5c842;
     --text: #f0ece4;
     --text2: #9e9a93;
-    --card: #161616;
+    --card: #141414;
     --border: rgba(255,255,255,0.07);
-    --radius: 18px;
+    --radius: 20px;
+    --radius-sm: 12px;
     --nav-h: 68px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -41,41 +40,30 @@
     height: var(--nav-h);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 5%;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(18px);
+    background: rgba(10,10,10,0.9);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    transition: background 0.3s;
   }
   .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 3px;
-    color: var(--text);
-    text-decoration: none;
+    font-size: 2rem; letter-spacing: 3px;
+    color: var(--text); text-decoration: none;
     display: flex; align-items: center; gap: 8px;
   }
   .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
-    color: var(--text2);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.88rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    color: var(--text2); text-decoration: none;
+    font-weight: 500; font-size: 0.85rem;
+    letter-spacing: 0.8px; text-transform: uppercase;
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--text); }
   .nav-cart-btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff; border: none;
+    padding: 10px 22px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 8px;
     font-size: 0.88rem;
     transition: background 0.2s, transform 0.15s;
     position: relative;
@@ -84,12 +72,10 @@
   .cart-badge {
     position: absolute; top: -8px; right: -8px;
     background: var(--gold); color: #000;
-    font-size: 0.7rem; font-weight: 700;
-    width: 20px; height: 20px;
-    border-radius: 50%;
+    font-size: 0.68rem; font-weight: 700;
+    width: 20px; height: 20px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; transform: scale(0);
-    transition: all 0.2s;
+    opacity: 0; transform: scale(0); transition: all 0.2s;
   }
   .cart-badge.show { opacity: 1; transform: scale(1); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
@@ -99,462 +85,394 @@
   #home {
     min-height: 100vh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: var(--nav-h) 5% 60px;
-    text-align: center;
+    position: relative; overflow: hidden;
+    padding: var(--nav-h) 5% 60px; text-align: center;
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
+    background:
       radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,69,0,0.18) 0%, transparent 70%),
       radial-gradient(ellipse 60% 40% at 80% 30%, rgba(245,200,66,0.08) 0%, transparent 60%),
       linear-gradient(to bottom, #0a0a0a 0%, #130a06 100%);
     z-index: 0;
   }
   .hero-food-strip {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 45%;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
     display: flex; align-items: flex-end; justify-content: center;
-    gap: 0;
     overflow: hidden;
     mask-image: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
     z-index: 1;
   }
   .hero-food-strip .food-img {
-    width: 200px; height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid rgba(255,255,255,0.06);
-    margin: 0 -20px;
-    filter: brightness(0.6) saturate(1.2);
+    width: 200px; height: 200px; object-fit: cover;
+    border-radius: 50%; border: 3px solid rgba(255,255,255,0.06);
+    margin: 0 -20px; filter: brightness(0.6) saturate(1.2);
     transition: filter 0.4s;
   }
   .hero-food-strip .food-img:hover { filter: brightness(0.9) saturate(1.4); }
   .hero-content { position: relative; z-index: 2; }
   .hero-eyebrow {
     display: inline-block;
-    background: rgba(255,69,0,0.15);
-    border: 1px solid rgba(255,69,0,0.3);
-    color: var(--accent2);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 50px;
-    margin-bottom: 24px;
+    background: rgba(255,69,0,0.12); border: 1px solid rgba(255,69,0,0.3);
+    color: var(--accent2); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 50px; margin-bottom: 24px;
     animation: fadeUp 0.7s ease both;
   }
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(4rem, 12vw, 9rem);
-    line-height: 0.92;
-    letter-spacing: 4px;
-    animation: fadeUp 0.7s 0.1s ease both;
-    margin-bottom: 10px;
+    line-height: 0.92; letter-spacing: 4px;
+    animation: fadeUp 0.7s 0.1s ease both; margin-bottom: 10px;
   }
   .hero-title em {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: var(--accent);
-    display: block;
-    font-size: 0.5em;
-    letter-spacing: 8px;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--accent); display: block; font-size: 0.5em; letter-spacing: 8px;
   }
   .hero-sub {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--text2);
-    font-weight: 300;
-    margin-bottom: 40px;
-    animation: fadeUp 0.7s 0.2s ease both;
+    font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--text2); font-weight: 300;
+    margin-bottom: 40px; animation: fadeUp 0.7s 0.2s ease both;
     max-width: 500px; margin-left: auto; margin-right: auto;
   }
   .hero-sub strong { color: var(--text); font-weight: 600; }
   .hero-ctas {
     display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.3s ease both;
-    margin-bottom: 40px;
+    animation: fadeUp 0.7s 0.3s ease both; margin-bottom: 40px;
   }
   .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 16px 36px;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
+    background: var(--accent); color: #fff; border: none;
+    padding: 16px 36px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem;
+    cursor: pointer; text-decoration: none;
     display: inline-flex; align-items: center; gap: 8px;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     box-shadow: 0 8px 32px rgba(255,69,0,0.35);
   }
   .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,69,0,0.45); }
   .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1.5px solid rgba(255,255,255,0.2);
-    padding: 15px 32px;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
+    background: transparent; color: var(--text);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    padding: 15px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 1rem;
+    cursor: pointer; text-decoration: none;
     display: inline-flex; align-items: center; gap: 8px;
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
   }
   .btn-outline:hover { border-color: var(--accent); background: rgba(255,69,0,0.08); transform: translateY(-2px); }
-  .hero-stats {
-    display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.4s ease both;
-  }
+  .hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.7s 0.4s ease both; }
   .hero-stat { text-align: center; }
-  .hero-stat .num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.4rem;
-    color: var(--gold);
-    display: block;
-  }
-  .hero-stat small { color: var(--text2); font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; }
+  .hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--gold); display: block; }
+  .hero-stat small { color: var(--text2); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
 
   /* ─── SECTIONS ─── */
   section { padding: 100px 5%; }
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-  }
+  .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: 2px; margin-bottom: 16px; }
   .section-sub { color: var(--text2); max-width: 480px; font-weight: 300; }
 
   /* ─── MENU ─── */
   #menu { background: var(--bg2); }
-  .menu-header { text-align: center; margin-bottom: 50px; }
+  .menu-header { text-align: center; margin-bottom: 60px; }
   .menu-header .section-sub { margin: 0 auto; }
 
-  .category-tabs {
-    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-    margin-bottom: 48px;
-  }
-  .tab-btn {
-    background: var(--card);
-    color: var(--text2);
-    border: 1.5px solid var(--border);
-    padding: 10px 22px;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-  }
-  .tab-btn:hover { border-color: rgba(255,69,0,0.5); color: var(--text); }
-  .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .tab-btn .tab-icon { font-size: 1.1rem; }
-
-  .menu-grid {
+  /* ─── CATEGORY GRID ─── */
+  .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
   }
-  .food-card {
-    background: var(--card);
+
+  /* Category Card */
+  .cat-card {
+    position: relative; border-radius: var(--radius);
+    overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border);
+    aspect-ratio: 4/3;
+    transition: transform 0.35s cubic-bezier(0.2,0,0,1), box-shadow 0.35s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    animation: fadeUp 0.5s ease both;
+    outline: none;
+  }
+  .cat-card:hover, .cat-card.active {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 56px rgba(0,0,0,0.65), 0 0 0 1.5px rgba(255,69,0,0.3);
+    border-color: rgba(255,69,0,0.35);
+  }
+  .cat-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.5s cubic-bezier(0.2,0,0,1), filter 0.4s ease;
+    filter: brightness(0.5) saturate(1.1);
+  }
+  .cat-card:hover img, .cat-card.active img { transform: scale(1.07); filter: brightness(0.42) saturate(1.25); }
+
+  .cat-card::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.35) 50%, rgba(10,10,10,0.05) 100%);
+    transition: background 0.35s;
+  }
+  .cat-card.active::before {
+    background: linear-gradient(to top, rgba(255,69,0,0.6) 0%, rgba(10,10,10,0.45) 55%, rgba(10,10,10,0.1) 100%);
+  }
+
+  .cat-card-content {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    padding: 22px 20px 20px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .cat-icon { font-size: 1.9rem; line-height: 1; margin-bottom: 3px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); }
+  .cat-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 2px;
+    color: var(--text); line-height: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .cat-meta {
+    display: flex; align-items: center; gap: 7px;
+    color: rgba(240,236,228,0.6); font-size: 0.76rem; font-weight: 500;
+  }
+  .cat-meta .dot { width: 3px; height: 3px; background: var(--accent2); border-radius: 50%; }
+
+  .cat-arrow {
+    position: absolute; top: 14px; right: 14px; z-index: 2;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text); font-size: 0.85rem;
+    backdrop-filter: blur(8px);
+    transition: background 0.25s, border-color 0.25s, transform 0.3s;
+  }
+  .cat-card:hover .cat-arrow { background: var(--accent); border-color: var(--accent); transform: rotate(45deg); }
+  .cat-card.active .cat-arrow { background: var(--accent); border-color: var(--accent); transform: rotate(135deg); }
+
+  /* ─── ITEMS PANEL ─── */
+  .items-panel {
+    display: none;
+    grid-column: 1 / -1;
+    background: var(--bg3);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
-    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-    display: flex; flex-direction: column;
-    animation: fadeUp 0.5s ease both;
   }
-  .food-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    border-color: rgba(255,69,0,0.25);
+  .items-panel.open {
+    display: block;
+    animation: panelOpen 0.32s cubic-bezier(0.2,0,0,1) both;
   }
-  .food-card-img {
-    width: 100%; height: 200px;
-    object-fit: cover;
-    position: relative;
-    background: #1a1a1a;
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+  @keyframes panelOpen {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  .food-card-img img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.025);
+    position: sticky; top: 0; z-index: 5;
   }
-  .food-card:hover .food-card-img img { transform: scale(1.07); }
-  .food-card-img .badge {
-    position: absolute; top: 12px; left: 12px;
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 50px;
-    letter-spacing: 0.5px;
+  .panel-title-row { display: flex; align-items: center; gap: 12px; }
+  .panel-icon { font-size: 1.6rem; line-height: 1; }
+  .panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 2px; }
+  .panel-count { color: var(--text2); font-size: 0.78rem; font-weight: 500; margin-top: 1px; }
+  .panel-close {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    cursor: pointer; color: var(--text2); font-size: 0.95rem;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
   }
-  .food-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
-  .food-name {
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--text);
-    line-height: 1.3;
+  .panel-close:hover { background: rgba(255,69,0,0.15); color: var(--accent); border-color: rgba(255,69,0,0.3); }
+
+  /* ─── ITEM ROW ─── */
+  .item-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 15px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.18s ease;
   }
-  .food-desc { color: var(--text2); font-size: 0.82rem; line-height: 1.5; flex: 1; }
-  .food-bottom { display: flex; align-items: center; justify-content: space-between; }
-  .food-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    color: var(--gold);
-    letter-spacing: 1px;
+  .item-row:last-child { border-bottom: none; }
+  .item-row:hover { background: rgba(255,255,255,0.022); }
+
+  .item-emoji { font-size: 1.35rem; flex-shrink: 0; width: 30px; text-align: center; line-height: 1; }
+
+  .item-info { flex: 1; min-width: 0; }
+  .item-name {
+    font-weight: 700; font-size: 0.93rem; color: var(--text);
+    line-height: 1.3; margin-bottom: 3px;
   }
-  .food-price small { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--text2); font-weight: 400; }
+  .item-desc { color: var(--text2); font-size: 0.78rem; line-height: 1.4; }
+
+  .item-badge {
+    display: inline-block; vertical-align: middle; margin-left: 6px;
+    background: rgba(255,69,0,0.14); color: var(--accent2);
+    border: 1px solid rgba(255,69,0,0.2);
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 50px;
+    white-space: nowrap;
+  }
+  .item-badge.gold { background: rgba(245,200,66,0.12); color: var(--gold); border-color: rgba(245,200,66,0.2); }
+
+  .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+  .item-price {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem;
+    color: var(--gold); letter-spacing: 0.5px; white-space: nowrap; min-width: 60px; text-align: right;
+  }
+  .item-price small { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; color: var(--text2); font-weight: 400; }
+
+  .item-actions { display: flex; align-items: center; gap: 8px; }
+
   .qty-control {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); border-radius: 50px; padding: 2px;
   }
   .qty-btn {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-    line-height: 1;
+    width: 26px; height: 26px; border-radius: 50%; border: none;
+    background: transparent; color: var(--text2); font-size: 1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s; line-height: 1;
   }
-  .qty-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .qty-num { font-weight: 700; font-size: 0.95rem; min-width: 20px; text-align: center; }
+  .qty-btn:hover { background: rgba(255,69,0,0.2); color: var(--accent); }
+  .qty-num { font-weight: 700; font-size: 0.85rem; min-width: 22px; text-align: center; color: var(--text); }
+
   .add-cart-btn {
-    width: 100%;
-    background: rgba(255,69,0,0.12);
-    color: var(--accent2);
-    border: 1.5px solid rgba(255,69,0,0.25);
-    padding: 11px;
-    border-radius: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
+    background: var(--accent); color: #fff; border: none;
+    padding: 8px 18px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.8rem;
+    cursor: pointer; white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
     transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 3px 12px rgba(255,69,0,0.28);
+    letter-spacing: 0.2px;
   }
-  .add-cart-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.02); }
-  .add-cart-btn.added { background: #1a3d1a; color: #4caf50; border-color: #4caf50; }
+  .add-cart-btn:hover { background: var(--accent2); transform: scale(1.04); box-shadow: 0 5px 18px rgba(255,69,0,0.42); }
+  .add-cart-btn.added { background: #1d3d1d; color: #5abf5a; box-shadow: 0 3px 12px rgba(90,191,90,0.18); }
 
   /* ─── CART DRAWER ─── */
   .cart-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-    z-index: 2000;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
-    backdrop-filter: blur(4px);
+    position: fixed; inset: 0; background: rgba(0,0,0,0.72);
+    z-index: 2000; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; backdrop-filter: blur(5px);
   }
   .cart-overlay.open { opacity: 1; pointer-events: all; }
   .cart-drawer {
     position: fixed; top: 0; right: 0; bottom: 0;
-    width: min(420px, 100vw);
-    background: var(--bg3);
-    border-left: 1px solid var(--border);
-    z-index: 2001;
+    width: min(420px, 100vw); background: var(--bg3);
+    border-left: 1px solid var(--border); z-index: 2001;
     display: flex; flex-direction: column;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
   }
   .cart-drawer.open { transform: translateX(0); }
   .cart-header {
-    padding: 24px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    flex-shrink: 0;
+    padding: 24px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
   }
   .cart-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; }
   .close-btn {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.07);
-    border: none; cursor: pointer;
-    color: var(--text);
-    font-size: 1.1rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.06); border: none; cursor: pointer;
+    color: var(--text); font-size: 1rem;
+    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
   }
-  .close-btn:hover { background: rgba(255,255,255,0.14); }
+  .close-btn:hover { background: rgba(255,255,255,0.12); }
   .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
   .cart-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 12px;
-    background: var(--card);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border);
+    padding: 12px; background: var(--card);
+    border-radius: var(--radius-sm); margin-bottom: 10px; border: 1px solid var(--border);
   }
-  .cart-item-img {
-    width: 64px; height: 64px;
-    border-radius: 10px;
-    object-fit: cover;
-    background: #222;
-    flex-shrink: 0;
-    overflow: hidden;
+  .cart-item-thumb {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(255,69,0,0.1); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
   }
-  .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
   .cart-item-info { flex: 1; }
-  .cart-item-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
-  .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.95rem; }
+  .cart-item-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; }
+  .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.92rem; }
   .cart-item-ctrl { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
-  .cart-item-ctrl .qty-btn { width: 26px; height: 26px; font-size: 0.95rem; }
-  .cart-item-ctrl .qty-num { font-size: 0.85rem; }
+  .cart-item-ctrl .qty-btn { width: 26px; height: 26px; font-size: 0.9rem; }
+  .cart-item-ctrl .qty-num { font-size: 0.82rem; }
   .cart-rm-btn {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: rgba(255,69,0,0.1);
-    border: none; cursor: pointer;
-    color: var(--accent);
-    font-size: 0.8rem;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,69,0,0.08); border: none; cursor: pointer;
+    color: var(--accent); font-size: 0.78rem;
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-    margin-left: auto;
+    transition: background 0.2s; margin-left: auto;
   }
-  .cart-rm-btn:hover { background: rgba(255,69,0,0.25); }
+  .cart-rm-btn:hover { background: rgba(255,69,0,0.22); }
   .cart-empty { text-align: center; padding: 60px 20px; color: var(--text2); }
-  .cart-empty .empty-icon { font-size: 3.5rem; margin-bottom: 14px; opacity: 0.5; }
-  .cart-footer {
-    padding: 20px 24px;
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .cart-total {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 16px;
-  }
-  .cart-total .label { font-weight: 600; color: var(--text2); }
+  .cart-empty .empty-icon { font-size: 3.5rem; margin-bottom: 14px; opacity: 0.4; }
+  .cart-footer { padding: 20px 24px; border-top: 1px solid var(--border); flex-shrink: 0; }
+  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .cart-total .label { font-weight: 600; color: var(--text2); font-size: 0.9rem; }
   .cart-total .amount { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 1px; }
   .btn-whatsapp {
-    width: 100%;
-    background: #25D366;
-    color: #fff;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: all 0.2s;
-    margin-bottom: 10px;
+    width: 100%; background: #25D366; color: #fff; border: none;
+    padding: 14px; border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.92rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.2s; margin-bottom: 10px;
   }
-  .btn-whatsapp:hover { background: #20ba58; transform: scale(1.01); }
+  .btn-whatsapp:hover { background: #1eb356; transform: scale(1.01); }
   .btn-glovo {
-    width: 100%;
-    background: rgba(255,193,7,0.1);
-    color: #ffc107;
-    border: 1.5px solid rgba(255,193,7,0.3);
-    padding: 13px;
-    border-radius: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: all 0.2s;
-    text-decoration: none;
+    width: 100%; background: rgba(255,193,7,0.08); color: #ffc107;
+    border: 1.5px solid rgba(255,193,7,0.25);
+    padding: 13px; border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.92rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.2s; text-decoration: none;
   }
-  .btn-glovo:hover { background: rgba(255,193,7,0.18); transform: scale(1.01); }
+  .btn-glovo:hover { background: rgba(255,193,7,0.16); transform: scale(1.01); }
 
   /* ─── REVIEWS ─── */
   #reviews { background: var(--bg); }
   .reviews-header { text-align: center; margin-bottom: 50px; }
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
   .review-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    transition: transform 0.2s, border-color 0.2s;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: transform 0.22s, border-color 0.22s;
   }
-  .review-card:hover { transform: translateY(-4px); border-color: rgba(245,200,66,0.2); }
-  .review-stars { color: var(--gold); font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
-  .review-text { color: var(--text2); font-size: 0.9rem; line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+  .review-card:hover { transform: translateY(-4px); border-color: rgba(245,200,66,0.18); }
+  .review-stars { color: var(--gold); font-size: 0.95rem; margin-bottom: 14px; letter-spacing: 3px; }
+  .review-text { color: var(--text2); font-size: 0.88rem; line-height: 1.7; margin-bottom: 18px; font-style: italic; }
   .review-author { display: flex; align-items: center; gap: 12px; }
   .review-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
+    width: 40px; height: 40px; border-radius: 50%; background: var(--accent);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #fff;
-    flex-shrink: 0;
+    font-weight: 700; font-size: 1rem; color: #fff; flex-shrink: 0;
   }
-  .review-name { font-weight: 600; font-size: 0.9rem; }
-  .review-location { color: var(--text2); font-size: 0.78rem; }
+  .review-name { font-weight: 600; font-size: 0.88rem; }
+  .review-location { color: var(--text2); font-size: 0.76rem; }
 
   /* ─── CONTACT ─── */
   #contact { background: var(--bg2); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
   .contact-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 24px;
     display: flex; align-items: center; gap: 18px;
     transition: transform 0.2s, border-color 0.2s;
   }
   .contact-card:hover { transform: translateX(4px); border-color: rgba(255,69,0,0.3); }
   .contact-icon {
-    width: 50px; height: 50px;
-    border-radius: 14px;
-    background: rgba(255,69,0,0.12);
+    width: 48px; height: 48px; border-radius: 14px;
+    background: rgba(255,69,0,0.1);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    flex-shrink: 0;
+    font-size: 1.3rem; flex-shrink: 0;
   }
-  .contact-label { font-size: 0.75rem; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .contact-val { font-weight: 600; font-size: 1rem; color: var(--text); }
+  .contact-label { font-size: 0.72rem; color: var(--text2); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
+  .contact-val { font-weight: 600; font-size: 0.98rem; color: var(--text); }
   .map-placeholder {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    height: 320px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; height: 320px;
     display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-    color: var(--text2);
-    position: relative;
+    flex-direction: column; gap: 12px; color: var(--text2); position: relative;
   }
   .map-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: 
+    content: ''; position: absolute; inset: 0;
+    background:
       repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
       repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
   }
@@ -564,8 +482,7 @@
 
   /* ─── FOOTER ─── */
   footer {
-    background: #060606;
-    border-top: 1px solid var(--border);
+    background: #060606; border-top: 1px solid var(--border);
     padding: 40px 5%;
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
   }
@@ -574,65 +491,66 @@
   footer p { color: var(--text2); font-size: 0.82rem; }
   .footer-socials { display: flex; gap: 12px; }
   .footer-socials a {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text2);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: all 0.2s;
+    color: var(--text2); text-decoration: none; font-size: 0.85rem; transition: all 0.2s;
   }
   .footer-socials a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ─── MOBILE NAV ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,69,0,0.35); border-radius: 4px; }
+
+  .toast {
+    position: fixed; bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(70px);
+    background: var(--card); border: 1px solid rgba(76,175,80,0.35);
+    color: #5abf5a; padding: 11px 22px; border-radius: 50px;
+    font-weight: 600; font-size: 0.85rem; z-index: 3000;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    white-space: nowrap; display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ─── MOBILE ─── */
   @media (max-width: 768px) {
-    .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: rgba(10,10,10,0.97); backdrop-filter: blur(18px); padding: 20px 5%; gap: 16px; border-bottom: 1px solid var(--border); }
+    .nav-links {
+      display: none; flex-direction: column;
+      position: absolute; top: var(--nav-h); left: 0; right: 0;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(18px);
+      padding: 20px 5%; gap: 16px; border-bottom: 1px solid var(--border);
+    }
     .nav-links.open { display: flex; }
     .hamburger { display: flex; }
     section { padding: 70px 5%; }
     .contact-grid { grid-template-columns: 1fr; gap: 32px; }
     footer { flex-direction: column; text-align: center; }
     .hero-food-strip { display: none; }
+    .category-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .item-row { padding: 12px 16px; gap: 10px; }
+    .item-right { gap: 8px; }
+    .item-desc { display: none; }
+    .panel-header { padding: 14px 16px; }
+    .item-price { min-width: unset; }
   }
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; align-items: center; }
     .btn-primary, .btn-outline { width: 100%; max-width: 280px; justify-content: center; }
+    .category-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .cat-title { font-size: 1.3rem; }
+    .cat-icon { font-size: 1.5rem; }
+    .add-cart-btn { padding: 7px 12px; font-size: 0.75rem; }
   }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,69,0,0.4); border-radius: 4px; }
-
-  /* Notification */
-  .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: var(--card);
-    border: 1px solid rgba(76,175,80,0.4);
-    color: #4caf50;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.88rem;
-    z-index: 3000;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    white-space: nowrap;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -664,7 +582,7 @@
     <img class="food-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=300&h=300&fit=crop" alt="tacos">
     <img class="food-img" src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=300&h=300&fit=crop" alt="chicken">
     <img class="food-img" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&h=300&fit=crop" alt="sandwich">
-    <img class="food-img" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&h=300&fit=crop" alt="food2">
+    <img class="food-img" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&h=300&fit=crop" alt="food">
   </div>
   <div class="hero-content">
     <span class="hero-eyebrow">📍 Kenitra — Open Now</span>
@@ -690,10 +608,9 @@
   <div class="menu-header reveal">
     <p class="section-label">🍔 Our Menu</p>
     <h2 class="section-title">Pick Your Favourite</h2>
-    <p class="section-sub">Fresh ingredients, big flavours — choose from our hand-crafted menu</p>
+    <p class="section-sub">Tap a category to explore the full menu</p>
   </div>
-  <div class="category-tabs reveal" id="categoryTabs"></div>
-  <div class="menu-grid" id="menuGrid"></div>
+  <div class="category-grid" id="categoryGrid"></div>
 </section>
 
 <!-- REVIEWS -->
@@ -712,7 +629,7 @@
     <div>
       <p class="section-label reveal">📞 Get In Touch</p>
       <h2 class="section-title reveal">Find Us &<br>Call Us</h2>
-      <div class="contact-info" id="contactInfo">
+      <div class="contact-info">
         <div class="contact-card reveal">
           <div class="contact-icon">📞</div>
           <div>
@@ -789,81 +706,79 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────────────────────────
-const categories = [
-  { id: 'all',       label: 'All',        icon: '🍽️' },
-  { id: 'tacos',     label: 'Tacos',      icon: '🌮' },
-  { id: 'sandwich',  label: 'Sandwiches', icon: '🥖' },
-  { id: 'panini',    label: 'Panini',     icon: '🫓' },
-  { id: 'pizza',     label: 'Pizza',      icon: '🍕' },
-  { id: 'burger',    label: 'Burgers',    icon: '🍔' },
-  { id: 'pasticcio', label: 'Pasticcio', icon: '🥧' },
-  { id: 'salad',     label: 'Salads',     icon: '🥗' },
+// ─── CATEGORY CONFIG ─────────────────────────────────────────────────────────
+const CATEGORIES = [
+  { id:'tacos',     label:'Tacos',      icon:'🌮', img:'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=450&fit=crop&q=85' },
+  { id:'sandwich',  label:'Sandwiches', icon:'🥖', img:'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=450&fit=crop&q=85' },
+  { id:'panini',    label:'Panini',     icon:'🫓', img:'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=600&h=450&fit=crop&q=85' },
+  { id:'pizza',     label:'Pizza',      icon:'🍕', img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=450&fit=crop&q=85' },
+  { id:'burger',    label:'Burgers',    icon:'🍔', img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=450&fit=crop&q=85' },
+  { id:'pasticcio', label:'Pasticcio',  icon:'🥧', img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=450&fit=crop&q=85' },
+  { id:'salad',     label:'Salads',     icon:'🥗', img:'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=600&h=450&fit=crop&q=85' },
 ];
 
+// Per-item emojis by category (positional)
+const CAT_EMOJIS = {
+  tacos:     ['🍗','🥩','🔀','🌯','🍗','👑','🍟','🧂'],
+  sandwich:  ['🍗','🐟','🥩','🥚','🔀','⚡'],
+  panini:    ['🐟','🍗','🥩','🔀','🌿'],
+  pizza:     ['🍕','🍕','🐟','🐟','🥩','🥩','🔀','🔀','🍗','🍗','🌿','🌿','🎉','🧀','🧀','🦐','🦐','🍂','🍂'],
+  burger:    ['🍔','🍗','🥩'],
+  pasticcio: ['🍗','🥩','🔀','🌿','🧀','👑','🍗'],
+  salad:     ['🥗'],
+};
+
+// ─── MENU DATA ───────────────────────────────────────────────────────────────
 const menuItems = [
-  // ── TACOS ──────────────────────────────────────────────────────────────────
-  { id:1,  cat:'tacos',     name:'Chicken Tacos',         desc:'Grilled chicken, fries, cheese sauce & fresh veggies wrapped in a soft tortilla',                   price:33,  badge:'Popular',     img:'https://images.unsplash.com/photo-1604467715878-83e57e8bc129?w=400&h=250&fit=crop' },
-  { id:2,  cat:'tacos',     name:'Kefta Tacos',           desc:'Spiced ground kefta, fries, cheese sauce & fresh veggies in a flour tortilla',                      price:42,  badge:'Chef\'s Pick', img:'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=400&h=250&fit=crop' },
-  { id:3,  cat:'tacos',     name:'Chicken Kefta Tacos',   desc:'Combo of grilled chicken & kefta, fries, cheese sauce & veggies',                                   price:30,  badge:'Value',        img:'https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=400&h=250&fit=crop' },
-  { id:4,  cat:'tacos',     name:'Mix Tacos',             desc:'Mixed fillings of chicken, kefta & veggies with fries and sauce',                                   price:35,  img:'https://images.unsplash.com/photo-1640039677324-4d0da92b5b7b?w=400&h=250&fit=crop' },
-  { id:5,  cat:'tacos',     name:'Nuggets Tacos',         desc:'Crispy chicken nuggets, fries, cheese sauce & fresh veggies',                                       price:37,  img:'https://images.unsplash.com/photo-1619474956587-a4b6f5f6cf0c?w=400&h=250&fit=crop' },
-  { id:6,  cat:'tacos',     name:'Cordon Bleu Tacos',     desc:'Golden cordon bleu, fries, creamy sauce & veggies in a warm tortilla',                              price:40,  badge:'Special',      img:'https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=250&fit=crop' },
-  { id:7,  cat:'tacos',     name:'Fries',                 desc:'Crispy golden fries — the perfect side',                                                            price:7,   badge:'Side',         img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=250&fit=crop' },
-  { id:8,  cat:'tacos',     name:'Crispy Fries',          desc:'Extra-crispy seasoned fries for that satisfying crunch',                                            price:7,   badge:'Side',         img:'https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&h=250&fit=crop' },
-
-  // ── SANDWICHES ─────────────────────────────────────────────────────────────
-  { id:9,  cat:'sandwich',  name:'Chicken Sandwich',      desc:'Grilled chicken, lettuce, tomato & mayo in a fresh baguette',                                       price:25,  badge:'Popular',      img:'https://images.unsplash.com/photo-1600555379765-f8a3ddde3b8e?w=400&h=250&fit=crop' },
-  { id:10, cat:'sandwich',  name:'Tuna Sandwich',         desc:'Seasoned tuna, fresh veggies & sauce in a soft baguette',                                           price:20,  badge:'Value',        img:'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=250&fit=crop' },
-  { id:11, cat:'sandwich',  name:'Kefta Sandwich',        desc:'Grilled spiced kefta, harissa, tomato & onion in a baguette',                                       price:30,  img:'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&h=250&fit=crop' },
-  { id:12, cat:'sandwich',  name:'Mix Sandwich',          desc:'A hearty mix of fillings — egg, veggies & sauce in a fresh baguette',                               price:22,  img:'https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=400&h=250&fit=crop' },
-  { id:13, cat:'sandwich',  name:'Chicken Kefta Sandwich',desc:'Grilled chicken & kefta combo with fresh toppings in a baguette',                                  price:28,  badge:'Best Deal',    img:'https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&h=250&fit=crop' },
-  { id:14, cat:'sandwich',  name:'Mega Crispy Sandwich',  desc:'Crispy fried chicken fillet, coleslaw & special sauce — fully loaded',                              price:35,  badge:'XXL',          img:'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=250&fit=crop' },
-
-  // ── PANINI ─────────────────────────────────────────────────────────────────
-  { id:15, cat:'panini',    name:'Tuna Panini',           desc:'Seasoned tuna, melted cheese & veggies in a toasted panini bread',                                  price:18,  badge:'Value',        img:'https://images.unsplash.com/photo-1528736235302-52922df5c122?w=400&h=250&fit=crop' },
-  { id:16, cat:'panini',    name:'Chicken Panini',        desc:'Grilled chicken, mozzarella & fresh greens pressed to golden perfection',                           price:22,  badge:'Popular',      img:'https://images.unsplash.com/photo-1550507992-eb63ffee0847?w=400&h=250&fit=crop' },
-  { id:17, cat:'panini',    name:'Kefta Panini',          desc:'Spiced kefta, tomato, onion & cheese grilled in a panini press',                                    price:28,  img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=250&fit=crop' },
-  { id:18, cat:'panini',    name:'Chicken Kefta Panini',  desc:'Chicken & kefta duo with melted cheese and veggies, toasted to perfection',                         price:28,  badge:'Chef\'s Pick', img:'https://images.unsplash.com/photo-1475090169767-40ed8d18f67d?w=400&h=250&fit=crop' },
-  { id:19, cat:'panini',    name:'Mix Panini',            desc:'A mix of savoury fillings with cheese pressed into crispy panini bread',                            price:22,  img:'https://images.unsplash.com/photo-1481070414801-51fd732d7184?w=400&h=250&fit=crop' },
-
-  // ── PIZZA ──────────────────────────────────────────────────────────────────
-  { id:20, cat:'pizza',     name:'Chicken Pizza (Small)', desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Small',                                       price:30,  img:'https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&h=250&fit=crop' },
-  { id:21, cat:'pizza',     name:'Chicken Pizza (Medium)',desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Medium',                                      price:40,  badge:'Popular',      img:'https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&h=250&fit=crop' },
-  { id:22, cat:'pizza',     name:'Tuna Pizza (Small)',    desc:'Tomato sauce, mozzarella & seasoned tuna — Small',                                                  price:30,  img:'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=250&fit=crop' },
-  { id:23, cat:'pizza',     name:'Tuna Pizza (Medium)',   desc:'Tomato sauce, mozzarella & seasoned tuna — Medium',                                                 price:40,  img:'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=250&fit=crop' },
-  { id:24, cat:'pizza',     name:'Kefta Pizza (Small)',   desc:'Tomato sauce, mozzarella & spiced ground kefta — Small',                                            price:38,  img:'https://images.unsplash.com/photo-1548369937-47519962c11a?w=400&h=250&fit=crop' },
-  { id:25, cat:'pizza',     name:'Kefta Pizza (Medium)',  desc:'Tomato sauce, mozzarella & spiced ground kefta — Medium',                                           price:48,  badge:'Chef\'s Pick', img:'https://images.unsplash.com/photo-1548369937-47519962c11a?w=400&h=250&fit=crop' },
-  { id:26, cat:'pizza',     name:'Mix Pizza (Small)',     desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Small',                                      price:33,  img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=250&fit=crop' },
-  { id:27, cat:'pizza',     name:'Mix Pizza (Medium)',    desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Medium',                                     price:43,  img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=250&fit=crop' },
-  { id:28, cat:'pizza',     name:'Chicken Kefta Pizza (Small)', desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Small',                         price:28,  badge:'Value',        img:'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&h=250&fit=crop' },
-  { id:29, cat:'pizza',     name:'Chicken Kefta Pizza (Medium)', desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Medium',                       price:38,  img:'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&h=250&fit=crop' },
-  { id:30, cat:'pizza',     name:'Margherita (Small)',    desc:'Classic tomato sauce, fresh mozzarella & basil — Small',                                            price:22,  img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop' },
-  { id:31, cat:'pizza',     name:'Margherita (Medium)',   desc:'Classic tomato sauce, fresh mozzarella & basil — Medium',                                           price:32,  img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop' },
-  { id:32, cat:'pizza',     name:'2 Margherita Offer 🎉', desc:'Special deal: two Margherita pizzas for a great price',                                             price:30,  badge:'🔥 Offer',     img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop' },
-  { id:33, cat:'pizza',     name:'4 Cheese Pizza (Small)',desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Small',                                   price:33,  img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=250&fit=crop' },
-  { id:34, cat:'pizza',     name:'4 Cheese Pizza (Medium)',desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Medium',                                 price:43,  badge:'Popular',      img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=250&fit=crop' },
-  { id:35, cat:'pizza',     name:'Seafood Pizza (Small)', desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Small',                              price:40,  img:'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=400&h=250&fit=crop' },
-  { id:36, cat:'pizza',     name:'Seafood Pizza (Medium)',desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Medium',                             price:50,  badge:'Premium',      img:'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=400&h=250&fit=crop' },
-  { id:37, cat:'pizza',     name:'4 Seasons Pizza (Small)', desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Small',                  price:40,  img:'https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=250&fit=crop' },
-  { id:38, cat:'pizza',     name:'4 Seasons Pizza (Medium)', desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Medium',                price:50,  badge:'Signature',    img:'https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=250&fit=crop' },
-
-  // ── BURGERS ────────────────────────────────────────────────────────────────
-  { id:39, cat:'burger',    name:'Double Kefta Burger',   desc:'Two spiced kefta patties, cheddar, pickles & special sauce in a brioche bun',                      price:45,  badge:'Best Seller',  img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=250&fit=crop' },
-  { id:40, cat:'burger',    name:'Crispy Burger',         desc:'Golden crispy chicken fillet, coleslaw & sriracha mayo in a toasted bun',                          price:40,  badge:'Popular',      img:'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=250&fit=crop' },
-  { id:41, cat:'burger',    name:'Simple Kefta Burger',   desc:'Classic kefta patty, lettuce, tomato & house sauce in a soft bun',                                 price:38,  badge:'Value',        img:'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=250&fit=crop' },
-
-  // ── PASTICCIO ──────────────────────────────────────────────────────────────
-  { id:42, cat:'pasticcio', name:'Chicken Pasticcio',     desc:'Layers of pasta, béchamel & seasoned grilled chicken, baked to perfection',                        price:35,  badge:'Popular',      img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=250&fit=crop' },
-  { id:43, cat:'pasticcio', name:'Kefta Pasticcio',       desc:'Layers of pasta, béchamel & spiced kefta, baked golden',                                           price:45,  badge:'Chef\'s Pick', img:'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=400&h=250&fit=crop' },
-  { id:44, cat:'pasticcio', name:'Chicken Kefta Pasticcio', desc:'Pasta bake with a duo of grilled chicken & kefta in creamy béchamel',                            price:33,  badge:'Value',        img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=250&fit=crop' },
-  { id:45, cat:'pasticcio', name:'Mix Pasticcio',         desc:'A hearty pasta bake with mixed fillings & creamy béchamel topping',                                price:40,  img:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&h=250&fit=crop' },
-  { id:46, cat:'pasticcio', name:'Gratin Pasticcio',      desc:'Classic pasta gratin with golden cheese crust & creamy béchamel',                                  price:33,  img:'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=250&fit=crop' },
-  { id:47, cat:'pasticcio', name:'Cordon Bleu Pasticcio', desc:'Pasta bake with golden cordon bleu & creamy béchamel sauce',                                       price:40,  badge:'Special',      img:'https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=400&h=250&fit=crop' },
-  { id:48, cat:'pasticcio', name:'Nuggets Pasticcio',     desc:'Pasta bake topped with crispy chicken nuggets & béchamel',                                         price:38,  img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=250&fit=crop' },
-
-  // ── SALADS ─────────────────────────────────────────────────────────────────
-  { id:49, cat:'salad',     name:'Caesar Salad',          desc:'Crisp romaine lettuce, croutons, parmesan & creamy Caesar dressing',                               price:37,  badge:'Fresh',        img:'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=250&fit=crop' },
+  { id:1,  cat:'tacos',     name:'Chicken Tacos',                desc:'Grilled chicken, fries, cheese sauce & fresh veggies wrapped in a soft tortilla',      price:33, badge:'Popular' },
+  { id:2,  cat:'tacos',     name:'Kefta Tacos',                  desc:'Spiced ground kefta, fries, cheese sauce & fresh veggies in a flour tortilla',          price:42, badge:"Chef's Pick" },
+  { id:3,  cat:'tacos',     name:'Chicken Kefta Tacos',          desc:'Combo of grilled chicken & kefta, fries, cheese sauce & veggies',                       price:30, badge:'Value' },
+  { id:4,  cat:'tacos',     name:'Mix Tacos',                    desc:'Mixed fillings of chicken, kefta & veggies with fries and sauce',                       price:35 },
+  { id:5,  cat:'tacos',     name:'Nuggets Tacos',                desc:'Crispy chicken nuggets, fries, cheese sauce & fresh veggies',                           price:37 },
+  { id:6,  cat:'tacos',     name:'Cordon Bleu Tacos',            desc:'Golden cordon bleu, fries, creamy sauce & veggies in a warm tortilla',                  price:40, badge:'Special' },
+  { id:7,  cat:'tacos',     name:'Fries',                        desc:'Crispy golden fries — the perfect side',                                                price:7,  badge:'Side' },
+  { id:8,  cat:'tacos',     name:'Crispy Fries',                 desc:'Extra-crispy seasoned fries for that satisfying crunch',                                price:7,  badge:'Side' },
+  { id:9,  cat:'sandwich',  name:'Chicken Sandwich',             desc:'Grilled chicken, lettuce, tomato & mayo in a fresh baguette',                           price:25, badge:'Popular' },
+  { id:10, cat:'sandwich',  name:'Tuna Sandwich',                desc:'Seasoned tuna, fresh veggies & sauce in a soft baguette',                               price:20, badge:'Value' },
+  { id:11, cat:'sandwich',  name:'Kefta Sandwich',               desc:'Grilled spiced kefta, harissa, tomato & onion in a baguette',                          price:30 },
+  { id:12, cat:'sandwich',  name:'Mix Sandwich',                 desc:'A hearty mix of fillings — egg, veggies & sauce in a fresh baguette',                  price:22 },
+  { id:13, cat:'sandwich',  name:'Chicken Kefta Sandwich',       desc:'Grilled chicken & kefta combo with fresh toppings in a baguette',                      price:28, badge:'Best Deal' },
+  { id:14, cat:'sandwich',  name:'Mega Crispy Sandwich',         desc:'Crispy fried chicken fillet, coleslaw & special sauce — fully loaded',                 price:35, badge:'XXL' },
+  { id:15, cat:'panini',    name:'Tuna Panini',                  desc:'Seasoned tuna, melted cheese & veggies in a toasted panini bread',                     price:18, badge:'Value' },
+  { id:16, cat:'panini',    name:'Chicken Panini',               desc:'Grilled chicken, mozzarella & fresh greens pressed to golden perfection',               price:22, badge:'Popular' },
+  { id:17, cat:'panini',    name:'Kefta Panini',                 desc:'Spiced kefta, tomato, onion & cheese grilled in a panini press',                       price:28 },
+  { id:18, cat:'panini',    name:'Chicken Kefta Panini',         desc:'Chicken & kefta duo with melted cheese and veggies, toasted to perfection',             price:28, badge:"Chef's Pick" },
+  { id:19, cat:'panini',    name:'Mix Panini',                   desc:'A mix of savoury fillings with cheese pressed into crispy panini bread',                price:22 },
+  { id:20, cat:'pizza',     name:'Chicken Pizza (Small)',        desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Small',                           price:30 },
+  { id:21, cat:'pizza',     name:'Chicken Pizza (Medium)',       desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Medium',                          price:40, badge:'Popular' },
+  { id:22, cat:'pizza',     name:'Tuna Pizza (Small)',           desc:'Tomato sauce, mozzarella & seasoned tuna — Small',                                      price:30 },
+  { id:23, cat:'pizza',     name:'Tuna Pizza (Medium)',          desc:'Tomato sauce, mozzarella & seasoned tuna — Medium',                                     price:40 },
+  { id:24, cat:'pizza',     name:'Kefta Pizza (Small)',          desc:'Tomato sauce, mozzarella & spiced ground kefta — Small',                               price:38 },
+  { id:25, cat:'pizza',     name:'Kefta Pizza (Medium)',         desc:'Tomato sauce, mozzarella & spiced ground kefta — Medium',                              price:48, badge:"Chef's Pick" },
+  { id:26, cat:'pizza',     name:'Mix Pizza (Small)',            desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Small',                         price:33 },
+  { id:27, cat:'pizza',     name:'Mix Pizza (Medium)',           desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Medium',                        price:43 },
+  { id:28, cat:'pizza',     name:'Chicken Kefta Pizza (Small)',  desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Small',                   price:28, badge:'Value' },
+  { id:29, cat:'pizza',     name:'Chicken Kefta Pizza (Medium)', desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Medium',                  price:38 },
+  { id:30, cat:'pizza',     name:'Margherita (Small)',           desc:'Classic tomato sauce, fresh mozzarella & basil — Small',                               price:22 },
+  { id:31, cat:'pizza',     name:'Margherita (Medium)',          desc:'Classic tomato sauce, fresh mozzarella & basil — Medium',                              price:32 },
+  { id:32, cat:'pizza',     name:'2 Margherita Offer 🎉',        desc:'Special deal: two Margherita pizzas for a great price',                                price:30, badge:'🔥 Offer' },
+  { id:33, cat:'pizza',     name:'4 Cheese Pizza (Small)',       desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Small',                      price:33 },
+  { id:34, cat:'pizza',     name:'4 Cheese Pizza (Medium)',      desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Medium',                     price:43, badge:'Popular' },
+  { id:35, cat:'pizza',     name:'Seafood Pizza (Small)',        desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Small',                 price:40 },
+  { id:36, cat:'pizza',     name:'Seafood Pizza (Medium)',       desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Medium',                price:50, badge:'Premium' },
+  { id:37, cat:'pizza',     name:'4 Seasons Pizza (Small)',      desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Small',        price:40 },
+  { id:38, cat:'pizza',     name:'4 Seasons Pizza (Medium)',     desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Medium',       price:50, badge:'Signature' },
+  { id:39, cat:'burger',    name:'Double Kefta Burger',          desc:'Two spiced kefta patties, cheddar, pickles & special sauce in a brioche bun',         price:45, badge:'Best Seller' },
+  { id:40, cat:'burger',    name:'Crispy Burger',                desc:'Golden crispy chicken fillet, coleslaw & sriracha mayo in a toasted bun',             price:40, badge:'Popular' },
+  { id:41, cat:'burger',    name:'Simple Kefta Burger',          desc:'Classic kefta patty, lettuce, tomato & house sauce in a soft bun',                    price:38, badge:'Value' },
+  { id:42, cat:'pasticcio', name:'Chicken Pasticcio',            desc:'Layers of pasta, béchamel & seasoned grilled chicken, baked to perfection',           price:35, badge:'Popular' },
+  { id:43, cat:'pasticcio', name:'Kefta Pasticcio',              desc:'Layers of pasta, béchamel & spiced kefta, baked golden',                              price:45, badge:"Chef's Pick" },
+  { id:44, cat:'pasticcio', name:'Chicken Kefta Pasticcio',      desc:'Pasta bake with a duo of grilled chicken & kefta in creamy béchamel',                 price:33, badge:'Value' },
+  { id:45, cat:'pasticcio', name:'Mix Pasticcio',                desc:'A hearty pasta bake with mixed fillings & creamy béchamel topping',                   price:40 },
+  { id:46, cat:'pasticcio', name:'Gratin Pasticcio',             desc:'Classic pasta gratin with golden cheese crust & creamy béchamel',                     price:33 },
+  { id:47, cat:'pasticcio', name:'Cordon Bleu Pasticcio',        desc:'Pasta bake with golden cordon bleu & creamy béchamel sauce',                          price:40, badge:'Special' },
+  { id:48, cat:'pasticcio', name:'Nuggets Pasticcio',            desc:'Pasta bake topped with crispy chicken nuggets & béchamel',                            price:38 },
+  { id:49, cat:'salad',     name:'Caesar Salad',                 desc:'Crisp romaine lettuce, croutons, parmesan & creamy Caesar dressing',                  price:37, badge:'Fresh' },
 ];
 
 const reviews = [
@@ -877,81 +792,148 @@ const reviews = [
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let cart = [];
-let activeCategory = 'all';
 let quantities = {};
+let openCategoryId = null;
 
-// ─── RENDER TABS ─────────────────────────────────────────────────────────────
-function renderTabs() {
-  const el = document.getElementById('categoryTabs');
-  el.innerHTML = categories.map(c => `
-    <button class="tab-btn ${c.id === activeCategory ? 'active' : ''}" onclick="setCategory('${c.id}')">
-      <span class="tab-icon">${c.icon}</span>${c.label}
-    </button>
-  `).join('');
-}
+// ─── RENDER CATEGORY GRID ────────────────────────────────────────────────────
+function renderCategoryGrid() {
+  const grid = document.getElementById('categoryGrid');
+  let html = '';
 
-function setCategory(id) {
-  activeCategory = id;
-  renderTabs();
-  renderMenu();
-}
-
-// ─── RENDER MENU ─────────────────────────────────────────────────────────────
-function renderMenu() {
-  const items = activeCategory === 'all' ? menuItems : menuItems.filter(i => i.cat === activeCategory);
-  const grid = document.getElementById('menuGrid');
-  grid.innerHTML = items.map((item, idx) => {
-    const q = quantities[item.id] || 1;
-    return `
-    <div class="food-card" style="animation-delay:${idx * 0.06}s">
-      <div class="food-card-img">
-        <img src="${item.img}" alt="${item.name}" loading="lazy">
-        ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
-      </div>
-      <div class="food-card-body">
-        <div class="food-name">${item.name}</div>
-        <div class="food-desc">${item.desc}</div>
-        <div class="food-bottom">
-          <div class="food-price">${item.price} <small>DH</small></div>
-          <div class="qty-control">
-            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
-            <span class="qty-num" id="qty-${item.id}">${q}</span>
-            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+  CATEGORIES.forEach((cat, idx) => {
+    const count = menuItems.filter(i => i.cat === cat.id).length;
+    html += `
+      <div class="cat-card reveal" style="animation-delay:${idx * 0.07}s" onclick="toggleCategory('${cat.id}')" id="catcard-${cat.id}" tabindex="0" role="button" aria-label="Open ${cat.label} menu">
+        <img src="${cat.img}" alt="${cat.label}" loading="lazy">
+        <div class="cat-arrow">↗</div>
+        <div class="cat-card-content">
+          <div class="cat-icon">${cat.icon}</div>
+          <div class="cat-title">${cat.label}</div>
+          <div class="cat-meta">
+            <span>${count} items</span>
+            <span class="dot"></span>
+            <span>Tap to explore</span>
           </div>
         </div>
-        <button class="add-cart-btn" id="addbtn-${item.id}" onclick="addToCart(${item.id})">
-          🛒 Add to Cart
-        </button>
       </div>
-    </div>`;
-  }).join('');
+      <div class="items-panel" id="panel-${cat.id}">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <span class="panel-icon">${cat.icon}</span>
+            <div>
+              <div class="panel-title">${cat.label}</div>
+              <div class="panel-count">${count} items available</div>
+            </div>
+          </div>
+          <button class="panel-close" onclick="closePanel(event,'${cat.id}')">✕</button>
+        </div>
+        <div class="panel-items" id="items-${cat.id}"></div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+
+  // Render item rows per category
+  CATEGORIES.forEach(cat => {
+    const items = menuItems.filter(i => i.cat === cat.id);
+    const emojis = CAT_EMOJIS[cat.id] || [];
+    const container = document.getElementById(`items-${cat.id}`);
+    if (!container) return;
+    container.innerHTML = items.map((item, idx) => {
+      const emoji = emojis[idx] || cat.icon;
+      const q = quantities[item.id] || 1;
+      const isGoldBadge = item.badge && (
+        item.badge.includes('🔥') || item.badge === 'Best Seller' ||
+        item.badge === 'Signature' || item.badge === 'Premium'
+      );
+      const badgeHtml = item.badge
+        ? `<span class="item-badge${isGoldBadge ? ' gold' : ''}">${item.badge}</span>`
+        : '';
+      return `
+        <div class="item-row">
+          <div class="item-emoji">${emoji}</div>
+          <div class="item-info">
+            <div class="item-name">${item.name}${badgeHtml}</div>
+            <div class="item-desc">${item.desc}</div>
+          </div>
+          <div class="item-right">
+            <div class="item-price">${item.price} <small>DH</small></div>
+            <div class="item-actions">
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+                <span class="qty-num" id="qty-${item.id}">${q}</span>
+                <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+              </div>
+              <button class="add-cart-btn" id="addbtn-${item.id}" onclick="addToCart(${item.id})">+ Add</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }, 50);
 }
 
+// ─── TOGGLE PANEL ─────────────────────────────────────────────────────────────
+function toggleCategory(catId) {
+  if (openCategoryId === catId) {
+    closeAllPanels();
+    return;
+  }
+  closeAllPanels();
+  openCategoryId = catId;
+
+  const panel = document.getElementById(`panel-${catId}`);
+  const card  = document.getElementById(`catcard-${catId}`);
+  if (panel) panel.classList.add('open');
+  if (card)  card.classList.add('active');
+
+  setTimeout(() => {
+    panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 60);
+}
+
+function closeAllPanels() {
+  document.querySelectorAll('.items-panel').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+  openCategoryId = null;
+}
+
+function closePanel(e, catId) {
+  e.stopPropagation();
+  const panel = document.getElementById(`panel-${catId}`);
+  const card  = document.getElementById(`catcard-${catId}`);
+  if (panel) panel.classList.remove('open');
+  if (card)  card.classList.remove('active');
+  if (openCategoryId === catId) openCategoryId = null;
+}
+
+// ─── QTY ─────────────────────────────────────────────────────────────────────
 function changeQty(id, delta) {
   quantities[id] = Math.max(1, (quantities[id] || 1) + delta);
   const el = document.getElementById(`qty-${id}`);
   if (el) el.textContent = quantities[id];
 }
 
-// ─── CART ────────────────────────────────────────────────────────────────────
+// ─── CART ─────────────────────────────────────────────────────────────────────
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
-  const qty = quantities[id] || 1;
+  const qty  = quantities[id] || 1;
   const existing = cart.find(c => c.id === id);
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...item, qty });
-  }
+  if (existing) { existing.qty += qty; }
+  else { cart.push({ ...item, qty }); }
   quantities[id] = 1;
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) qtyEl.textContent = 1;
 
   const btn = document.getElementById(`addbtn-${id}`);
   if (btn) {
-    btn.classList.add('added');
-    btn.textContent = '✓ Added!';
-    setTimeout(() => { btn.classList.remove('added'); btn.textContent = '🛒 Add to Cart'; }, 1500);
+    btn.classList.add('added'); btn.textContent = '✓ Added';
+    setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ Add'; }, 1500);
   }
   updateCartUI();
   showToast(`✓ ${item.name} added to cart`);
@@ -959,16 +941,14 @@ function addToCart(id) {
 
 function removeFromCart(id) {
   cart = cart.filter(c => c.id !== id);
-  updateCartUI();
-  renderCartItems();
+  updateCartUI(); renderCartItems();
 }
 
 function changeCartQty(id, delta) {
   const item = cart.find(c => c.id === id);
   if (!item) return;
   item.qty = Math.max(1, item.qty + delta);
-  updateCartUI();
-  renderCartItems();
+  updateCartUI(); renderCartItems();
 }
 
 function updateCartUI() {
@@ -981,6 +961,11 @@ function updateCartUI() {
   document.getElementById('cartFooter').style.display = cart.length ? 'block' : 'none';
 }
 
+function getCatIcon(catId) {
+  const c = CATEGORIES.find(x => x.id === catId);
+  return c ? c.icon : '🍽️';
+}
+
 function renderCartItems() {
   const el = document.getElementById('cartItems');
   if (!cart.length) {
@@ -989,14 +974,14 @@ function renderCartItems() {
   }
   el.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img"><img src="${item.img}" alt="${item.name}"></div>
+      <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">${item.price * item.qty} DH</div>
         <div class="cart-item-ctrl">
-          <button class="qty-btn" onclick="changeCartQty(${item.id}, -1)">−</button>
+          <button class="qty-btn" onclick="changeCartQty(${item.id},-1)">−</button>
           <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeCartQty(${item.id}, 1)">+</button>
+          <button class="qty-btn" onclick="changeCartQty(${item.id},1)">+</button>
           <button class="cart-rm-btn" onclick="removeFromCart(${item.id})">✕</button>
         </div>
       </div>
@@ -1017,28 +1002,24 @@ function closeCart() {
   document.body.style.overflow = '';
 }
 
-// ─── WHATSAPP ORDER ──────────────────────────────────────────────────────────
+// ─── WHATSAPP ────────────────────────────────────────────────────────────────
 function orderWhatsApp() {
   if (!cart.length) return;
   const lines = cart.map(i => `• ${i.name} x${i.qty} = ${i.price * i.qty} DH`).join('\n');
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const msg = encodeURIComponent(`🍕 *MegaMed Snack Order*\n\n${lines}\n\n*Total: ${total} DH*\n\nMerci! 🙏`);
+  const msg   = encodeURIComponent(`🍕 *MegaMed Snack Order*\n\n${lines}\n\n*Total: ${total} DH*\n\nMerci! 🙏`);
   window.open(`https://wa.me/212717989955?text=${msg}`, '_blank');
 }
 
 // ─── REVIEWS ─────────────────────────────────────────────────────────────────
 function renderReviews() {
-  const el = document.getElementById('reviewsGrid');
-  el.innerHTML = reviews.map((r, i) => `
+  document.getElementById('reviewsGrid').innerHTML = reviews.map((r, i) => `
     <div class="review-card reveal" style="transition-delay:${i*0.08}s">
       <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
       <p class="review-text">"${r.text}"</p>
       <div class="review-author">
         <div class="review-avatar">${r.name[0]}</div>
-        <div>
-          <div class="review-name">${r.name}</div>
-          <div class="review-location">📍 ${r.loc}</div>
-        </div>
+        <div><div class="review-name">${r.name}</div><div class="review-location">📍 ${r.loc}</div></div>
       </div>
     </div>
   `).join('');
@@ -1048,16 +1029,13 @@ function renderReviews() {
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ─── NAV MOBILE ──────────────────────────────────────────────────────────────
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
+// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
@@ -1065,17 +1043,14 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 // ─── SCROLL REVEAL ───────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.12 });
-
-function observeReveal() {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
+}, { threshold: 0.08 });
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
-renderTabs();
-renderMenu();
+renderCategoryGrid();
 renderReviews();
-setTimeout(observeReveal, 100);
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}, 100);
 </script>
 </body>
 </html>
