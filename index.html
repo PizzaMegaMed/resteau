@@ -283,7 +283,7 @@
 
   /* ─── ITEM ROW ─── */
   .item-row {
-    display: flex; align-items: center; gap: 16px;
+    display: flex; align-items: flex-start; gap: 16px;
     padding: 15px 24px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
     transition: background 0.18s ease;
@@ -291,14 +291,56 @@
   .item-row:last-child { border-bottom: none; }
   .item-row:hover { background: rgba(255,255,255,0.022); }
 
-  .item-emoji { font-size: 1.35rem; flex-shrink: 0; width: 30px; text-align: center; line-height: 1; }
+  .item-emoji { font-size: 1.35rem; flex-shrink: 0; width: 30px; text-align: center; line-height: 1; padding-top: 2px; }
 
   .item-info { flex: 1; min-width: 0; }
   .item-name {
     font-weight: 700; font-size: 0.93rem; color: var(--text);
     line-height: 1.3; margin-bottom: 3px;
   }
-  .item-desc { color: var(--text2); font-size: 0.78rem; line-height: 1.4; }
+  .item-desc { color: var(--text2); font-size: 0.78rem; line-height: 1.4; margin-bottom: 8px; }
+
+  /* ─── SAUCE SELECTOR ─── */
+  .sauce-selector {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .sauce-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text2); margin-right: 2px; white-space: nowrap;
+  }
+  .sauce-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: 50px; cursor: pointer;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: var(--text2);
+    transition: all 0.22s cubic-bezier(0.2,0,0,1);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .sauce-chip:hover {
+    border-color: rgba(255,69,0,0.35);
+    color: var(--text);
+    background: rgba(255,69,0,0.06);
+    transform: translateY(-1px);
+  }
+  .sauce-chip.selected {
+    background: rgba(255,69,0,0.14);
+    border-color: rgba(255,69,0,0.5);
+    color: var(--accent2);
+    box-shadow: 0 0 10px rgba(255,69,0,0.18), inset 0 0 8px rgba(255,69,0,0.06);
+  }
+  .sauce-chip.selected::before {
+    content: '✓ ';
+    font-size: 0.62rem;
+  }
+  .sauce-price-tag {
+    font-size: 0.6rem; color: var(--gold); font-weight: 700;
+    background: rgba(245,200,66,0.1); border-radius: 20px;
+    padding: 1px 5px; margin-left: 1px;
+  }
 
   .item-badge {
     display: inline-block; vertical-align: middle; margin-left: 6px;
@@ -310,7 +352,7 @@
   }
   .item-badge.gold { background: rgba(245,200,66,0.12); color: var(--gold); border-color: rgba(245,200,66,0.2); }
 
-  .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding-top: 2px; }
 
   .item-price {
     font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem;
@@ -380,14 +422,21 @@
     display: flex; align-items: center; gap: 12px;
     padding: 12px; background: var(--card);
     border-radius: var(--radius-sm); margin-bottom: 10px; border: 1px solid var(--border);
+    transition: border-color 0.2s;
   }
+  .cart-item:hover { border-color: rgba(255,255,255,0.1); }
   .cart-item-thumb {
     width: 48px; height: 48px; border-radius: 10px;
     background: rgba(255,69,0,0.1); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
   }
   .cart-item-info { flex: 1; }
-  .cart-item-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; }
+  .cart-item-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 3px; }
+  .cart-item-sauces {
+    font-size: 0.72rem; color: var(--accent2); margin-bottom: 3px;
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  }
+  .cart-item-sauces span { background: rgba(255,69,0,0.1); padding: 1px 7px; border-radius: 20px; border: 1px solid rgba(255,69,0,0.18); }
   .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.92rem; }
   .cart-item-ctrl { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
   .cart-item-ctrl .qty-btn { width: 26px; height: 26px; font-size: 0.9rem; }
@@ -402,10 +451,87 @@
   .cart-rm-btn:hover { background: rgba(255,69,0,0.22); }
   .cart-empty { text-align: center; padding: 60px 20px; color: var(--text2); }
   .cart-empty .empty-icon { font-size: 3.5rem; margin-bottom: 14px; opacity: 0.4; }
-  .cart-footer { padding: 20px 24px; border-top: 1px solid var(--border); flex-shrink: 0; }
-  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .cart-total .label { font-weight: 600; color: var(--text2); font-size: 0.9rem; }
-  .cart-total .amount { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 1px; }
+
+  /* ─── DELIVERY ZONE SELECTOR ─── */
+  .delivery-section {
+    padding: 16px 16px 0;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .delivery-title {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text2);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .delivery-title::before { content: '🚚'; font-size: 0.85rem; }
+  .delivery-zones {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    margin-bottom: 14px;
+  }
+  .delivery-zone-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 8px; text-align: center;
+    cursor: pointer; transition: all 0.22s cubic-bezier(0.2,0,0,1);
+    position: relative; overflow: hidden;
+  }
+  .delivery-zone-btn::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(255,69,0,0.15) 0%, transparent 70%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .delivery-zone-btn:hover {
+    border-color: rgba(255,69,0,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .delivery-zone-btn:hover::after { opacity: 1; }
+  .delivery-zone-btn.selected {
+    border-color: var(--accent);
+    background: rgba(255,69,0,0.1);
+    box-shadow: 0 0 16px rgba(255,69,0,0.2), 0 4px 16px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+  }
+  .delivery-zone-btn.selected::after { opacity: 1; }
+  .dz-name {
+    font-weight: 700; font-size: 0.82rem; color: var(--text);
+    display: block; margin-bottom: 3px; position: relative; z-index: 1;
+  }
+  .dz-price {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+    color: var(--gold); letter-spacing: 0.5px;
+    display: block; position: relative; z-index: 1;
+  }
+  .delivery-zone-btn.selected .dz-name { color: var(--accent2); }
+  .dz-check {
+    position: absolute; top: 5px; right: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-size: 0.5rem; font-weight: 900;
+    display: none; align-items: center; justify-content: center; z-index: 2;
+  }
+  .delivery-zone-btn.selected .dz-check { display: flex; }
+
+  /* ─── CART FOOTER ─── */
+  .cart-footer { padding: 14px 16px 20px; border-top: 1px solid var(--border); flex-shrink: 0; }
+  .cart-totals { margin-bottom: 14px; }
+  .cart-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 0;
+  }
+  .cart-total-row .label { font-weight: 500; color: var(--text2); font-size: 0.85rem; }
+  .cart-total-row .val { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+  .cart-total-row.delivery .val { color: var(--accent2); }
+  .cart-total-row.final {
+    border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px;
+  }
+  .cart-total-row.final .label { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+  .cart-total-row.final .val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+    color: var(--gold); letter-spacing: 1px;
+  }
+
   .btn-whatsapp {
     width: 100%; background: #25D366; color: #fff; border: none;
     padding: 14px; border-radius: var(--radius-sm);
@@ -414,6 +540,7 @@
     transition: all 0.2s; margin-bottom: 10px;
   }
   .btn-whatsapp:hover { background: #1eb356; transform: scale(1.01); }
+  .btn-whatsapp:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
   .btn-glovo {
     width: 100%; background: rgba(255,193,7,0.08); color: #ffc107;
     border: 1.5px solid rgba(255,193,7,0.25);
@@ -423,6 +550,14 @@
     transition: all 0.2s; text-decoration: none;
   }
   .btn-glovo:hover { background: rgba(255,193,7,0.16); transform: scale(1.01); }
+
+  /* zone-required hint */
+  .zone-hint {
+    font-size: 0.72rem; color: var(--accent); text-align: center;
+    margin-bottom: 10px; opacity: 0; height: 0; overflow: hidden;
+    transition: all 0.25s;
+  }
+  .zone-hint.show { opacity: 1; height: 20px; }
 
   /* ─── REVIEWS ─── */
   #reviews { background: var(--bg); }
@@ -542,6 +677,9 @@
     .item-desc { display: none; }
     .panel-header { padding: 14px 16px; }
     .item-price { min-width: unset; }
+    .delivery-zones { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .dz-name { font-size: 0.75rem; }
+    .dz-price { font-size: 0.9rem; }
   }
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; align-items: center; }
@@ -550,6 +688,7 @@
     .cat-title { font-size: 1.3rem; }
     .cat-icon { font-size: 1.5rem; }
     .add-cart-btn { padding: 7px 12px; font-size: 0.75rem; }
+    .sauce-chip { padding: 3px 8px; font-size: 0.65rem; }
   }
 </style>
 </head>
@@ -688,13 +827,18 @@
     <button class="close-btn" onclick="closeCart()">✕</button>
   </div>
   <div class="cart-items" id="cartItems"></div>
+
+  <!-- DELIVERY ZONE -->
+  <div class="delivery-section" id="deliverySection" style="display:none">
+    <div class="delivery-title">Choose Delivery Zone</div>
+    <div class="delivery-zones" id="deliveryZones"></div>
+  </div>
+
   <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-total">
-      <span class="label">Total</span>
-      <span class="amount" id="cartTotal">0 DH</span>
-    </div>
-    <button class="btn-whatsapp" onclick="orderWhatsApp()">
-      💬 Order via WhatsApp (Alliance • Kasba • Mehdia 🚀)
+    <div class="cart-totals" id="cartTotals"></div>
+    <div class="zone-hint" id="zoneHint">⚠️ Please select a delivery zone to order</div>
+    <button class="btn-whatsapp" onclick="orderWhatsApp()" id="btnWhatsapp">
+      💬 Order via WhatsApp
     </button>
     <a class="btn-glovo" href="#" target="_blank">
       🛵 Order via Glovo (Other areas)
@@ -706,6 +850,20 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ─── SAUCE CONFIG ────────────────────────────────────────────────────────────
+const SAUCES = [
+  { id: 'biggy',    label: 'Biggy Sauce',    price: 2 },
+  { id: 'algerian', label: 'Algerian Sauce', price: 2 },
+  { id: 'white',    label: 'White Sauce',    price: 2 },
+];
+
+// ─── DELIVERY ZONES ──────────────────────────────────────────────────────────
+const DELIVERY_ZONES = [
+  { id: 'alliance', name: 'Alliance', fee: 5 },
+  { id: 'kasba',    name: 'Kasba',    fee: 10 },
+  { id: 'mehdia',   name: 'Mehdia',   fee: 15 },
+];
+
 // ─── CATEGORY CONFIG ─────────────────────────────────────────────────────────
 const CATEGORIES = [
   { id:'tacos',     label:'Tacos',      icon:'🌮', img:'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=450&fit=crop&q=85' },
@@ -717,7 +875,6 @@ const CATEGORIES = [
   { id:'salad',     label:'Salads',     icon:'🥗', img:'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=600&h=450&fit=crop&q=85' },
 ];
 
-// Per-item emojis by category (positional)
 const CAT_EMOJIS = {
   tacos:     ['🍗','🥩','🔀','🌯','🍗','👑','🍟','🧂'],
   sandwich:  ['🍗','🐟','🥩','🥚','🔀','⚡'],
@@ -793,7 +950,34 @@ const reviews = [
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let cart = [];
 let quantities = {};
+let itemSauces = {};      // { itemId: Set of sauce ids }
+let selectedZone = null;  // zone id string
 let openCategoryId = null;
+
+// ─── SAUCE HELPERS ───────────────────────────────────────────────────────────
+function getSauces(itemId) {
+  if (!itemSauces[itemId]) itemSauces[itemId] = new Set();
+  return itemSauces[itemId];
+}
+
+function toggleSauce(itemId, sauceId) {
+  const set = getSauces(itemId);
+  if (set.has(sauceId)) { set.delete(sauceId); } else { set.add(sauceId); }
+  // Update chip visual
+  const chip = document.getElementById(`sauce-${itemId}-${sauceId}`);
+  if (chip) chip.classList.toggle('selected', set.has(sauceId));
+}
+
+function getSauceCost(itemId) {
+  return [...getSauces(itemId)].reduce((acc, sid) => {
+    const s = SAUCES.find(x => x.id === sid);
+    return acc + (s ? s.price : 0);
+  }, 0);
+}
+
+function getSauceLabels(sauceSet) {
+  return [...sauceSet].map(sid => SAUCES.find(x => x.id === sid)?.label).filter(Boolean);
+}
 
 // ─── RENDER CATEGORY GRID ────────────────────────────────────────────────────
 function renderCategoryGrid() {
@@ -850,12 +1034,24 @@ function renderCategoryGrid() {
       const badgeHtml = item.badge
         ? `<span class="item-badge${isGoldBadge ? ' gold' : ''}">${item.badge}</span>`
         : '';
+
+      // Sauce chips HTML
+      const sauceChips = SAUCES.map(s => `
+        <span class="sauce-chip" id="sauce-${item.id}-${s.id}" onclick="toggleSauce(${item.id},'${s.id}')">
+          ${s.label}<span class="sauce-price-tag">+${s.price}</span>
+        </span>
+      `).join('');
+
       return `
         <div class="item-row">
           <div class="item-emoji">${emoji}</div>
           <div class="item-info">
             <div class="item-name">${item.name}${badgeHtml}</div>
             <div class="item-desc">${item.desc}</div>
+            <div class="sauce-selector">
+              <span class="sauce-label">+ Sauce</span>
+              ${sauceChips}
+            </div>
           </div>
           <div class="item-right">
             <div class="item-price">${item.price} <small>DH</small></div>
@@ -880,21 +1076,14 @@ function renderCategoryGrid() {
 
 // ─── TOGGLE PANEL ─────────────────────────────────────────────────────────────
 function toggleCategory(catId) {
-  if (openCategoryId === catId) {
-    closeAllPanels();
-    return;
-  }
+  if (openCategoryId === catId) { closeAllPanels(); return; }
   closeAllPanels();
   openCategoryId = catId;
-
   const panel = document.getElementById(`panel-${catId}`);
   const card  = document.getElementById(`catcard-${catId}`);
   if (panel) panel.classList.add('open');
   if (card)  card.classList.add('active');
-
-  setTimeout(() => {
-    panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 60);
+  setTimeout(() => { panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
 }
 
 function closeAllPanels() {
@@ -923,12 +1112,30 @@ function changeQty(id, delta) {
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
   const qty  = quantities[id] || 1;
-  const existing = cart.find(c => c.id === id);
+  const sauceSet = new Set(getSauces(id)); // snapshot current sauces
+  const sauceCost = getSauceCost(id);
+
+  // Check if identical item+sauces combo already in cart
+  const existing = cart.find(c => {
+    if (c.id !== id) return false;
+    if (c.sauces.size !== sauceSet.size) return false;
+    for (const s of sauceSet) { if (!c.sauces.has(s)) return false; }
+    return true;
+  });
+
   if (existing) { existing.qty += qty; }
-  else { cart.push({ ...item, qty }); }
+  else { cart.push({ ...item, qty, sauces: sauceSet, sauceCost }); }
+
+  // Reset qty & sauces for that item
   quantities[id] = 1;
+  itemSauces[id] = new Set();
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) qtyEl.textContent = 1;
+  // Reset sauce chip visuals
+  SAUCES.forEach(s => {
+    const chip = document.getElementById(`sauce-${id}-${s.id}`);
+    if (chip) chip.classList.remove('selected');
+  });
 
   const btn = document.getElementById(`addbtn-${id}`);
   if (btn) {
@@ -936,29 +1143,63 @@ function addToCart(id) {
     setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ Add'; }, 1500);
   }
   updateCartUI();
-  showToast(`✓ ${item.name} added to cart`);
+  const sauceNames = getSauceLabels(sauceSet);
+  const sauceNote = sauceNames.length ? ` + ${sauceNames.join(', ')}` : '';
+  showToast(`✓ ${item.name}${sauceNote} added`);
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(c => c.id !== id);
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
   updateCartUI(); renderCartItems();
 }
 
-function changeCartQty(id, delta) {
-  const item = cart.find(c => c.id === id);
-  if (!item) return;
-  item.qty = Math.max(1, item.qty + delta);
+function changeCartQty(idx, delta) {
+  if (!cart[idx]) return;
+  cart[idx].qty = Math.max(1, cart[idx].qty + delta);
   updateCartUI(); renderCartItems();
+}
+
+function getFoodTotal() {
+  return cart.reduce((s, i) => s + (i.price + i.sauceCost) * i.qty, 0);
+}
+
+function getDeliveryFee() {
+  if (!selectedZone) return 0;
+  const z = DELIVERY_ZONES.find(x => x.id === selectedZone);
+  return z ? z.fee : 0;
 }
 
 function updateCartUI() {
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const count = cart.reduce((s, i) => s + i.qty, 0);
   const badge = document.getElementById('cartBadge');
   badge.textContent = count;
   badge.classList.toggle('show', count > 0);
-  document.getElementById('cartTotal').textContent = `${total} DH`;
-  document.getElementById('cartFooter').style.display = cart.length ? 'block' : 'none';
+
+  const hasItems = cart.length > 0;
+  document.getElementById('deliverySection').style.display = hasItems ? 'block' : 'none';
+  document.getElementById('cartFooter').style.display = hasItems ? 'block' : 'none';
+
+  // Update totals display
+  if (hasItems) {
+    const foodTotal = getFoodTotal();
+    const deliveryFee = getDeliveryFee();
+    const finalTotal = foodTotal + deliveryFee;
+    const zone = DELIVERY_ZONES.find(x => x.id === selectedZone);
+    document.getElementById('cartTotals').innerHTML = `
+      <div class="cart-total-row">
+        <span class="label">Food Total</span>
+        <span class="val">${foodTotal} DH</span>
+      </div>
+      <div class="cart-total-row delivery">
+        <span class="label">Delivery${zone ? ' · ' + zone.name : ''}</span>
+        <span class="val">${selectedZone ? deliveryFee + ' DH' : '— Select zone'}</span>
+      </div>
+      <div class="cart-total-row final">
+        <span class="label">Final Total</span>
+        <span class="val">${selectedZone ? finalTotal + ' DH' : '—'}</span>
+      </div>
+    `;
+  }
 }
 
 function getCatIcon(catId) {
@@ -972,25 +1213,34 @@ function renderCartItems() {
     el.innerHTML = `<div class="cart-empty"><div class="empty-icon">🛒</div><p>Your cart is empty</p><p style="font-size:0.8rem;margin-top:6px">Browse the menu and add items!</p></div>`;
     return;
   }
-  el.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
-      <div class="cart-item-info">
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">${item.price * item.qty} DH</div>
-        <div class="cart-item-ctrl">
-          <button class="qty-btn" onclick="changeCartQty(${item.id},-1)">−</button>
-          <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeCartQty(${item.id},1)">+</button>
-          <button class="cart-rm-btn" onclick="removeFromCart(${item.id})">✕</button>
+  el.innerHTML = cart.map((item, idx) => {
+    const lineTotal = (item.price + item.sauceCost) * item.qty;
+    const sauceLabels = getSauceLabels(item.sauces);
+    const saucesHtml = sauceLabels.length
+      ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>`
+      : '';
+    return `
+      <div class="cart-item">
+        <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          ${saucesHtml}
+          <div class="cart-item-price">${lineTotal} DH</div>
+          <div class="cart-item-ctrl">
+            <button class="qty-btn" onclick="changeCartQty(${idx},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeCartQty(${idx},1)">+</button>
+            <button class="cart-rm-btn" onclick="removeFromCart(${idx})">✕</button>
+          </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function openCart() {
   renderCartItems();
+  renderDeliveryZones();
   document.getElementById('cartOverlay').classList.add('open');
   document.getElementById('cartDrawer').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1002,12 +1252,51 @@ function closeCart() {
   document.body.style.overflow = '';
 }
 
+// ─── DELIVERY ZONES ──────────────────────────────────────────────────────────
+function renderDeliveryZones() {
+  const container = document.getElementById('deliveryZones');
+  container.innerHTML = DELIVERY_ZONES.map(z => `
+    <div class="delivery-zone-btn${selectedZone === z.id ? ' selected' : ''}" onclick="selectZone('${z.id}')">
+      <div class="dz-check">✓</div>
+      <span class="dz-name">${z.name}</span>
+      <span class="dz-price">${z.fee} DH</span>
+    </div>
+  `).join('');
+}
+
+function selectZone(zoneId) {
+  selectedZone = zoneId;
+  renderDeliveryZones();
+  updateCartUI();
+  // Hide hint
+  document.getElementById('zoneHint').classList.remove('show');
+}
+
 // ─── WHATSAPP ────────────────────────────────────────────────────────────────
 function orderWhatsApp() {
   if (!cart.length) return;
-  const lines = cart.map(i => `• ${i.name} x${i.qty} = ${i.price * i.qty} DH`).join('\n');
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const msg   = encodeURIComponent(`🍕 *MegaMed Snack Order*\n\n${lines}\n\n*Total: ${total} DH*\n\nMerci! 🙏`);
+  if (!selectedZone) {
+    document.getElementById('zoneHint').classList.add('show');
+    return;
+  }
+  const zone = DELIVERY_ZONES.find(x => x.id === selectedZone);
+  const foodTotal = getFoodTotal();
+  const deliveryFee = getDeliveryFee();
+  const finalTotal = foodTotal + deliveryFee;
+
+  const lines = cart.map(i => {
+    const sauceLabels = getSauceLabels(i.sauces);
+    const saucePart = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
+    return `• ${i.name} x${i.qty}${saucePart} = ${(i.price + i.sauceCost) * i.qty} DH`;
+  }).join('\n');
+
+  const msg = encodeURIComponent(
+    `🍕 *MegaMed Snack Order*\n\n${lines}\n\n` +
+    `📍 Delivery Zone: ${zone.name}\n` +
+    `🚚 Delivery Fee: ${deliveryFee} DH\n` +
+    `💰 *Final Total: ${finalTotal} DH*\n\n` +
+    `Merci! 🙏`
+  );
   window.open(`https://wa.me/212717989955?text=${msg}`, '_blank');
 }
 
