@@ -342,6 +342,151 @@
     padding: 1px 5px; margin-left: 1px;
   }
 
+  /* ─── FRIES SIZE SELECTOR (in-item, for tacos panel) ─── */
+  .fries-size-selector {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .fries-size-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text2); margin-right: 2px; white-space: nowrap;
+  }
+  .fries-size-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 50px; cursor: pointer;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.3px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: var(--text2);
+    transition: all 0.22s cubic-bezier(0.2,0,0,1);
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+  }
+  .fries-size-btn:hover {
+    border-color: rgba(245,200,66,0.4);
+    color: var(--text);
+    background: rgba(245,200,66,0.06);
+    transform: translateY(-1px);
+  }
+  .fries-size-btn.selected {
+    background: rgba(245,200,66,0.14);
+    border-color: rgba(245,200,66,0.55);
+    color: var(--gold);
+    box-shadow: 0 0 10px rgba(245,200,66,0.15), inset 0 0 8px rgba(245,200,66,0.05);
+  }
+  .fries-size-btn.selected::before {
+    content: '✓ ';
+    font-size: 0.62rem;
+  }
+  .fries-size-price {
+    font-size: 0.62rem; font-weight: 700;
+    background: rgba(245,200,66,0.12); color: var(--gold);
+    border-radius: 20px; padding: 1px 6px; margin-left: 1px;
+  }
+
+  /* ─── STANDALONE FRIES SIZE SELECTOR (in fries panel) ─── */
+  .standalone-fries-panel {
+    padding: 28px 24px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 24px;
+  }
+  .standalone-fries-header {
+    text-align: center;
+  }
+  .standalone-fries-emoji {
+    font-size: 3.5rem; margin-bottom: 10px; display: block;
+    filter: drop-shadow(0 4px 16px rgba(245,200,66,0.3));
+  }
+  .standalone-fries-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 3px; color: var(--text); margin-bottom: 6px;
+  }
+  .standalone-fries-desc {
+    color: var(--text2); font-size: 0.85rem; max-width: 360px; margin: 0 auto;
+  }
+  .standalone-fries-sizes {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  }
+  .standalone-size-card {
+    flex: 1; min-width: 140px; max-width: 200px;
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 20px 16px;
+    text-align: center; cursor: pointer;
+    background: rgba(255,255,255,0.03);
+    transition: all 0.25s cubic-bezier(0.2,0,0,1);
+    position: relative; overflow: hidden;
+  }
+  .standalone-size-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(245,200,66,0.12) 0%, transparent 70%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .standalone-size-card:hover {
+    border-color: rgba(245,200,66,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  }
+  .standalone-size-card:hover::before { opacity: 1; }
+  .standalone-size-card.selected {
+    border-color: var(--gold);
+    background: rgba(245,200,66,0.08);
+    box-shadow: 0 0 24px rgba(245,200,66,0.2), 0 6px 20px rgba(0,0,0,0.35);
+    transform: translateY(-3px);
+  }
+  .standalone-size-card.selected::before { opacity: 1; }
+  .standalone-size-check {
+    position: absolute; top: 8px; right: 10px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--gold); color: #000;
+    font-size: 0.6rem; font-weight: 900;
+    display: none; align-items: center; justify-content: center;
+  }
+  .standalone-size-card.selected .standalone-size-check { display: flex; }
+  .standalone-size-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; position: relative; z-index: 1; }
+  .standalone-size-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px;
+    color: var(--text); display: block; margin-bottom: 4px; position: relative; z-index: 1;
+  }
+  .standalone-size-price {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+    color: var(--gold); letter-spacing: 1px;
+    display: block; position: relative; z-index: 1;
+  }
+  .standalone-size-sublabel {
+    font-size: 0.68rem; color: var(--text2); letter-spacing: 0.5px; position: relative; z-index: 1;
+    display: block; margin-top: 2px;
+  }
+  .standalone-fries-add-row {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center;
+  }
+  .standalone-fries-qty {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); border-radius: 50px; padding: 3px;
+  }
+  .standalone-fries-add-btn {
+    background: var(--accent); color: #fff; border: none;
+    padding: 12px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.92rem;
+    cursor: pointer; display: flex; align-items: center; gap: 7px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(255,69,0,0.3);
+    letter-spacing: 0.2px;
+  }
+  .standalone-fries-add-btn:hover { background: var(--accent2); transform: scale(1.04); box-shadow: 0 6px 22px rgba(255,69,0,0.45); }
+  .standalone-fries-add-btn.added { background: #1d3d1d; color: #5abf5a; box-shadow: 0 3px 12px rgba(90,191,90,0.18); }
+  .standalone-fries-add-btn:disabled {
+    background: rgba(255,255,255,0.07); color: var(--text2);
+    cursor: not-allowed; box-shadow: none; transform: none;
+  }
+  .standalone-fries-hint {
+    font-size: 0.75rem; color: var(--accent);
+    text-align: center; opacity: 0; height: 0; overflow: hidden;
+    transition: all 0.25s;
+  }
+  .standalone-fries-hint.show { opacity: 1; height: 18px; }
+
   .item-badge {
     display: inline-block; vertical-align: middle; margin-left: 6px;
     background: rgba(255,69,0,0.14); color: var(--accent2);
@@ -437,6 +582,11 @@
     display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
   }
   .cart-item-sauces span { background: rgba(255,69,0,0.1); padding: 1px 7px; border-radius: 20px; border: 1px solid rgba(255,69,0,0.18); }
+  .cart-item-extras {
+    font-size: 0.72rem; color: var(--gold); margin-bottom: 3px;
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+  }
+  .cart-item-extras span { background: rgba(245,200,66,0.08); padding: 1px 7px; border-radius: 20px; border: 1px solid rgba(245,200,66,0.18); }
   .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.92rem; }
   .cart-item-ctrl { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
   .cart-item-ctrl .qty-btn { width: 26px; height: 26px; font-size: 0.9rem; }
@@ -680,6 +830,8 @@
     .delivery-zones { grid-template-columns: repeat(3, 1fr); gap: 6px; }
     .dz-name { font-size: 0.75rem; }
     .dz-price { font-size: 0.9rem; }
+    .standalone-fries-panel { padding: 20px 16px; }
+    .standalone-size-card { min-width: 120px; padding: 16px 12px; }
   }
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; align-items: center; }
@@ -689,6 +841,9 @@
     .cat-icon { font-size: 1.5rem; }
     .add-cart-btn { padding: 7px 12px; font-size: 0.75rem; }
     .sauce-chip { padding: 3px 8px; font-size: 0.65rem; }
+    .fries-size-btn { padding: 3px 9px; font-size: 0.65rem; }
+    .standalone-fries-sizes { gap: 10px; }
+    .standalone-size-card { min-width: 110px; }
   }
 </style>
 </head>
@@ -736,7 +891,7 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><span class="num">500+</span><small>Happy Clients</small></div>
-      <div class="hero-stat"><span class="num">7</span><small>Categories</small></div>
+      <div class="hero-stat"><span class="num">6</span><small>Categories</small></div>
       <div class="hero-stat"><span class="num">30min</span><small>Delivery</small></div>
     </div>
   </div>
@@ -850,12 +1005,24 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── SAUCE CONFIG ────────────────────────────────────────────────────────────
+// ─── SAUCE CONFIG (Tacos only) ────────────────────────────────────────────────
 const SAUCES = [
-  { id: 'biggy',    label: 'Biggy Sauce',    price: 2 },
-  { id: 'algerian', label: 'Algerian Sauce', price: 2 },
-  { id: 'white',    label: 'White Sauce',    price: 2 },
+  { id: 'biggy',    label: 'Biggy',          price: 2 },
+  { id: 'algerian', label: 'Algerienne',     price: 2 },
+  { id: 'white',    label: 'Sauce Blanche',  price: 2 },
 ];
+
+// ─── FRIES SIZE CONFIG (for tacos sub-items 7 & 8) ───────────────────────────
+const FRIES_ITEMS = new Set([7, 8]);
+const FRIES_SIZES = [
+  { id: 'small', label: 'Small', price: 7 },
+  { id: 'large', label: 'Large', price: 10 },
+];
+
+// ─── STANDALONE FRIES (separate category) ────────────────────────────────────
+// State for the standalone fries category
+let standaloneFriesSize = null; // 'small' | 'large'
+let standaloneFriesQty  = 1;
 
 // ─── DELIVERY ZONES ──────────────────────────────────────────────────────────
 const DELIVERY_ZONES = [
@@ -872,7 +1039,8 @@ const CATEGORIES = [
   { id:'pizza',     label:'Pizza',      icon:'🍕', img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=450&fit=crop&q=85' },
   { id:'burger',    label:'Burgers',    icon:'🍔', img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=450&fit=crop&q=85' },
   { id:'pasticcio', label:'Pasticcio',  icon:'🥧', img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=450&fit=crop&q=85' },
-  { id:'salad',     label:'Salads',     icon:'🥗', img:'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=600&h=450&fit=crop&q=85' },
+  // ─── NEW: Standalone Fries category ───────────────────────────────────────
+  { id:'fries',     label:'Fries',      icon:'🍟', img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&h=450&fit=crop&q=85' },
 ];
 
 const CAT_EMOJIS = {
@@ -882,10 +1050,10 @@ const CAT_EMOJIS = {
   pizza:     ['🍕','🍕','🐟','🐟','🥩','🥩','🔀','🔀','🍗','🍗','🌿','🌿','🎉','🧀','🧀','🦐','🦐','🍂','🍂'],
   burger:    ['🍔','🍗','🥩'],
   pasticcio: ['🍗','🥩','🔀','🌿','🧀','👑','🍗'],
-  salad:     ['🥗'],
+  fries:     [],
 };
 
-// ─── MENU DATA ───────────────────────────────────────────────────────────────
+// ─── MENU DATA ─────────────────────────────────────────────────────────────────
 const menuItems = [
   { id:1,  cat:'tacos',     name:'Chicken Tacos',                desc:'Grilled chicken, fries, cheese sauce & fresh veggies wrapped in a soft tortilla',      price:33, badge:'Popular' },
   { id:2,  cat:'tacos',     name:'Kefta Tacos',                  desc:'Spiced ground kefta, fries, cheese sauce & fresh veggies in a flour tortilla',          price:42, badge:"Chef's Pick" },
@@ -935,7 +1103,6 @@ const menuItems = [
   { id:46, cat:'pasticcio', name:'Gratin Pasticcio',             desc:'Classic pasta gratin with golden cheese crust & creamy béchamel',                     price:33 },
   { id:47, cat:'pasticcio', name:'Cordon Bleu Pasticcio',        desc:'Pasta bake with golden cordon bleu & creamy béchamel sauce',                          price:40, badge:'Special' },
   { id:48, cat:'pasticcio', name:'Nuggets Pasticcio',            desc:'Pasta bake topped with crispy chicken nuggets & béchamel',                            price:38 },
-  { id:49, cat:'salad',     name:'Caesar Salad',                 desc:'Crisp romaine lettuce, croutons, parmesan & creamy Caesar dressing',                  price:37, badge:'Fresh' },
 ];
 
 const reviews = [
@@ -950,33 +1117,161 @@ const reviews = [
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let cart = [];
 let quantities = {};
-let itemSauces = {};      // { itemId: Set of sauce ids }
-let selectedZone = null;  // zone id string
+let itemSauces = {};
+let itemFriesSize = {};
+let selectedZone = null;
 let openCategoryId = null;
 
-// ─── SAUCE HELPERS ───────────────────────────────────────────────────────────
+// ─── SAUCE HELPERS ────────────────────────────────────────────────────────────
 function getSauces(itemId) {
   if (!itemSauces[itemId]) itemSauces[itemId] = new Set();
   return itemSauces[itemId];
 }
-
 function toggleSauce(itemId, sauceId) {
   const set = getSauces(itemId);
   if (set.has(sauceId)) { set.delete(sauceId); } else { set.add(sauceId); }
-  // Update chip visual
   const chip = document.getElementById(`sauce-${itemId}-${sauceId}`);
   if (chip) chip.classList.toggle('selected', set.has(sauceId));
 }
-
 function getSauceCost(itemId) {
   return [...getSauces(itemId)].reduce((acc, sid) => {
     const s = SAUCES.find(x => x.id === sid);
     return acc + (s ? s.price : 0);
   }, 0);
 }
-
 function getSauceLabels(sauceSet) {
   return [...sauceSet].map(sid => SAUCES.find(x => x.id === sid)?.label).filter(Boolean);
+}
+
+// ─── FRIES SIZE HELPERS (tacos sub-items) ─────────────────────────────────────
+function getFriesSize(itemId) { return itemFriesSize[itemId] || 'small'; }
+function selectFriesSize(itemId, sizeId) {
+  itemFriesSize[itemId] = sizeId;
+  FRIES_SIZES.forEach(s => {
+    const btn = document.getElementById(`fries-size-${itemId}-${s.id}`);
+    if (btn) btn.classList.toggle('selected', s.id === sizeId);
+  });
+  const priceEl = document.getElementById(`price-display-${itemId}`);
+  if (priceEl) {
+    const size = FRIES_SIZES.find(x => x.id === sizeId);
+    priceEl.innerHTML = `${size.price} <small>DH</small>`;
+  }
+}
+function getFriesPrice(itemId) {
+  const sizeId = getFriesSize(itemId);
+  const size = FRIES_SIZES.find(x => x.id === sizeId);
+  return size ? size.price : 7;
+}
+function getFriesSizeLabel(itemId) {
+  const sizeId = getFriesSize(itemId);
+  const size = FRIES_SIZES.find(x => x.id === sizeId);
+  return size ? size.label : 'Small';
+}
+
+// ─── STANDALONE FRIES HELPERS ─────────────────────────────────────────────────
+function selectStandaloneFriesSize(sizeId) {
+  standaloneFriesSize = sizeId;
+  // Update card visuals
+  ['small','large'].forEach(id => {
+    const card = document.getElementById(`sf-size-${id}`);
+    if (card) card.classList.toggle('selected', id === sizeId);
+  });
+  // Hide hint
+  const hint = document.getElementById('sf-hint');
+  if (hint) hint.classList.remove('show');
+}
+
+function changeStandaloneFriesQty(delta) {
+  standaloneFriesQty = Math.max(1, standaloneFriesQty + delta);
+  const el = document.getElementById('sf-qty-num');
+  if (el) el.textContent = standaloneFriesQty;
+}
+
+function addStandaloneFriesToCart() {
+  if (!standaloneFriesSize) {
+    const hint = document.getElementById('sf-hint');
+    if (hint) hint.classList.add('show');
+    return;
+  }
+  const sizeObj = FRIES_SIZES.find(s => s.id === standaloneFriesSize);
+  const qty = standaloneFriesQty;
+
+  // Check for identical existing cart entry
+  const existing = cart.find(c =>
+    c.id === 'fries-standalone' && c.friesSizeLabel === sizeObj.label
+  );
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({
+      id: 'fries-standalone',
+      cat: 'fries',
+      name: 'Fries',
+      price: sizeObj.price,
+      qty,
+      sauces: new Set(),
+      sauceCost: 0,
+      friesSizeLabel: sizeObj.label,
+    });
+  }
+
+  // Reset state
+  standaloneFriesQty = 1;
+  const qtyEl = document.getElementById('sf-qty-num');
+  if (qtyEl) qtyEl.textContent = 1;
+
+  // Button feedback
+  const btn = document.getElementById('sf-add-btn');
+  if (btn) {
+    btn.classList.add('added'); btn.textContent = '✓ Added!';
+    setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ Add to Cart'; }, 1600);
+  }
+
+  updateCartUI();
+  showToast(`✓ Fries - ${sizeObj.label} - ${sizeObj.price} DH added`);
+}
+
+// ─── RENDER STANDALONE FRIES PANEL ────────────────────────────────────────────
+function renderFriesPanel() {
+  return `
+    <div class="standalone-fries-panel">
+      <div class="standalone-fries-header">
+        <span class="standalone-fries-emoji">🍟</span>
+        <div class="standalone-fries-title">Golden Fries</div>
+        <p class="standalone-fries-desc">Crispy on the outside, fluffy on the inside — choose your size and enjoy!</p>
+      </div>
+
+      <div class="standalone-fries-sizes">
+        <div class="standalone-size-card" id="sf-size-small" onclick="selectStandaloneFriesSize('small')">
+          <div class="standalone-size-check">✓</div>
+          <span class="standalone-size-icon">🍟</span>
+          <span class="standalone-size-name">Small</span>
+          <span class="standalone-size-price">7 DH</span>
+          <span class="standalone-size-sublabel">Regular portion</span>
+        </div>
+        <div class="standalone-size-card" id="sf-size-large" onclick="selectStandaloneFriesSize('large')">
+          <div class="standalone-size-check">✓</div>
+          <span class="standalone-size-icon">🍟🍟</span>
+          <span class="standalone-size-name">Large</span>
+          <span class="standalone-size-price">10 DH</span>
+          <span class="standalone-size-sublabel">Extra portion</span>
+        </div>
+      </div>
+
+      <div class="standalone-fries-hint" id="sf-hint">⚠️ Please choose a size before adding to cart</div>
+
+      <div class="standalone-fries-add-row">
+        <div class="standalone-fries-qty qty-control">
+          <button class="qty-btn" onclick="changeStandaloneFriesQty(-1)">−</button>
+          <span class="qty-num" id="sf-qty-num">1</span>
+          <button class="qty-btn" onclick="changeStandaloneFriesQty(1)">+</button>
+        </div>
+        <button class="standalone-fries-add-btn" id="sf-add-btn" onclick="addStandaloneFriesToCart()">
+          🍟 Add to Cart
+        </button>
+      </div>
+    </div>
+  `;
 }
 
 // ─── RENDER CATEGORY GRID ────────────────────────────────────────────────────
@@ -985,7 +1280,10 @@ function renderCategoryGrid() {
   let html = '';
 
   CATEGORIES.forEach((cat, idx) => {
-    const count = menuItems.filter(i => i.cat === cat.id).length;
+    const isFriesCat = cat.id === 'fries';
+    const count = isFriesCat ? 2 : menuItems.filter(i => i.cat === cat.id).length;
+    const metaLabel = isFriesCat ? '2 sizes · Choose yours' : `${count} items · Tap to explore`;
+
     html += `
       <div class="cat-card reveal" style="animation-delay:${idx * 0.07}s" onclick="toggleCategory('${cat.id}')" id="catcard-${cat.id}" tabindex="0" role="button" aria-label="Open ${cat.label} menu">
         <img src="${cat.img}" alt="${cat.label}" loading="lazy">
@@ -994,9 +1292,9 @@ function renderCategoryGrid() {
           <div class="cat-icon">${cat.icon}</div>
           <div class="cat-title">${cat.label}</div>
           <div class="cat-meta">
-            <span>${count} items</span>
+            <span>${isFriesCat ? '2 sizes' : count + ' items'}</span>
             <span class="dot"></span>
-            <span>Tap to explore</span>
+            <span>${isFriesCat ? 'Small & Large' : 'Tap to explore'}</span>
           </div>
         </div>
       </div>
@@ -1006,7 +1304,7 @@ function renderCategoryGrid() {
             <span class="panel-icon">${cat.icon}</span>
             <div>
               <div class="panel-title">${cat.label}</div>
-              <div class="panel-count">${count} items available</div>
+              <div class="panel-count">${isFriesCat ? 'Small (7 DH) · Large (10 DH)' : count + ' items available'}</div>
             </div>
           </div>
           <button class="panel-close" onclick="closePanel(event,'${cat.id}')">✕</button>
@@ -1018,12 +1316,20 @@ function renderCategoryGrid() {
 
   grid.innerHTML = html;
 
-  // Render item rows per category
+  // Render item rows per regular category
   CATEGORIES.forEach(cat => {
-    const items = menuItems.filter(i => i.cat === cat.id);
-    const emojis = CAT_EMOJIS[cat.id] || [];
     const container = document.getElementById(`items-${cat.id}`);
     if (!container) return;
+
+    // ── Standalone Fries category ──
+    if (cat.id === 'fries') {
+      container.innerHTML = renderFriesPanel();
+      return;
+    }
+
+    // ── Regular categories ──
+    const items = menuItems.filter(i => i.cat === cat.id);
+    const emojis = CAT_EMOJIS[cat.id] || [];
     container.innerHTML = items.map((item, idx) => {
       const emoji = emojis[idx] || cat.icon;
       const q = quantities[item.id] || 1;
@@ -1035,12 +1341,35 @@ function renderCategoryGrid() {
         ? `<span class="item-badge${isGoldBadge ? ' gold' : ''}">${item.badge}</span>`
         : '';
 
-      // Sauce chips HTML
-      const sauceChips = SAUCES.map(s => `
-        <span class="sauce-chip" id="sauce-${item.id}-${s.id}" onclick="toggleSauce(${item.id},'${s.id}')">
-          ${s.label}<span class="sauce-price-tag">+${s.price}</span>
-        </span>
-      `).join('');
+      let selectorHtml = '';
+      if (FRIES_ITEMS.has(item.id)) {
+        const defaultSize = getFriesSize(item.id) || 'small';
+        const sizeBtns = FRIES_SIZES.map(s => `
+          <button class="fries-size-btn${s.id === defaultSize ? ' selected' : ''}" id="fries-size-${item.id}-${s.id}" onclick="selectFriesSize(${item.id},'${s.id}')">
+            ${s.label}<span class="fries-size-price">${s.price} DH</span>
+          </button>
+        `).join('');
+        selectorHtml = `
+          <div class="fries-size-selector">
+            <span class="fries-size-label">🍟 Size</span>
+            ${sizeBtns}
+          </div>
+        `;
+      } else if (cat.id === 'tacos') {
+        const sauceChips = SAUCES.map(s => `
+          <span class="sauce-chip" id="sauce-${item.id}-${s.id}" onclick="toggleSauce(${item.id},'${s.id}')">
+            ${s.label}<span class="sauce-price-tag">+${s.price}</span>
+          </span>
+        `).join('');
+        selectorHtml = `
+          <div class="sauce-selector">
+            <span class="sauce-label">+ Sauce</span>
+            ${sauceChips}
+          </div>
+        `;
+      }
+
+      const displayPrice = FRIES_ITEMS.has(item.id) ? getFriesPrice(item.id) : item.price;
 
       return `
         <div class="item-row">
@@ -1048,13 +1377,10 @@ function renderCategoryGrid() {
           <div class="item-info">
             <div class="item-name">${item.name}${badgeHtml}</div>
             <div class="item-desc">${item.desc}</div>
-            <div class="sauce-selector">
-              <span class="sauce-label">+ Sauce</span>
-              ${sauceChips}
-            </div>
+            ${selectorHtml}
           </div>
           <div class="item-right">
-            <div class="item-price">${item.price} <small>DH</small></div>
+            <div class="item-price" id="price-display-${item.id}">${displayPrice} <small>DH</small></div>
             <div class="item-actions">
               <div class="qty-control">
                 <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
@@ -1083,6 +1409,11 @@ function toggleCategory(catId) {
   const card  = document.getElementById(`catcard-${catId}`);
   if (panel) panel.classList.add('open');
   if (card)  card.classList.add('active');
+  // Reset standalone fries state when reopened
+  if (catId === 'fries') {
+    standaloneFriesSize = null;
+    standaloneFriesQty = 1;
+  }
   setTimeout(() => { panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
 }
 
@@ -1112,30 +1443,45 @@ function changeQty(id, delta) {
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
   const qty  = quantities[id] || 1;
-  const sauceSet = new Set(getSauces(id)); // snapshot current sauces
-  const sauceCost = getSauceCost(id);
 
-  // Check if identical item+sauces combo already in cart
+  let sauceSet = new Set();
+  let sauceCost = 0;
+  let friesSizeLabel = null;
+  let effectivePrice = item.price;
+
+  if (FRIES_ITEMS.has(id)) {
+    effectivePrice = getFriesPrice(id);
+    friesSizeLabel = getFriesSizeLabel(id);
+  } else if (item.cat === 'tacos') {
+    sauceSet = new Set(getSauces(id));
+    sauceCost = getSauceCost(id);
+  }
+
   const existing = cart.find(c => {
     if (c.id !== id) return false;
+    if (c.friesSizeLabel !== friesSizeLabel) return false;
     if (c.sauces.size !== sauceSet.size) return false;
     for (const s of sauceSet) { if (!c.sauces.has(s)) return false; }
     return true;
   });
 
-  if (existing) { existing.qty += qty; }
-  else { cart.push({ ...item, qty, sauces: sauceSet, sauceCost }); }
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ ...item, price: effectivePrice, qty, sauces: sauceSet, sauceCost, friesSizeLabel });
+  }
 
-  // Reset qty & sauces for that item
   quantities[id] = 1;
   itemSauces[id] = new Set();
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) qtyEl.textContent = 1;
-  // Reset sauce chip visuals
-  SAUCES.forEach(s => {
-    const chip = document.getElementById(`sauce-${id}-${s.id}`);
-    if (chip) chip.classList.remove('selected');
-  });
+
+  if (item.cat === 'tacos' && !FRIES_ITEMS.has(id)) {
+    SAUCES.forEach(s => {
+      const chip = document.getElementById(`sauce-${id}-${s.id}`);
+      if (chip) chip.classList.remove('selected');
+    });
+  }
 
   const btn = document.getElementById(`addbtn-${id}`);
   if (btn) {
@@ -1143,9 +1489,11 @@ function addToCart(id) {
     setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ Add'; }, 1500);
   }
   updateCartUI();
-  const sauceNames = getSauceLabels(sauceSet);
-  const sauceNote = sauceNames.length ? ` + ${sauceNames.join(', ')}` : '';
-  showToast(`✓ ${item.name}${sauceNote} added`);
+
+  let note = '';
+  if (friesSizeLabel) { note = ` · ${friesSizeLabel}`; }
+  else if (sauceSet.size) { note = ` + ${getSauceLabels(sauceSet).join(', ')}`; }
+  showToast(`✓ ${item.name}${note} added`);
 }
 
 function removeFromCart(idx) {
@@ -1179,7 +1527,6 @@ function updateCartUI() {
   document.getElementById('deliverySection').style.display = hasItems ? 'block' : 'none';
   document.getElementById('cartFooter').style.display = hasItems ? 'block' : 'none';
 
-  // Update totals display
   if (hasItems) {
     const foodTotal = getFoodTotal();
     const deliveryFee = getDeliveryFee();
@@ -1219,12 +1566,17 @@ function renderCartItems() {
     const saucesHtml = sauceLabels.length
       ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>`
       : '';
+    // Show size label for both standalone fries and tacos fries sub-items
+    const friesHtml = item.friesSizeLabel
+      ? `<div class="cart-item-extras"><span>🍟 ${item.friesSizeLabel} — ${item.price} DH</span></div>`
+      : '';
+
     return `
       <div class="cart-item">
         <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          ${saucesHtml}
+          ${friesHtml}${saucesHtml}
           <div class="cart-item-price">${lineTotal} DH</div>
           <div class="cart-item-ctrl">
             <button class="qty-btn" onclick="changeCartQty(${idx},-1)">−</button>
@@ -1268,7 +1620,6 @@ function selectZone(zoneId) {
   selectedZone = zoneId;
   renderDeliveryZones();
   updateCartUI();
-  // Hide hint
   document.getElementById('zoneHint').classList.remove('show');
 }
 
@@ -1286,8 +1637,10 @@ function orderWhatsApp() {
 
   const lines = cart.map(i => {
     const sauceLabels = getSauceLabels(i.sauces);
-    const saucePart = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
-    return `• ${i.name} x${i.qty}${saucePart} = ${(i.price + i.sauceCost) * i.qty} DH`;
+    const saucePart  = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
+    // Cart display: "Fries - Large - 10 DH" format
+    const friesPart  = i.friesSizeLabel ? `\n   Size: ${i.friesSizeLabel} (${i.price} DH)` : '';
+    return `• ${i.name} x${i.qty}${friesPart}${saucePart} = ${(i.price + i.sauceCost) * i.qty} DH`;
   }).join('\n');
 
   const msg = encodeURIComponent(
