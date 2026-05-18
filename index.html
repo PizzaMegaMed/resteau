@@ -281,24 +281,26 @@
   }
   .panel-close:hover { background: rgba(255,69,0,0.15); color: var(--accent); border-color: rgba(255,69,0,0.3); }
 
-  /* ─── ITEM ROW ─── */
+  /* ─── ITEM ROW — cleaned up, no emoji column ─── */
   .item-row {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 15px 24px;
+    display: flex; align-items: center; gap: 16px;
+    padding: 13px 24px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
     transition: background 0.18s ease;
   }
   .item-row:last-child { border-bottom: none; }
   .item-row:hover { background: rgba(255,255,255,0.022); }
 
-  .item-emoji { font-size: 1.35rem; flex-shrink: 0; width: 30px; text-align: center; line-height: 1; padding-top: 2px; }
+  /* item-emoji removed — no longer rendered */
 
   .item-info { flex: 1; min-width: 0; }
   .item-name {
-    font-weight: 700; font-size: 0.93rem; color: var(--text);
-    line-height: 1.3; margin-bottom: 3px;
+    font-weight: 600; font-size: 0.93rem; color: var(--text);
+    line-height: 1.3; margin-bottom: 2px;
   }
-  .item-desc { color: var(--text2); font-size: 0.78rem; line-height: 1.4; margin-bottom: 8px; }
+  .item-desc {
+    color: var(--text2); font-size: 0.78rem; line-height: 1.4; margin-bottom: 6px;
+  }
 
   /* ─── SAUCE SELECTOR ─── */
   .sauce-selector {
@@ -332,17 +334,14 @@
     color: var(--accent2);
     box-shadow: 0 0 10px rgba(255,69,0,0.18), inset 0 0 8px rgba(255,69,0,0.06);
   }
-  .sauce-chip.selected::before {
-    content: '✓ ';
-    font-size: 0.62rem;
-  }
+  .sauce-chip.selected::before { content: '✓ '; font-size: 0.62rem; }
   .sauce-price-tag {
     font-size: 0.6rem; color: var(--gold); font-weight: 700;
     background: rgba(245,200,66,0.1); border-radius: 20px;
     padding: 1px 5px; margin-left: 1px;
   }
 
-  /* ─── FRIES SIZE SELECTOR (in-item, for tacos panel) ─── */
+  /* ─── FRIES SIZE SELECTOR (in-item) ─── */
   .fries-size-selector {
     display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
     margin-top: 6px;
@@ -375,25 +374,20 @@
     color: var(--gold);
     box-shadow: 0 0 10px rgba(245,200,66,0.15), inset 0 0 8px rgba(245,200,66,0.05);
   }
-  .fries-size-btn.selected::before {
-    content: '✓ ';
-    font-size: 0.62rem;
-  }
+  .fries-size-btn.selected::before { content: '✓ '; font-size: 0.62rem; }
   .fries-size-price {
     font-size: 0.62rem; font-weight: 700;
     background: rgba(245,200,66,0.12); color: var(--gold);
     border-radius: 20px; padding: 1px 6px; margin-left: 1px;
   }
 
-  /* ─── STANDALONE FRIES SIZE SELECTOR (in fries panel) ─── */
+  /* ─── STANDALONE FRIES PANEL ─── */
   .standalone-fries-panel {
     padding: 28px 24px;
     display: flex; flex-direction: column; align-items: center;
     gap: 24px;
   }
-  .standalone-fries-header {
-    text-align: center;
-  }
+  .standalone-fries-header { text-align: center; }
   .standalone-fries-emoji {
     font-size: 3.5rem; margin-bottom: 10px; display: block;
     filter: drop-shadow(0 4px 16px rgba(245,200,66,0.3));
@@ -402,12 +396,8 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem; letter-spacing: 3px; color: var(--text); margin-bottom: 6px;
   }
-  .standalone-fries-desc {
-    color: var(--text2); font-size: 0.85rem; max-width: 360px; margin: 0 auto;
-  }
-  .standalone-fries-sizes {
-    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  }
+  .standalone-fries-desc { color: var(--text2); font-size: 0.85rem; max-width: 360px; margin: 0 auto; }
+  .standalone-fries-sizes { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
   .standalone-size-card {
     flex: 1; min-width: 140px; max-width: 200px;
     border: 2px solid rgba(255,255,255,0.08);
@@ -422,11 +412,7 @@
     background: radial-gradient(circle at center, rgba(245,200,66,0.12) 0%, transparent 70%);
     opacity: 0; transition: opacity 0.3s;
   }
-  .standalone-size-card:hover {
-    border-color: rgba(245,200,66,0.4);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
-  }
+  .standalone-size-card:hover { border-color: rgba(245,200,66,0.4); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
   .standalone-size-card:hover::before { opacity: 1; }
   .standalone-size-card.selected {
     border-color: var(--gold);
@@ -444,22 +430,10 @@
   }
   .standalone-size-card.selected .standalone-size-check { display: flex; }
   .standalone-size-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; position: relative; z-index: 1; }
-  .standalone-size-name {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px;
-    color: var(--text); display: block; margin-bottom: 4px; position: relative; z-index: 1;
-  }
-  .standalone-size-price {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
-    color: var(--gold); letter-spacing: 1px;
-    display: block; position: relative; z-index: 1;
-  }
-  .standalone-size-sublabel {
-    font-size: 0.68rem; color: var(--text2); letter-spacing: 0.5px; position: relative; z-index: 1;
-    display: block; margin-top: 2px;
-  }
-  .standalone-fries-add-row {
-    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center;
-  }
+  .standalone-size-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--text); display: block; margin-bottom: 4px; position: relative; z-index: 1; }
+  .standalone-size-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); letter-spacing: 1px; display: block; position: relative; z-index: 1; }
+  .standalone-size-sublabel { font-size: 0.68rem; color: var(--text2); letter-spacing: 0.5px; position: relative; z-index: 1; display: block; margin-top: 2px; }
+  .standalone-fries-add-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
   .standalone-fries-qty {
     display: flex; align-items: center;
     background: rgba(255,255,255,0.05);
@@ -476,15 +450,8 @@
   }
   .standalone-fries-add-btn:hover { background: var(--accent2); transform: scale(1.04); box-shadow: 0 6px 22px rgba(255,69,0,0.45); }
   .standalone-fries-add-btn.added { background: #1d3d1d; color: #5abf5a; box-shadow: 0 3px 12px rgba(90,191,90,0.18); }
-  .standalone-fries-add-btn:disabled {
-    background: rgba(255,255,255,0.07); color: var(--text2);
-    cursor: not-allowed; box-shadow: none; transform: none;
-  }
-  .standalone-fries-hint {
-    font-size: 0.75rem; color: var(--accent);
-    text-align: center; opacity: 0; height: 0; overflow: hidden;
-    transition: all 0.25s;
-  }
+  .standalone-fries-add-btn:disabled { background: rgba(255,255,255,0.07); color: var(--text2); cursor: not-allowed; box-shadow: none; transform: none; }
+  .standalone-fries-hint { font-size: 0.75rem; color: var(--accent); text-align: center; opacity: 0; height: 0; overflow: hidden; transition: all 0.25s; }
   .standalone-fries-hint.show { opacity: 1; height: 18px; }
 
   .item-badge {
@@ -497,7 +464,7 @@
   }
   .item-badge.gold { background: rgba(245,200,66,0.12); color: var(--gold); border-color: rgba(245,200,66,0.2); }
 
-  .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding-top: 2px; }
+  .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
   .item-price {
     font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem;
@@ -614,10 +581,7 @@
     margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
   }
   .delivery-title::before { content: '🚚'; font-size: 0.85rem; }
-  .delivery-zones {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-    margin-bottom: 14px;
-  }
+  .delivery-zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
   .delivery-zone-btn {
     background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
@@ -631,11 +595,7 @@
     background: radial-gradient(circle at center, rgba(255,69,0,0.15) 0%, transparent 70%);
     opacity: 0; transition: opacity 0.3s;
   }
-  .delivery-zone-btn:hover {
-    border-color: rgba(255,69,0,0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
+  .delivery-zone-btn:hover { border-color: rgba(255,69,0,0.3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
   .delivery-zone-btn:hover::after { opacity: 1; }
   .delivery-zone-btn.selected {
     border-color: var(--accent);
@@ -644,15 +604,8 @@
     transform: translateY(-2px);
   }
   .delivery-zone-btn.selected::after { opacity: 1; }
-  .dz-name {
-    font-weight: 700; font-size: 0.82rem; color: var(--text);
-    display: block; margin-bottom: 3px; position: relative; z-index: 1;
-  }
-  .dz-price {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
-    color: var(--gold); letter-spacing: 0.5px;
-    display: block; position: relative; z-index: 1;
-  }
+  .dz-name { font-weight: 700; font-size: 0.82rem; color: var(--text); display: block; margin-bottom: 3px; position: relative; z-index: 1; }
+  .dz-price { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.5px; display: block; position: relative; z-index: 1; }
   .delivery-zone-btn.selected .dz-name { color: var(--accent2); }
   .dz-check {
     position: absolute; top: 5px; right: 6px;
@@ -666,21 +619,13 @@
   /* ─── CART FOOTER ─── */
   .cart-footer { padding: 14px 16px 20px; border-top: 1px solid var(--border); flex-shrink: 0; }
   .cart-totals { margin-bottom: 14px; }
-  .cart-total-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 0;
-  }
+  .cart-total-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
   .cart-total-row .label { font-weight: 500; color: var(--text2); font-size: 0.85rem; }
   .cart-total-row .val { font-weight: 600; font-size: 0.88rem; color: var(--text); }
   .cart-total-row.delivery .val { color: var(--accent2); }
-  .cart-total-row.final {
-    border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px;
-  }
+  .cart-total-row.final { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px; }
   .cart-total-row.final .label { font-weight: 700; color: var(--text); font-size: 0.95rem; }
-  .cart-total-row.final .val {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
-    color: var(--gold); letter-spacing: 1px;
-  }
+  .cart-total-row.final .val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 1px; }
 
   .btn-whatsapp {
     width: 100%; background: #25D366; color: #fff; border: none;
@@ -701,12 +646,7 @@
   }
   .btn-glovo:hover { background: rgba(255,193,7,0.16); transform: scale(1.01); }
 
-  /* zone-required hint */
-  .zone-hint {
-    font-size: 0.72rem; color: var(--accent); text-align: center;
-    margin-bottom: 10px; opacity: 0; height: 0; overflow: hidden;
-    transition: all 0.25s;
-  }
+  .zone-hint { font-size: 0.72rem; color: var(--accent); text-align: center; margin-bottom: 10px; opacity: 0; height: 0; overflow: hidden; transition: all 0.25s; }
   .zone-hint.show { opacity: 1; height: 20px; }
 
   /* ─── REVIEWS ─── */
@@ -722,11 +662,7 @@
   .review-stars { color: var(--gold); font-size: 0.95rem; margin-bottom: 14px; letter-spacing: 3px; }
   .review-text { color: var(--text2); font-size: 0.88rem; line-height: 1.7; margin-bottom: 18px; font-style: italic; }
   .review-author { display: flex; align-items: center; gap: 12px; }
-  .review-avatar {
-    width: 40px; height: 40px; border-radius: 50%; background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1rem; color: #fff; flex-shrink: 0;
-  }
+  .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: #fff; flex-shrink: 0; }
   .review-name { font-weight: 600; font-size: 0.88rem; }
   .review-location { color: var(--text2); font-size: 0.76rem; }
 
@@ -741,12 +677,7 @@
     transition: transform 0.2s, border-color 0.2s;
   }
   .contact-card:hover { transform: translateX(4px); border-color: rgba(255,69,0,0.3); }
-  .contact-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    background: rgba(255,69,0,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; flex-shrink: 0;
-  }
+  .contact-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,69,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
   .contact-label { font-size: 0.72rem; color: var(--text2); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
   .contact-val { font-weight: 600; font-size: 0.98rem; color: var(--text); }
   .map-placeholder {
@@ -784,10 +715,7 @@
   .footer-socials a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -809,12 +737,7 @@
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
-    .nav-links {
-      display: none; flex-direction: column;
-      position: absolute; top: var(--nav-h); left: 0; right: 0;
-      background: rgba(10,10,10,0.97); backdrop-filter: blur(18px);
-      padding: 20px 5%; gap: 16px; border-bottom: 1px solid var(--border);
-    }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: rgba(10,10,10,0.97); backdrop-filter: blur(18px); padding: 20px 5%; gap: 16px; border-bottom: 1px solid var(--border); }
     .nav-links.open { display: flex; }
     .hamburger { display: flex; }
     section { padding: 70px 5%; }
@@ -822,9 +745,8 @@
     footer { flex-direction: column; text-align: center; }
     .hero-food-strip { display: none; }
     .category-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-    .item-row { padding: 12px 16px; gap: 10px; }
+    .item-row { padding: 11px 16px; gap: 10px; }
     .item-right { gap: 8px; }
-    .item-desc { display: none; }
     .panel-header { padding: 14px 16px; }
     .item-price { min-width: unset; }
     .delivery-zones { grid-template-columns: repeat(3, 1fr); gap: 6px; }
@@ -844,6 +766,7 @@
     .fries-size-btn { padding: 3px 9px; font-size: 0.65rem; }
     .standalone-fries-sizes { gap: 10px; }
     .standalone-size-card { min-width: 110px; }
+    .item-desc { display: none; }
   }
 </style>
 </head>
@@ -982,13 +905,10 @@
     <button class="close-btn" onclick="closeCart()">✕</button>
   </div>
   <div class="cart-items" id="cartItems"></div>
-
-  <!-- DELIVERY ZONE -->
   <div class="delivery-section" id="deliverySection" style="display:none">
     <div class="delivery-title">Choose Delivery Zone</div>
     <div class="delivery-zones" id="deliveryZones"></div>
   </div>
-
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-totals" id="cartTotals"></div>
     <div class="zone-hint" id="zoneHint">⚠️ Please select a delivery zone to order</div>
@@ -1005,33 +925,27 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── SAUCE CONFIG (Tacos only) ────────────────────────────────────────────────
 const SAUCES = [
-  { id: 'biggy',    label: 'Biggy',          price: 2 },
-  { id: 'algerian', label: 'Algerienne',     price: 2 },
-  { id: 'white',    label: 'Sauce Blanche',  price: 2 },
+  { id: 'biggy',    label: 'Biggy',         price: 2 },
+  { id: 'algerian', label: 'Algerienne',    price: 2 },
+  { id: 'white',    label: 'Sauce Blanche', price: 2 },
 ];
 
-// ─── FRIES SIZE CONFIG (for tacos sub-items 7 & 8) ───────────────────────────
 const FRIES_ITEMS = new Set([7, 8]);
 const FRIES_SIZES = [
   { id: 'small', label: 'Small', price: 7 },
   { id: 'large', label: 'Large', price: 10 },
 ];
 
-// ─── STANDALONE FRIES (separate category) ────────────────────────────────────
-// State for the standalone fries category
-let standaloneFriesSize = null; // 'small' | 'large'
+let standaloneFriesSize = null;
 let standaloneFriesQty  = 1;
 
-// ─── DELIVERY ZONES ──────────────────────────────────────────────────────────
 const DELIVERY_ZONES = [
   { id: 'alliance', name: 'Alliance', fee: 5 },
   { id: 'kasba',    name: 'Kasba',    fee: 10 },
   { id: 'mehdia',   name: 'Mehdia',   fee: 15 },
 ];
 
-// ─── CATEGORY CONFIG ─────────────────────────────────────────────────────────
 const CATEGORIES = [
   { id:'tacos',     label:'Tacos',      icon:'🌮', img:'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=450&fit=crop&q=85' },
   { id:'sandwich',  label:'Sandwiches', icon:'🥖', img:'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=450&fit=crop&q=85' },
@@ -1039,70 +953,58 @@ const CATEGORIES = [
   { id:'pizza',     label:'Pizza',      icon:'🍕', img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=450&fit=crop&q=85' },
   { id:'burger',    label:'Burgers',    icon:'🍔', img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=450&fit=crop&q=85' },
   { id:'pasticcio', label:'Pasticcio',  icon:'🥧', img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=450&fit=crop&q=85' },
-  // ─── NEW: Standalone Fries category ───────────────────────────────────────
   { id:'fries',     label:'Fries',      icon:'🍟', img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&h=450&fit=crop&q=85' },
 ];
 
-const CAT_EMOJIS = {
-  tacos:     ['🍗','🥩','🔀','🌯','🍗','👑','🍟','🧂'],
-  sandwich:  ['🍗','🐟','🥩','🥚','🔀','⚡'],
-  panini:    ['🐟','🍗','🥩','🔀','🌿'],
-  pizza:     ['🍕','🍕','🐟','🐟','🥩','🥩','🔀','🔀','🍗','🍗','🌿','🌿','🎉','🧀','🧀','🦐','🦐','🍂','🍂'],
-  burger:    ['🍔','🍗','🥩'],
-  pasticcio: ['🍗','🥩','🔀','🌿','🧀','👑','🍗'],
-  fries:     [],
-};
-
-// ─── MENU DATA ─────────────────────────────────────────────────────────────────
 const menuItems = [
-  { id:1,  cat:'tacos',     name:'Tacos Poulet',                desc:'Grilled chicken, fries, cheese sauce & fresh veggies wrapped in a soft tortilla',      price:33, badge:'Popular' },
-  { id:2,  cat:'tacos',     name:'Tacos kefta',                  desc:'Spiced ground kefta, fries, cheese sauce & fresh veggies in a flour tortilla',          price:42, badge:"Chef's Pick" },
-  { id:3,  cat:'tacos',     name:'Tacos Kefta Poulet',          desc:'Combo of grilled chicken & kefta, fries, cheese sauce & veggies',                       price:30, badge:'Value' },
-  { id:4,  cat:'tacos',     name:'Tacos Mix',                    desc:'Mixed fillings of chicken, kefta & veggies with fries and sauce',                       price:35 },
-  { id:5,  cat:'tacos',     name:'Tacos Nuggets',                desc:'Crispy chicken nuggets, fries, cheese sauce & fresh veggies',                           price:37 },
-  { id:6,  cat:'tacos',     name:'Tacos Cordon Bleu',            desc:'Golden cordon bleu, fries, creamy sauce & veggies in a warm tortilla',                  price:40, badge:'Special' },
-  { id:7,  cat:'tacos',     name:'Fries',                        desc:'Crispy golden fries — the perfect side',                                                price:7,  badge:'Side' },
-  { id:8,  cat:'tacos',     name:'Crispy Fries',                 desc:'Extra-crispy seasoned fries for that satisfying crunch',                                price:7,  badge:'Side' },
-  { id:9,  cat:'sandwich',  name:'Sandwich Poulet',             desc:'Grilled chicken, lettuce, tomato & mayo in a fresh baguette',                           price:25, badge:'Popular' },
-  { id:10, cat:'sandwich',  name:'Sandwich Thon',                desc:'Seasoned tuna, fresh veggies & sauce in a soft baguette',                               price:20, badge:'Value' },
-  { id:11, cat:'sandwich',  name:'Sandwich Kefta',               desc:'Grilled spiced kefta, harissa, tomato & onion in a baguette',                          price:30 },
-  { id:12, cat:'sandwich',  name:'Sandwich Mix',                 desc:'A hearty mix of fillings — egg, veggies & sauce in a fresh baguette',                  price:22 },
-  { id:13, cat:'sandwich',  name:'Sandwich Kefta Poulet',       desc:'Grilled chicken & kefta combo with fresh toppings in a baguette',                      price:28, badge:'Best Deal' },
-  { id:14, cat:'sandwich',  name:'Sandwich Mega Crispy',         desc:'Crispy fried chicken fillet, coleslaw & special sauce — fully loaded',                 price:35, badge:'XXL' },
-  { id:15, cat:'panini',    name:'Panini Thon',                  desc:'Seasoned tuna, melted cheese & veggies in a toasted panini bread',                     price:18, badge:'Value' },
-  { id:16, cat:'panini',    name:'Panini Poulet',               desc:'Grilled chicken, mozzarella & fresh greens pressed to golden perfection',               price:22, badge:'Popular' },
-  { id:17, cat:'panini',    name:'Panini Kefta',                 desc:'Spiced kefta, tomato, onion & cheese grilled in a panini press',                       price:28 },
-  { id:18, cat:'panini',    name:'Panini Kefta Poulet',         desc:'Chicken & kefta duo with melted cheese and veggies, toasted to perfection',             price:28, badge:"Chef's Pick" },
-  { id:19, cat:'panini',    name:'Panini mix',                   desc:'A mix of savoury fillings with cheese pressed into crispy panini bread',                price:22 },
-  { id:20, cat:'pizza',     name:'Pizza Poulet (Small)',        desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Small',                           price:30 },
-  { id:21, cat:'pizza',     name:'Pizza Poulet (Medium)',       desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Medium',                          price:40, badge:'Popular' },
-  { id:22, cat:'pizza',     name:'Pizza Thon (Small)',           desc:'Tomato sauce, mozzarella & seasoned tuna — Small',                                      price:30 },
-  { id:23, cat:'pizza',     name:'Pizza Thon (Medium)',          desc:'Tomato sauce, mozzarella & seasoned tuna — Medium',                                     price:40 },
-  { id:24, cat:'pizza',     name:'Pizza Kefta (Small)',          desc:'Tomato sauce, mozzarella & spiced ground kefta — Small',                               price:38 },
-  { id:25, cat:'pizza',     name:'Pizza Kefta (Medium)',         desc:'Tomato sauce, mozzarella & spiced ground kefta — Medium',                              price:48, badge:"Chef's Pick" },
-  { id:26, cat:'pizza',     name:'Pizza Mix (Small)',            desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Small',                         price:33 },
-  { id:27, cat:'pizza',     name:'Pizza Mix (Medium)',           desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Medium',                        price:43 },
-  { id:28, cat:'pizza',     name:'Pizza Kefta Poulet (Small)',  desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Small',                   price:28, badge:'Value' },
-  { id:29, cat:'pizza',     name:'Pizza Kefta Poulet (Medium)', desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Medium',                  price:38 },
-  { id:30, cat:'pizza',     name:'Margherita (Small)',           desc:'Classic tomato sauce, fresh mozzarella & basil — Small',                               price:22 },
-  { id:31, cat:'pizza',     name:'Margherita (Medium)',          desc:'Classic tomato sauce, fresh mozzarella & basil — Medium',                              price:32 },
-  { id:32, cat:'pizza',     name:'2 Margherita Offer 🎉',        desc:'Special deal: two Margherita pizzas for a great price',                                price:30, badge:'🔥 Offer' },
-  { id:33, cat:'pizza',     name:'Pizza 4 Frommage (Small)',       desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Small',                      price:33 },
-  { id:34, cat:'pizza',     name:'Pizza 4 Frommage (Medium)',      desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Medium',                     price:43, badge:'Popular' },
-  { id:35, cat:'pizza',     name:'Pizza Fruit De Mer (Small)',        desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Small',                 price:40 },
-  { id:36, cat:'pizza',     name:'Pizza Fruit De Mer (Medium)',       desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Medium',                price:50, badge:'Premium' },
-  { id:37, cat:'pizza',     name:'Pizza 4 Seasons (Small)',      desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Small',        price:40 },
-  { id:38, cat:'pizza',     name:'Pizza 4 Seasons (Medium)',     desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Medium',       price:50, badge:'Signature' },
-  { id:39, cat:'burger',    name:'Double Kefta Burger',          desc:'Two spiced kefta patties, cheddar, pickles & special sauce in a brioche bun',         price:45, badge:'Best Seller' },
-  { id:40, cat:'burger',    name:'Crispy Burger',                desc:'Golden crispy chicken fillet, coleslaw & sriracha mayo in a toasted bun',             price:40, badge:'Popular' },
-  { id:41, cat:'burger',    name:'Simple Kefta Burger',          desc:'Classic kefta patty, lettuce, tomato & house sauce in a soft bun',                    price:38, badge:'Value' },
-  { id:42, cat:'pasticcio', name:'Pasticcio Poulet',            desc:'Layers of pasta, béchamel & seasoned grilled chicken, baked to perfection',           price:35, badge:'Popular' },
-  { id:43, cat:'pasticcio', name:'Pasticcio Kefta',              desc:'Layers of pasta, béchamel & spiced kefta, baked golden',                              price:45, badge:"Chef's Pick" },
-  { id:44, cat:'pasticcio', name:'Pasticcio Kefta Poulet',      desc:'Pasta bake with a duo of grilled chicken & kefta in creamy béchamel',                 price:33, badge:'Value' },
-  { id:45, cat:'pasticcio', name:'Pasticcio Mix ',                desc:'A hearty pasta bake with mixed fillings & creamy béchamel topping',                   price:40 },
-  { id:46, cat:'pasticcio', name:'Pasticcio Jambon',             desc:'Classic pasta gratin with golden cheese crust & creamy béchamel',                     price:33 },
-  { id:47, cat:'pasticcio', name:'Cordon Bleu Pasticcio',        desc:'Pasta bake with golden cordon bleu & creamy béchamel sauce',                          price:40, badge:'Special' },
-  { id:48, cat:'pasticcio', name:'Nuggets Pasticcio',            desc:'Pasta bake topped with crispy chicken nuggets & béchamel',                            price:38 },
+  { id:1,  cat:'tacos',     name:'Tacos Poulet',               desc:'Grilled chicken, fries, cheese sauce & fresh veggies wrapped in a soft tortilla',    price:33, badge:'Popular' },
+  { id:2,  cat:'tacos',     name:'Tacos Kefta',                desc:'Spiced ground kefta, fries, cheese sauce & fresh veggies in a flour tortilla',        price:42, badge:"Chef's Pick" },
+  { id:3,  cat:'tacos',     name:'Tacos Kefta Poulet',         desc:'Combo of grilled chicken & kefta, fries, cheese sauce & veggies',                     price:30, badge:'Value' },
+  { id:4,  cat:'tacos',     name:'Tacos Mix',                  desc:'Mixed fillings of chicken, kefta & veggies with fries and sauce',                     price:35 },
+  { id:5,  cat:'tacos',     name:'Tacos Nuggets',              desc:'Crispy chicken nuggets, fries, cheese sauce & fresh veggies',                         price:37 },
+  { id:6,  cat:'tacos',     name:'Tacos Cordon Bleu',          desc:'Golden cordon bleu, fries, creamy sauce & veggies in a warm tortilla',                price:40, badge:'Special' },
+  { id:7,  cat:'tacos',     name:'Fries',                      desc:'Crispy golden fries — the perfect side',                                              price:7,  badge:'Side' },
+  { id:8,  cat:'tacos',     name:'Crispy Fries',               desc:'Extra-crispy seasoned fries for that satisfying crunch',                              price:7,  badge:'Side' },
+  { id:9,  cat:'sandwich',  name:'Sandwich Poulet',            desc:'Grilled chicken, lettuce, tomato & mayo in a fresh baguette',                         price:25, badge:'Popular' },
+  { id:10, cat:'sandwich',  name:'Sandwich Thon',              desc:'Seasoned tuna, fresh veggies & sauce in a soft baguette',                             price:20, badge:'Value' },
+  { id:11, cat:'sandwich',  name:'Sandwich Kefta',             desc:'Grilled spiced kefta, harissa, tomato & onion in a baguette',                        price:30 },
+  { id:12, cat:'sandwich',  name:'Sandwich Mix',               desc:'A hearty mix of fillings — egg, veggies & sauce in a fresh baguette',                price:22 },
+  { id:13, cat:'sandwich',  name:'Sandwich Kefta Poulet',      desc:'Grilled chicken & kefta combo with fresh toppings in a baguette',                    price:28, badge:'Best Deal' },
+  { id:14, cat:'sandwich',  name:'Sandwich Mega Crispy',       desc:'Crispy fried chicken fillet, coleslaw & special sauce — fully loaded',               price:35, badge:'XXL' },
+  { id:15, cat:'panini',    name:'Panini Thon',                desc:'Seasoned tuna, melted cheese & veggies in a toasted panini bread',                   price:18, badge:'Value' },
+  { id:16, cat:'panini',    name:'Panini Poulet',              desc:'Grilled chicken, mozzarella & fresh greens pressed to golden perfection',             price:22, badge:'Popular' },
+  { id:17, cat:'panini',    name:'Panini Kefta',               desc:'Spiced kefta, tomato, onion & cheese grilled in a panini press',                     price:28 },
+  { id:18, cat:'panini',    name:'Panini Kefta Poulet',        desc:'Chicken & kefta duo with melted cheese and veggies, toasted to perfection',           price:28, badge:"Chef's Pick" },
+  { id:19, cat:'panini',    name:'Panini Mix',                 desc:'A mix of savoury fillings with cheese pressed into crispy panini bread',              price:22 },
+  { id:20, cat:'pizza',     name:'Pizza Poulet (Small)',       desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Small',                         price:30 },
+  { id:21, cat:'pizza',     name:'Pizza Poulet (Medium)',      desc:'Tomato sauce, mozzarella & seasoned grilled chicken — Medium',                        price:40, badge:'Popular' },
+  { id:22, cat:'pizza',     name:'Pizza Thon (Small)',         desc:'Tomato sauce, mozzarella & seasoned tuna — Small',                                    price:30 },
+  { id:23, cat:'pizza',     name:'Pizza Thon (Medium)',        desc:'Tomato sauce, mozzarella & seasoned tuna — Medium',                                   price:40 },
+  { id:24, cat:'pizza',     name:'Pizza Kefta (Small)',        desc:'Tomato sauce, mozzarella & spiced ground kefta — Small',                             price:38 },
+  { id:25, cat:'pizza',     name:'Pizza Kefta (Medium)',       desc:'Tomato sauce, mozzarella & spiced ground kefta — Medium',                            price:48, badge:"Chef's Pick" },
+  { id:26, cat:'pizza',     name:'Pizza Mix (Small)',          desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Small',                       price:33 },
+  { id:27, cat:'pizza',     name:'Pizza Mix (Medium)',         desc:'Chicken, kefta & tuna with tomato sauce & mozzarella — Medium',                      price:43 },
+  { id:28, cat:'pizza',     name:'Pizza Kefta Poulet (Small)', desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Small',                 price:28, badge:'Value' },
+  { id:29, cat:'pizza',     name:'Pizza Kefta Poulet (Medium)',desc:'Grilled chicken & kefta combo on tomato sauce & mozzarella — Medium',                price:38 },
+  { id:30, cat:'pizza',     name:'Margherita (Small)',         desc:'Classic tomato sauce, fresh mozzarella & basil — Small',                             price:22 },
+  { id:31, cat:'pizza',     name:'Margherita (Medium)',        desc:'Classic tomato sauce, fresh mozzarella & basil — Medium',                            price:32 },
+  { id:32, cat:'pizza',     name:'2 Margherita Offer 🎉',      desc:'Special deal: two Margherita pizzas for a great price',                              price:30, badge:'🔥 Offer' },
+  { id:33, cat:'pizza',     name:'Pizza 4 Fromage (Small)',    desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Small',                     price:33 },
+  { id:34, cat:'pizza',     name:'Pizza 4 Fromage (Medium)',   desc:'Mozzarella, cheddar, gouda & parmesan on a creamy base — Medium',                    price:43, badge:'Popular' },
+  { id:35, cat:'pizza',     name:'Pizza Fruit de Mer (Small)', desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Small',               price:40 },
+  { id:36, cat:'pizza',     name:'Pizza Fruit de Mer (Medium)',desc:'Shrimp, calamari & seafood mix on tomato sauce & mozzarella — Medium',              price:50, badge:'Premium' },
+  { id:37, cat:'pizza',     name:'Pizza 4 Seasons (Small)',    desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Small',      price:40 },
+  { id:38, cat:'pizza',     name:'Pizza 4 Seasons (Medium)',   desc:'Four quarters: chicken, kefta, tuna & veggies on tomato & mozzarella — Medium',     price:50, badge:'Signature' },
+  { id:39, cat:'burger',    name:'Double Kefta Burger',        desc:'Two spiced kefta patties, cheddar, pickles & special sauce in a brioche bun',       price:45, badge:'Best Seller' },
+  { id:40, cat:'burger',    name:'Crispy Burger',              desc:'Golden crispy chicken fillet, coleslaw & sriracha mayo in a toasted bun',           price:40, badge:'Popular' },
+  { id:41, cat:'burger',    name:'Simple Kefta Burger',        desc:'Classic kefta patty, lettuce, tomato & house sauce in a soft bun',                  price:38, badge:'Value' },
+  { id:42, cat:'pasticcio', name:'Pasticcio Poulet',           desc:'Layers of pasta, béchamel & seasoned grilled chicken, baked to perfection',         price:35, badge:'Popular' },
+  { id:43, cat:'pasticcio', name:'Pasticcio Kefta',            desc:'Layers of pasta, béchamel & spiced kefta, baked golden',                           price:45, badge:"Chef's Pick" },
+  { id:44, cat:'pasticcio', name:'Pasticcio Kefta Poulet',     desc:'Pasta bake with a duo of grilled chicken & kefta in creamy béchamel',               price:33, badge:'Value' },
+  { id:45, cat:'pasticcio', name:'Pasticcio Mix',              desc:'A hearty pasta bake with mixed fillings & creamy béchamel topping',                 price:40 },
+  { id:46, cat:'pasticcio', name:'Pasticcio Jambon',           desc:'Classic pasta gratin with golden cheese crust & creamy béchamel',                  price:33 },
+  { id:47, cat:'pasticcio', name:'Cordon Bleu Pasticcio',      desc:'Pasta bake with golden cordon bleu & creamy béchamel sauce',                       price:40, badge:'Special' },
+  { id:48, cat:'pasticcio', name:'Nuggets Pasticcio',          desc:'Pasta bake topped with crispy chicken nuggets & béchamel',                         price:38 },
 ];
 
 const reviews = [
@@ -1114,7 +1016,6 @@ const reviews = [
   { name:'Nora R.',    loc:'Kenitra', stars:5, text:'Ordered via WhatsApp, was super easy. Food arrived in 25 min and everything was perfect. 👏' },
 ];
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
 let cart = [];
 let quantities = {};
 let itemSauces = {};
@@ -1122,7 +1023,6 @@ let itemFriesSize = {};
 let selectedZone = null;
 let openCategoryId = null;
 
-// ─── SAUCE HELPERS ────────────────────────────────────────────────────────────
 function getSauces(itemId) {
   if (!itemSauces[itemId]) itemSauces[itemId] = new Set();
   return itemSauces[itemId];
@@ -1143,7 +1043,6 @@ function getSauceLabels(sauceSet) {
   return [...sauceSet].map(sid => SAUCES.find(x => x.id === sid)?.label).filter(Boolean);
 }
 
-// ─── FRIES SIZE HELPERS (tacos sub-items) ─────────────────────────────────────
 function getFriesSize(itemId) { return itemFriesSize[itemId] || 'small'; }
 function selectFriesSize(itemId, sizeId) {
   itemFriesSize[itemId] = sizeId;
@@ -1168,15 +1067,12 @@ function getFriesSizeLabel(itemId) {
   return size ? size.label : 'Small';
 }
 
-// ─── STANDALONE FRIES HELPERS ─────────────────────────────────────────────────
 function selectStandaloneFriesSize(sizeId) {
   standaloneFriesSize = sizeId;
-  // Update card visuals
   ['small','large'].forEach(id => {
     const card = document.getElementById(`sf-size-${id}`);
     if (card) card.classList.toggle('selected', id === sizeId);
   });
-  // Hide hint
   const hint = document.getElementById('sf-hint');
   if (hint) hint.classList.remove('show');
 }
@@ -1195,43 +1091,21 @@ function addStandaloneFriesToCart() {
   }
   const sizeObj = FRIES_SIZES.find(s => s.id === standaloneFriesSize);
   const qty = standaloneFriesQty;
-
-  // Check for identical existing cart entry
-  const existing = cart.find(c =>
-    c.id === 'fries-standalone' && c.friesSizeLabel === sizeObj.label
-  );
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({
-      id: 'fries-standalone',
-      cat: 'fries',
-      name: 'Fries',
-      price: sizeObj.price,
-      qty,
-      sauces: new Set(),
-      sauceCost: 0,
-      friesSizeLabel: sizeObj.label,
-    });
-  }
-
-  // Reset state
+  const existing = cart.find(c => c.id === 'fries-standalone' && c.friesSizeLabel === sizeObj.label);
+  if (existing) { existing.qty += qty; }
+  else { cart.push({ id: 'fries-standalone', cat: 'fries', name: 'Fries', price: sizeObj.price, qty, sauces: new Set(), sauceCost: 0, friesSizeLabel: sizeObj.label }); }
   standaloneFriesQty = 1;
   const qtyEl = document.getElementById('sf-qty-num');
   if (qtyEl) qtyEl.textContent = 1;
-
-  // Button feedback
   const btn = document.getElementById('sf-add-btn');
   if (btn) {
     btn.classList.add('added'); btn.textContent = '✓ Added!';
-    setTimeout(() => { btn.classList.remove('added'); btn.textContent = '+ Add to Cart'; }, 1600);
+    setTimeout(() => { btn.classList.remove('added'); btn.textContent = '🍟 Add to Cart'; }, 1600);
   }
-
   updateCartUI();
   showToast(`✓ Fries - ${sizeObj.label} - ${sizeObj.price} DH added`);
 }
 
-// ─── RENDER STANDALONE FRIES PANEL ────────────────────────────────────────────
 function renderFriesPanel() {
   return `
     <div class="standalone-fries-panel">
@@ -1240,7 +1114,6 @@ function renderFriesPanel() {
         <div class="standalone-fries-title">Golden Fries</div>
         <p class="standalone-fries-desc">Crispy on the outside, fluffy on the inside — choose your size and enjoy!</p>
       </div>
-
       <div class="standalone-fries-sizes">
         <div class="standalone-size-card" id="sf-size-small" onclick="selectStandaloneFriesSize('small')">
           <div class="standalone-size-check">✓</div>
@@ -1257,9 +1130,7 @@ function renderFriesPanel() {
           <span class="standalone-size-sublabel">Extra portion</span>
         </div>
       </div>
-
       <div class="standalone-fries-hint" id="sf-hint">⚠️ Please choose a size before adding to cart</div>
-
       <div class="standalone-fries-add-row">
         <div class="standalone-fries-qty qty-control">
           <button class="qty-btn" onclick="changeStandaloneFriesQty(-1)">−</button>
@@ -1274,7 +1145,6 @@ function renderFriesPanel() {
   `;
 }
 
-// ─── RENDER CATEGORY GRID ────────────────────────────────────────────────────
 function renderCategoryGrid() {
   const grid = document.getElementById('categoryGrid');
   let html = '';
@@ -1282,7 +1152,6 @@ function renderCategoryGrid() {
   CATEGORIES.forEach((cat, idx) => {
     const isFriesCat = cat.id === 'fries';
     const count = isFriesCat ? 2 : menuItems.filter(i => i.cat === cat.id).length;
-    const metaLabel = isFriesCat ? '2 sizes · Choose yours' : `${count} items · Tap to explore`;
 
     html += `
       <div class="cat-card reveal" style="animation-delay:${idx * 0.07}s" onclick="toggleCategory('${cat.id}')" id="catcard-${cat.id}" tabindex="0" role="button" aria-label="Open ${cat.label} menu">
@@ -1316,22 +1185,17 @@ function renderCategoryGrid() {
 
   grid.innerHTML = html;
 
-  // Render item rows per regular category
   CATEGORIES.forEach(cat => {
     const container = document.getElementById(`items-${cat.id}`);
     if (!container) return;
 
-    // ── Standalone Fries category ──
     if (cat.id === 'fries') {
       container.innerHTML = renderFriesPanel();
       return;
     }
 
-    // ── Regular categories ──
     const items = menuItems.filter(i => i.cat === cat.id);
-    const emojis = CAT_EMOJIS[cat.id] || [];
-    container.innerHTML = items.map((item, idx) => {
-      const emoji = emojis[idx] || cat.icon;
+    container.innerHTML = items.map((item) => {
       const q = quantities[item.id] || 1;
       const isGoldBadge = item.badge && (
         item.badge.includes('🔥') || item.badge === 'Best Seller' ||
@@ -1349,31 +1213,20 @@ function renderCategoryGrid() {
             ${s.label}<span class="fries-size-price">${s.price} DH</span>
           </button>
         `).join('');
-        selectorHtml = `
-          <div class="fries-size-selector">
-            <span class="fries-size-label">🍟 Size</span>
-            ${sizeBtns}
-          </div>
-        `;
+        selectorHtml = `<div class="fries-size-selector"><span class="fries-size-label">Size</span>${sizeBtns}</div>`;
       } else if (cat.id === 'tacos') {
         const sauceChips = SAUCES.map(s => `
           <span class="sauce-chip" id="sauce-${item.id}-${s.id}" onclick="toggleSauce(${item.id},'${s.id}')">
             ${s.label}<span class="sauce-price-tag">+${s.price}</span>
           </span>
         `).join('');
-        selectorHtml = `
-          <div class="sauce-selector">
-            <span class="sauce-label">+ Sauce</span>
-            ${sauceChips}
-          </div>
-        `;
+        selectorHtml = `<div class="sauce-selector"><span class="sauce-label">+ Sauce</span>${sauceChips}</div>`;
       }
 
       const displayPrice = FRIES_ITEMS.has(item.id) ? getFriesPrice(item.id) : item.price;
 
       return `
         <div class="item-row">
-          <div class="item-emoji">${emoji}</div>
           <div class="item-info">
             <div class="item-name">${item.name}${badgeHtml}</div>
             <div class="item-desc">${item.desc}</div>
@@ -1400,7 +1253,6 @@ function renderCategoryGrid() {
   }, 50);
 }
 
-// ─── TOGGLE PANEL ─────────────────────────────────────────────────────────────
 function toggleCategory(catId) {
   if (openCategoryId === catId) { closeAllPanels(); return; }
   closeAllPanels();
@@ -1409,20 +1261,14 @@ function toggleCategory(catId) {
   const card  = document.getElementById(`catcard-${catId}`);
   if (panel) panel.classList.add('open');
   if (card)  card.classList.add('active');
-  // Reset standalone fries state when reopened
-  if (catId === 'fries') {
-    standaloneFriesSize = null;
-    standaloneFriesQty = 1;
-  }
+  if (catId === 'fries') { standaloneFriesSize = null; standaloneFriesQty = 1; }
   setTimeout(() => { panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
 }
-
 function closeAllPanels() {
   document.querySelectorAll('.items-panel').forEach(p => p.classList.remove('open'));
   document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
   openCategoryId = null;
 }
-
 function closePanel(e, catId) {
   e.stopPropagation();
   const panel = document.getElementById(`panel-${catId}`);
@@ -1432,21 +1278,16 @@ function closePanel(e, catId) {
   if (openCategoryId === catId) openCategoryId = null;
 }
 
-// ─── QTY ─────────────────────────────────────────────────────────────────────
 function changeQty(id, delta) {
   quantities[id] = Math.max(1, (quantities[id] || 1) + delta);
   const el = document.getElementById(`qty-${id}`);
   if (el) el.textContent = quantities[id];
 }
 
-// ─── CART ─────────────────────────────────────────────────────────────────────
 function addToCart(id) {
   const item = menuItems.find(i => i.id === id);
   const qty  = quantities[id] || 1;
-
-  let sauceSet = new Set();
-  let sauceCost = 0;
-  let friesSizeLabel = null;
+  let sauceSet = new Set(), sauceCost = 0, friesSizeLabel = null;
   let effectivePrice = item.price;
 
   if (FRIES_ITEMS.has(id)) {
@@ -1465,11 +1306,8 @@ function addToCart(id) {
     return true;
   });
 
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...item, price: effectivePrice, qty, sauces: sauceSet, sauceCost, friesSizeLabel });
-  }
+  if (existing) { existing.qty += qty; }
+  else { cart.push({ ...item, price: effectivePrice, qty, sauces: sauceSet, sauceCost, friesSizeLabel }); }
 
   quantities[id] = 1;
   itemSauces[id] = new Set();
@@ -1496,21 +1334,14 @@ function addToCart(id) {
   showToast(`✓ ${item.name}${note} added`);
 }
 
-function removeFromCart(idx) {
-  cart.splice(idx, 1);
-  updateCartUI(); renderCartItems();
-}
-
+function removeFromCart(idx) { cart.splice(idx, 1); updateCartUI(); renderCartItems(); }
 function changeCartQty(idx, delta) {
   if (!cart[idx]) return;
   cart[idx].qty = Math.max(1, cart[idx].qty + delta);
   updateCartUI(); renderCartItems();
 }
 
-function getFoodTotal() {
-  return cart.reduce((s, i) => s + (i.price + i.sauceCost) * i.qty, 0);
-}
-
+function getFoodTotal() { return cart.reduce((s, i) => s + (i.price + i.sauceCost) * i.qty, 0); }
 function getDeliveryFee() {
   if (!selectedZone) return 0;
   const z = DELIVERY_ZONES.find(x => x.id === selectedZone);
@@ -1522,37 +1353,21 @@ function updateCartUI() {
   const badge = document.getElementById('cartBadge');
   badge.textContent = count;
   badge.classList.toggle('show', count > 0);
-
   const hasItems = cart.length > 0;
   document.getElementById('deliverySection').style.display = hasItems ? 'block' : 'none';
   document.getElementById('cartFooter').style.display = hasItems ? 'block' : 'none';
-
   if (hasItems) {
-    const foodTotal = getFoodTotal();
-    const deliveryFee = getDeliveryFee();
-    const finalTotal = foodTotal + deliveryFee;
+    const foodTotal = getFoodTotal(), deliveryFee = getDeliveryFee(), finalTotal = foodTotal + deliveryFee;
     const zone = DELIVERY_ZONES.find(x => x.id === selectedZone);
     document.getElementById('cartTotals').innerHTML = `
-      <div class="cart-total-row">
-        <span class="label">Food Total</span>
-        <span class="val">${foodTotal} DH</span>
-      </div>
-      <div class="cart-total-row delivery">
-        <span class="label">Delivery${zone ? ' · ' + zone.name : ''}</span>
-        <span class="val">${selectedZone ? deliveryFee + ' DH' : '— Select zone'}</span>
-      </div>
-      <div class="cart-total-row final">
-        <span class="label">Final Total</span>
-        <span class="val">${selectedZone ? finalTotal + ' DH' : '—'}</span>
-      </div>
+      <div class="cart-total-row"><span class="label">Food Total</span><span class="val">${foodTotal} DH</span></div>
+      <div class="cart-total-row delivery"><span class="label">Delivery${zone ? ' · ' + zone.name : ''}</span><span class="val">${selectedZone ? deliveryFee + ' DH' : '— Select zone'}</span></div>
+      <div class="cart-total-row final"><span class="label">Final Total</span><span class="val">${selectedZone ? finalTotal + ' DH' : '—'}</span></div>
     `;
   }
 }
 
-function getCatIcon(catId) {
-  const c = CATEGORIES.find(x => x.id === catId);
-  return c ? c.icon : '🍽️';
-}
+function getCatIcon(catId) { const c = CATEGORIES.find(x => x.id === catId); return c ? c.icon : '🍽️'; }
 
 function renderCartItems() {
   const el = document.getElementById('cartItems');
@@ -1564,13 +1379,9 @@ function renderCartItems() {
     const lineTotal = (item.price + item.sauceCost) * item.qty;
     const sauceLabels = getSauceLabels(item.sauces);
     const saucesHtml = sauceLabels.length
-      ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>`
-      : '';
-    // Show size label for both standalone fries and tacos fries sub-items
+      ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>` : '';
     const friesHtml = item.friesSizeLabel
-      ? `<div class="cart-item-extras"><span>🍟 ${item.friesSizeLabel} — ${item.price} DH</span></div>`
-      : '';
-
+      ? `<div class="cart-item-extras"><span>🍟 ${item.friesSizeLabel} — ${item.price} DH</span></div>` : '';
     return `
       <div class="cart-item">
         <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
@@ -1591,20 +1402,17 @@ function renderCartItems() {
 }
 
 function openCart() {
-  renderCartItems();
-  renderDeliveryZones();
+  renderCartItems(); renderDeliveryZones();
   document.getElementById('cartOverlay').classList.add('open');
   document.getElementById('cartDrawer').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeCart() {
   document.getElementById('cartOverlay').classList.remove('open');
   document.getElementById('cartDrawer').classList.remove('open');
   document.body.style.overflow = '';
 }
 
-// ─── DELIVERY ZONES ──────────────────────────────────────────────────────────
 function renderDeliveryZones() {
   const container = document.getElementById('deliveryZones');
   container.innerHTML = DELIVERY_ZONES.map(z => `
@@ -1618,42 +1426,28 @@ function renderDeliveryZones() {
 
 function selectZone(zoneId) {
   selectedZone = zoneId;
-  renderDeliveryZones();
-  updateCartUI();
+  renderDeliveryZones(); updateCartUI();
   document.getElementById('zoneHint').classList.remove('show');
 }
 
-// ─── WHATSAPP ────────────────────────────────────────────────────────────────
 function orderWhatsApp() {
   if (!cart.length) return;
-  if (!selectedZone) {
-    document.getElementById('zoneHint').classList.add('show');
-    return;
-  }
+  if (!selectedZone) { document.getElementById('zoneHint').classList.add('show'); return; }
   const zone = DELIVERY_ZONES.find(x => x.id === selectedZone);
-  const foodTotal = getFoodTotal();
-  const deliveryFee = getDeliveryFee();
-  const finalTotal = foodTotal + deliveryFee;
-
+  const foodTotal = getFoodTotal(), deliveryFee = getDeliveryFee(), finalTotal = foodTotal + deliveryFee;
   const lines = cart.map(i => {
     const sauceLabels = getSauceLabels(i.sauces);
-    const saucePart  = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
-    // Cart display: "Fries - Large - 10 DH" format
-    const friesPart  = i.friesSizeLabel ? `\n   Size: ${i.friesSizeLabel} (${i.price} DH)` : '';
+    const saucePart = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
+    const friesPart = i.friesSizeLabel ? `\n   Size: ${i.friesSizeLabel} (${i.price} DH)` : '';
     return `• ${i.name} x${i.qty}${friesPart}${saucePart} = ${(i.price + i.sauceCost) * i.qty} DH`;
   }).join('\n');
-
   const msg = encodeURIComponent(
     `🍕 *MegaMed Snack Order*\n\n${lines}\n\n` +
-    `📍 Delivery Zone: ${zone.name}\n` +
-    `🚚 Delivery Fee: ${deliveryFee} DH\n` +
-    `💰 *Final Total: ${finalTotal} DH*\n\n` +
-    `Merci! 🙏`
+    `📍 Delivery Zone: ${zone.name}\n🚚 Delivery Fee: ${deliveryFee} DH\n💰 *Final Total: ${finalTotal} DH*\n\nMerci! 🙏`
   );
   window.open(`https://wa.me/212717989955?text=${msg}`, '_blank');
 }
 
-// ─── REVIEWS ─────────────────────────────────────────────────────────────────
 function renderReviews() {
   document.getElementById('reviewsGrid').innerHTML = reviews.map((r, i) => `
     <div class="review-card reveal" style="transition-delay:${i*0.08}s">
@@ -1667,7 +1461,6 @@ function renderReviews() {
   `).join('');
 }
 
-// ─── TOAST ───────────────────────────────────────────────────────────────────
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1676,23 +1469,18 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ─── MOBILE NAV ──────────────────────────────────────────────────────────────
 function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
 
-// ─── SCROLL REVEAL ───────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, { threshold: 0.08 });
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
 renderCategoryGrid();
 renderReviews();
-setTimeout(() => {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}, 100);
+setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); }, 100);
 </script>
 </body>
 </html>
