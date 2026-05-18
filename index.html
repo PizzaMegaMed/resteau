@@ -21,6 +21,10 @@
     --radius: 20px;
     --radius-sm: 12px;
     --nav-h: 68px;
+    --open-green: #22c55e;
+    --open-green-dim: rgba(34,197,94,0.12);
+    --closed-red: #ef4444;
+    --closed-red-dim: rgba(239,68,68,0.12);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -164,6 +168,267 @@
   .hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--gold); display: block; }
   .hero-stat small { color: var(--text2); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
 
+  /* ════════════════════════════════════════════
+     OPENING HOURS BANNER
+  ════════════════════════════════════════════ */
+  .hours-banner {
+    width: 100%;
+    position: relative; z-index: 2;
+    margin-bottom: 36px;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+
+  /* ── OPEN state ── */
+  .hours-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 36px;
+    border-radius: 24px;
+    border: 1.5px solid;
+    backdrop-filter: blur(14px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.2,0,0,1);
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .hours-card.is-open {
+    background: rgba(34,197,94,0.07);
+    border-color: rgba(34,197,94,0.3);
+    box-shadow: 0 0 60px rgba(34,197,94,0.12), 0 8px 40px rgba(0,0,0,0.4);
+  }
+  .hours-card.is-closed {
+    background: rgba(239,68,68,0.07);
+    border-color: rgba(239,68,68,0.3);
+    box-shadow: 0 0 60px rgba(239,68,68,0.12), 0 8px 40px rgba(0,0,0,0.4);
+  }
+
+  /* Glow sweep animation */
+  .hours-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -60%;
+    width: 50%; height: 200%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
+    animation: sweep 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sweep {
+    0%   { left: -60%; }
+    50%  { left: 130%; }
+    100% { left: 130%; }
+  }
+
+  .hours-row-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Pulse dot */
+  .status-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .status-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  .is-open  .status-dot { background: var(--open-green); }
+  .is-open  .status-dot::after { border: 2px solid var(--open-green); }
+  .is-closed .status-dot { background: var(--closed-red); }
+  .is-closed .status-dot::after { border: 2px solid var(--closed-red); }
+  @keyframes pulse-ring {
+    0%   { transform: scale(1);   opacity: 0.9; }
+    70%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  .status-main-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.7rem, 5vw, 2.6rem);
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+  .is-open  .status-main-text { color: var(--open-green); }
+  .is-closed .status-main-text { color: var(--closed-red); }
+
+  .status-time-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 14px; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+  }
+  .is-open  .status-time-badge {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.35);
+    color: var(--open-green);
+  }
+  .is-closed .status-time-badge {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.35);
+    color: var(--closed-red);
+  }
+
+  .hours-sub-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hours-sub-text {
+    font-size: 0.85rem;
+    color: var(--text2);
+    font-weight: 400;
+    text-align: center;
+  }
+  .hours-sub-text strong { color: var(--text); font-weight: 600; }
+
+  /* Today's hours pills strip */
+  .hours-today-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .hours-day-pill {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text2);
+    transition: all 0.3s;
+  }
+  .hours-day-pill.today {
+    background: rgba(245,200,66,0.12);
+    border-color: rgba(245,200,66,0.35);
+    color: var(--gold);
+  }
+  .hours-day-pill.closed-day {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+
+  /* ── CLOSED FULL OVERLAY BANNER (below hero, above menu) ── */
+  .closed-overlay-banner {
+    display: none;
+    background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(10,10,10,0) 60%);
+    border-top: 1px solid rgba(239,68,68,0.15);
+    border-bottom: 1px solid rgba(239,68,68,0.15);
+    padding: 52px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .closed-overlay-banner.show { display: block; }
+  .closed-overlay-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(239,68,68,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .closed-banner-inner { position: relative; z-index: 1; }
+
+  .closed-big-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 16px;
+    animation: closed-bob 3s ease-in-out infinite;
+  }
+  @keyframes closed-bob {
+    0%, 100% { transform: translateY(0);  }
+    50%       { transform: translateY(-8px); }
+  }
+
+  .closed-banner-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    letter-spacing: 5px;
+    color: var(--closed-red);
+    line-height: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 60px rgba(239,68,68,0.35);
+  }
+  .closed-banner-sub {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .closed-banner-sub strong { color: var(--text); font-weight: 600; }
+
+  .closed-next-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(245,200,66,0.08);
+    border: 1.5px solid rgba(245,200,66,0.3);
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .closed-next-open .clock-icon { font-size: 1.1rem; }
+
+  .closed-schedule-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 560px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .closed-sched-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.78rem;
+    color: var(--text2);
+  }
+  .closed-sched-item.today-sched {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.3);
+    color: var(--closed-red);
+  }
+  .closed-sched-item.is-open-day {
+    background: rgba(34,197,94,0.06);
+    border-color: rgba(34,197,94,0.2);
+    color: var(--text);
+  }
+  .sched-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .is-open-day .sched-dot  { background: var(--open-green); }
+  .today-sched  .sched-dot { background: var(--closed-red); }
+  .sched-day { font-weight: 700; }
+
   /* ─── SECTIONS ─── */
   section { padding: 100px 5%; }
   .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
@@ -281,7 +546,6 @@
   }
   .panel-close:hover { background: rgba(255,69,0,0.15); color: var(--accent); border-color: rgba(255,69,0,0.3); }
 
-  /* ─── ITEM ROW — cleaned up, no emoji column ─── */
   .item-row {
     display: flex; align-items: center; gap: 16px;
     padding: 13px 24px;
@@ -290,8 +554,6 @@
   }
   .item-row:last-child { border-bottom: none; }
   .item-row:hover { background: rgba(255,255,255,0.022); }
-
-  /* item-emoji removed — no longer rendered */
 
   .item-info { flex: 1; min-width: 0; }
   .item-name {
@@ -754,6 +1016,9 @@
     .dz-price { font-size: 0.9rem; }
     .standalone-fries-panel { padding: 20px 16px; }
     .standalone-size-card { min-width: 120px; padding: 16px 12px; }
+    .hours-card { padding: 18px 22px; }
+    .closed-banner-title { letter-spacing: 3px; }
+    .closed-schedule-grid { gap: 6px; }
   }
   @media (max-width: 480px) {
     .hero-ctas { flex-direction: column; align-items: center; }
@@ -767,6 +1032,9 @@
     .standalone-fries-sizes { gap: 10px; }
     .standalone-size-card { min-width: 110px; }
     .item-desc { display: none; }
+    .hours-row-top { gap: 10px; }
+    .status-main-text { font-size: 1.6rem; }
+    .closed-sched-item { font-size: 0.72rem; padding: 5px 11px; }
   }
 </style>
 </head>
@@ -802,12 +1070,29 @@
     <img class="food-img" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&h=300&fit=crop" alt="food">
   </div>
   <div class="hero-content">
-    <span class="hero-eyebrow">📍 Kenitra — Open Now</span>
+    <span class="hero-eyebrow">📍 Kenitra — <span id="navStatusDot"></span><span id="navStatusText">Checking...</span></span>
     <h1 class="hero-title">
       MegaMed
       <em>Snack</em>
     </h1>
     <p class="hero-sub">Fast, <strong>Delicious</strong> & Affordable — Order fresh food delivered hot to your door</p>
+
+    <!-- ══════════ HOURS BANNER ══════════ -->
+    <div class="hours-banner">
+      <div class="hours-card" id="hoursBannerCard">
+        <div class="hours-row-top">
+          <div class="status-dot"></div>
+          <div class="status-main-text" id="statusMainText">Checking…</div>
+          <div class="status-time-badge" id="statusTimeBadge"></div>
+        </div>
+        <div class="hours-sub-row">
+          <div class="hours-sub-text" id="statusSubText"></div>
+        </div>
+        <div class="hours-today-strip" id="hoursTodayStrip"></div>
+      </div>
+    </div>
+    <!-- ═══════════════════════════════════ -->
+
     <div class="hero-ctas">
       <a href="#menu" class="btn-primary">🍕 Order Now</a>
       <a href="#contact" class="btn-outline">📞 Call Us</a>
@@ -819,6 +1104,21 @@
     </div>
   </div>
 </section>
+
+<!-- ══════ BIG CLOSED SECTION (shown between hero and menu when closed) ══════ -->
+<div class="closed-overlay-banner" id="closedOverlayBanner">
+  <div class="closed-banner-inner">
+    <span class="closed-big-emoji">🔴</span>
+    <div class="closed-banner-title">We Are Currently Closed</div>
+    <p class="closed-banner-sub" id="closedBannerSub">We'll be back soon. Check our schedule below.</p>
+    <div class="closed-next-open" id="closedNextOpen">
+      <span class="clock-icon">🕐</span>
+      <span id="closedNextOpenText">—</span>
+    </div>
+    <div class="closed-schedule-grid" id="closedScheduleGrid"></div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
 <!-- MENU -->
 <section id="menu">
@@ -865,7 +1165,7 @@
           <div class="contact-icon">🕐</div>
           <div>
             <div class="contact-label">Opening Hours</div>
-            <div class="contact-val">Every day · 10:00 – 23:00</div>
+            <div class="contact-val">Except Tuesday · 13:30 – 23:40</div>
           </div>
         </div>
         <div class="contact-card reveal">
@@ -925,6 +1225,173 @@
 <div class="toast" id="toast"></div>
 
 <script>
+/* ═══════════════════════════════════════════════════════════
+   OPENING HOURS ENGINE
+   Schedule: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+═══════════════════════════════════════════════════════════ */
+const SCHEDULE = {
+  0: { open: '13:30', close: '23:40' }, // Sunday
+  1: { open: '13:30', close: '23:40' }, // Monday
+  2: null,                               // Tuesday — CLOSED
+  3: { open: '13:30', close: '23:40' }, // Wednesday
+  4: { open: '13:30', close: '23:40' }, // Thursday
+  5: { open: '14:45', close: '23:40' }, // Friday
+  6: { open: '13:30', close: '23:40' }, // Saturday
+};
+
+const DAY_NAMES   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAY_SHORT   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function parseTime(str) {
+  // returns total minutes since midnight
+  const [h, m] = str.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function formatTime(str) {
+  // e.g. "13:30" → "1:30 PM"
+  const [h, m] = str.split(':').map(Number);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12  = h > 12 ? h - 12 : h === 0 ? 12 : h;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function getRestaurantStatus() {
+  const now       = new Date();
+  const day       = now.getDay();
+  const mins      = now.getHours() * 60 + now.getMinutes();
+  const todaySch  = SCHEDULE[day];
+
+  let isOpen = false;
+  let closesAt = null;
+  let opensAt  = null;
+
+  if (todaySch) {
+    const openMins  = parseTime(todaySch.open);
+    const closeMins = parseTime(todaySch.close);
+    if (mins >= openMins && mins < closeMins) {
+      isOpen   = true;
+      closesAt = todaySch.close;
+    } else if (mins < openMins) {
+      // opens later today
+      opensAt = { day: day, time: todaySch.open, isToday: true };
+    }
+  }
+
+  // If closed (no schedule today or past closing), find next open slot
+  if (!isOpen && !opensAt) {
+    for (let d = 1; d <= 7; d++) {
+      const nextDay  = (day + d) % 7;
+      const nextSch  = SCHEDULE[nextDay];
+      if (nextSch) {
+        opensAt = { day: nextDay, time: nextSch.open, isToday: false };
+        break;
+      }
+    }
+  }
+
+  return { isOpen, closesAt, opensAt, day, todaySch };
+}
+
+function getNextOpenText(opensAt) {
+  if (!opensAt) return 'We will be back soon';
+  const timeFmt = formatTime(opensAt.time);
+  if (opensAt.isToday) return `Opening today at ${timeFmt}`;
+  const diff = ((opensAt.day - new Date().getDay() + 7) % 7);
+  if (diff === 1) return `Opening tomorrow at ${timeFmt}`;
+  return `Opening ${DAY_NAMES[opensAt.day]} at ${timeFmt}`;
+}
+
+function renderHoursBanner() {
+  const { isOpen, closesAt, opensAt, day, todaySch } = getRestaurantStatus();
+  const card        = document.getElementById('hoursBannerCard');
+  const mainText    = document.getElementById('statusMainText');
+  const timeBadge   = document.getElementById('statusTimeBadge');
+  const subText     = document.getElementById('statusSubText');
+  const strip       = document.getElementById('hoursTodayStrip');
+  const navDot      = document.getElementById('navStatusDot');
+  const navTxt      = document.getElementById('navStatusText');
+  const closedBanner= document.getElementById('closedOverlayBanner');
+  const closedSub   = document.getElementById('closedBannerSub');
+  const closedNext  = document.getElementById('closedNextOpenText');
+  const schedGrid   = document.getElementById('closedScheduleGrid');
+
+  // ── Card state
+  card.classList.toggle('is-open',   isOpen);
+  card.classList.toggle('is-closed', !isOpen);
+
+  // ── Main text
+  mainText.textContent = isOpen ? 'We Are Open Now' : 'We Are Currently Closed';
+
+  // ── Time badge
+  if (isOpen && closesAt) {
+    timeBadge.textContent = `Closes at ${formatTime(closesAt)}`;
+  } else if (!isOpen && opensAt) {
+    const timeFmt = formatTime(opensAt.time);
+    timeBadge.textContent = opensAt.isToday ? `Opens today ${timeFmt}` : `Opens ${DAY_SHORT[opensAt.day]} ${timeFmt}`;
+  } else {
+    timeBadge.textContent = '';
+  }
+
+  // ── Sub text
+  if (isOpen && todaySch) {
+    subText.innerHTML = `Today: <strong>${formatTime(todaySch.open)}</strong> – <strong>${formatTime(closesAt)}</strong>`;
+  } else {
+    subText.innerHTML = getNextOpenText(opensAt).replace(/Opening/, '<strong>Opening</strong>');
+  }
+
+  // ── Week strip
+  const days = Object.entries(SCHEDULE).map(([d, sch]) => {
+    const di    = parseInt(d);
+    const isToday = di === day;
+    const isClosed = !sch;
+    let cls = 'hours-day-pill';
+    if (isToday) cls += ' today';
+    if (isClosed) cls += ' closed-day';
+    const label = sch ? `${DAY_SHORT[di]} ${sch.open.replace(':','ʰ')}` : `${DAY_SHORT[di]} ✕`;
+    return `<span class="${cls}">${label}</span>`;
+  });
+  strip.innerHTML = days.join('');
+
+  // ── Navbar eyebrow
+  navDot.textContent = isOpen ? '🟢 ' : '🔴 ';
+  navTxt.textContent = isOpen ? 'Open Now' : 'Closed';
+
+  // ── Full closed overlay banner
+  if (!isOpen) {
+    closedBanner.classList.add('show');
+    const nextText = getNextOpenText(opensAt);
+    closedSub.textContent = 'Sorry, we are currently closed. Come back soon!';
+    closedNext.textContent = nextText;
+
+    // Schedule grid
+    schedGrid.innerHTML = Object.entries(SCHEDULE).map(([d, sch]) => {
+      const di = parseInt(d);
+      const isToday = di === day;
+      let cls = 'closed-sched-item';
+      if (isToday) cls += ' today-sched';
+      else if (sch) cls += ' is-open-day';
+      const hours = sch ? `${sch.open} – ${sch.close}` : 'Closed';
+      const dotCls = sch ? 'sched-dot' : 'sched-dot';
+      return `
+        <div class="${cls}">
+          <span class="sched-dot"></span>
+          <span class="sched-day">${DAY_NAMES[di].slice(0,3)}</span>
+          <span>${hours}</span>
+        </div>`;
+    }).join('');
+  } else {
+    closedBanner.classList.remove('show');
+  }
+}
+
+// Run immediately, then re-check every 60 seconds
+renderHoursBanner();
+setInterval(renderHoursBanner, 60000);
+
+/* ═══════════════════════════════════════════════════════════
+   MENU + CART LOGIC (unchanged)
+═══════════════════════════════════════════════════════════ */
 const SAUCES = [
   { id: 'biggy',    label: 'Biggy',         price: 2 },
   { id: 'algerian', label: 'Algerienne',    price: 2 },
