@@ -1224,12 +1224,14 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script>
+<script type="module">
 /* ═══════════════════════════════════════════════════════════
    OPENING HOURS ENGINE
    Schedule: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
 ═══════════════════════════════════════════════════════════ */
-const SCHEDULE = {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+window.SCHEDULE = {
   0: { open: '13:30', close: '23:40' }, // Sunday
   1: { open: '13:30', close: '23:40' }, // Monday
   2: null,                               // Tuesday — CLOSED
@@ -1948,6 +1950,206 @@ const observer = new IntersectionObserver(entries => {
 renderCategoryGrid();
 renderReviews();
 setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); }, 100);
+// ═══════════════════════════════════════════════════════════════
+// FIREBASE PATCH FOR index.html  —  paste this BEFORE </body>
+// Replace the existing <script type="module"> block at the
+// VERY END of your index.html with this entire block.
+// ═══════════════════════════════════════════════════════════════
+
+/* ── Your existing menu data (keep this exactly as-is) ── */
+// (menuItems, CATEGORIES, SAUCES, FRIES_SIZES, etc. stay the same)
+
+/* ════════════════════════════════════════════════════════
+   FIREBASE REALTIME SYNC
+   This reads data from Firebase and updates the website.
+════════════════════════════════════════════════════════ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// ⚙️ PASTE THE SAME firebaseConfig AS IN admin.html
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY_HERE",
+  authDomain: "PASTE_YOUR_AUTH_DOMAIN_HERE",
+  databaseURL: "PASTE_YOUR_DATABASE_URL_HERE",
+  projectId: "PASTE_YOUR_PROJECT_ID_HERE",
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET_HERE",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
+  appId: "PASTE_YOUR_APP_ID_HERE"
+};
+
+let firebaseData = {};
+
+function initFirebaseSync() {
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db  = getDatabase(app);
+    onValue(ref(db, 'megamed'), (snap) => {
+      firebaseData = snap.val() || {};
+      applyFirebaseData();
+    });
+  } catch(e) {
+    // Firebase not configured yet — website works normally with hardcoded data
+  }
+}
+
+function applyFirebaseData() {
+  applyOpenClosed();
+  applyHours();
+  applyProducts();
+  applyOffers();
+}
+
+/* ── 1. OPEN / CLOSED OVERRIDE ── */
+function applyOpenClosed() {
+  const status = firebaseData.status;
+  if (!status) return;
+
+  const isClosed = (status === 'closed');
+
+  // ── Show / hide the big closed banner ──
+  const banner = document.getElementById('closedOverlayBanner');
+  if (banner) {
+    if (isClosed) {
+      banner.classList.add('show');
+      const sub = document.getElementById('closedBannerSub');
+      if (sub) sub.textContent = 'Nous sommes actuellement fermés. Revenez bientôt !';
+    } else {
+      // Let the schedule engine handle it
+    }
+  }
+
+  // ── Update the hero hours card ──
+  const card = document.getElementById('hoursBannerCard');
+  const mainText = document.getElementById('statusMainText');
+  const timeBadge = document.getElementById('statusTimeBadge');
+  const navTxt = document.getElementById('navStatusText');
+  const navDot = document.getElementById('navStatusDot');
+
+  if (card && isClosed) {
+    card.classList.remove('is-open');
+    card.classList.add('is-closed');
+    if (mainText) mainText.textContent = 'Nous sommes fermés';
+    if (timeBadge) timeBadge.textContent = 'Fermé par le gérant';
+    if (navDot) navDot.textContent = '🔴 ';
+    if (navTxt) navTxt.textContent = 'Fermé';
+  }
+}
+
+/* ── 2. HOURS ── */
+function applyHours() {
+  const hours = firebaseData.hours;
+  if (!hours) return;
+
+  // Rebuild the SCHEDULE object that renderHoursBanner() uses
+  // We override the global SCHEDULE variable
+  Object.entries(hours).forEach(([d, sch]) => {
+    if (sch.closed || !sch.open) {
+      window.SCHEDULE[d] = null;
+    } else {
+      window.SCHEDULE[d] = { open: sch.open, close: sch.close };
+    }
+  });
+
+  // Re-render the hours banner with new schedule
+  renderHoursBanner();
+}
+
+/* ── 3. PRODUCTS: prices, names, availability ── */
+function applyProducts() {
+  const products = firebaseData.products;
+  if (!products || !Array.isArray(products)) return;
+
+  // Update the global menuItems array
+  products.forEach(fbItem => {
+    const local = menuItems.find(m => m.id === fbItem.id);
+    if (local) {
+      local.name  = fbItem.name;
+      local.price = fbItem.price;
+      local.available = fbItem.available !== false; // default true
+      local.badge = local.available ? local.badge : 'Non disponible';
+    }
+  });
+
+  // Re-render the category grid to reflect changes
+  renderCategoryGrid();
+
+  // If a panel is currently open, re-apply availability to visible items
+  applyAvailabilityUI(products);
+}
+
+function applyAvailabilityUI(products) {
+  products.forEach(fbItem => {
+    const isAvailable = fbItem.available !== false;
+
+    // Disable add-to-cart button if unavailable
+    const btn = document.getElementById(`addbtn-${fbItem.id}`);
+    if (btn) {
+      if (!isAvailable) {
+        btn.disabled = true;
+        btn.textContent = '❌ Non dispo';
+        btn.style.background = 'rgba(239,68,68,0.12)';
+        btn.style.color = 'var(--red, #ef4444)';
+        btn.style.boxShadow = 'none';
+        btn.style.cursor = 'not-allowed';
+      } else {
+        btn.disabled = false;
+        btn.textContent = '+ Add';
+        btn.style = '';
+      }
+    }
+
+    // Show / update price if changed
+    const priceEl = document.getElementById(`price-display-${fbItem.id}`);
+    if (priceEl) {
+      priceEl.innerHTML = `${fbItem.price} <small>DH</small>`;
+    }
+  });
+}
+
+/* ── 4. OFFERS ── */
+function applyOffers() {
+  const offers = firebaseData.offers;
+  if (!offers || !offers.length) return;
+
+  // If there's an existing offers section, update it
+  // Or inject one into the hero if desired
+  // For now, we update the menu items array with any matching offers
+  // and log them (you can display them wherever you like)
+  console.log('Active offers:', offers);
+
+  // Simple approach: show offers as a banner above the menu
+  let offerBar = document.getElementById('fb-offer-bar');
+  if (!offerBar) {
+    offerBar = document.createElement('div');
+    offerBar.id = 'fb-offer-bar';
+    offerBar.style.cssText = `
+      background: rgba(245,200,66,0.1);
+      border-top: 1px solid rgba(245,200,66,0.2);
+      border-bottom: 1px solid rgba(245,200,66,0.2);
+      padding: 12px 5%;
+      display: flex; gap: 16px; flex-wrap: wrap;
+      align-items: center; justify-content: center;
+    `;
+    const menu = document.getElementById('menu');
+    if (menu) menu.insertBefore(offerBar, menu.firstChild);
+  }
+
+  offerBar.innerHTML = `
+    <span style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,200,66,0.6)">🔥 Offres Spéciales</span>
+    ${offers.map(o => `
+      <span style="
+        background:rgba(245,200,66,0.12);
+        border:1px solid rgba(245,200,66,0.3);
+        color:#f5c842;
+        font-size:0.82rem; font-weight:600;
+        padding:5px 14px; border-radius:50px;
+      ">${o.text} — <strong>${o.price} DH</strong></span>
+    `).join('')}
+  `;
+}
+
+// Initialise Firebase sync on page load
+initFirebaseSync();
 </script>
 </body>
 </html>
