@@ -168,17 +168,15 @@
   .hero-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--gold); display: block; }
   .hero-stat small { color: var(--text2); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
 
-  /* ════════════════════════════════════════════
+  /* ════════════════════════════════════════════════════════════
      OPENING HOURS BANNER
-  ════════════════════════════════════════════ */
+  ════════════════════════════════════════════════════════════ */
   .hours-banner {
     width: 100%;
     position: relative; z-index: 2;
     margin-bottom: 36px;
     animation: fadeUp 0.7s 0.35s ease both;
   }
-
-  /* ── OPEN state ── */
   .hours-card {
     display: inline-flex;
     flex-direction: column;
@@ -194,7 +192,6 @@
     max-width: 520px;
     width: 100%;
   }
-
   .hours-card.is-open {
     background: rgba(34,197,94,0.07);
     border-color: rgba(34,197,94,0.3);
@@ -205,8 +202,6 @@
     border-color: rgba(239,68,68,0.3);
     box-shadow: 0 0 60px rgba(239,68,68,0.12), 0 8px 40px rgba(0,0,0,0.4);
   }
-
-  /* Glow sweep animation */
   .hours-card::before {
     content: '';
     position: absolute;
@@ -221,7 +216,6 @@
     50%  { left: 130%; }
     100% { left: 130%; }
   }
-
   .hours-row-top {
     display: flex;
     align-items: center;
@@ -229,8 +223,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  /* Pulse dot */
   .status-dot {
     width: 14px; height: 14px;
     border-radius: 50%;
@@ -253,7 +245,6 @@
     70%  { transform: scale(2.2); opacity: 0; }
     100% { transform: scale(2.2); opacity: 0; }
   }
-
   .status-main-text {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.7rem, 5vw, 2.6rem);
@@ -262,7 +253,6 @@
   }
   .is-open  .status-main-text { color: var(--open-green); }
   .is-closed .status-main-text { color: var(--closed-red); }
-
   .status-time-badge {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 4px 14px; border-radius: 50px;
@@ -278,7 +268,6 @@
     border: 1px solid rgba(239,68,68,0.35);
     color: var(--closed-red);
   }
-
   .hours-sub-row {
     display: flex;
     align-items: center;
@@ -293,8 +282,6 @@
     text-align: center;
   }
   .hours-sub-text strong { color: var(--text); font-weight: 600; }
-
-  /* Today's hours pills strip */
   .hours-today-strip {
     display: flex;
     align-items: center;
@@ -324,7 +311,7 @@
     text-decoration: line-through;
   }
 
-  /* ── CLOSED FULL OVERLAY BANNER (below hero, above menu) ── */
+  /* ── CLOSED FULL OVERLAY BANNER ── */
   .closed-overlay-banner {
     display: none;
     background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(10,10,10,0) 60%);
@@ -342,9 +329,7 @@
     background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(239,68,68,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .closed-banner-inner { position: relative; z-index: 1; }
-
   .closed-big-emoji {
     font-size: 4rem;
     display: block;
@@ -355,7 +340,6 @@
     0%, 100% { transform: translateY(0);  }
     50%       { transform: translateY(-8px); }
   }
-
   .closed-banner-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(2.8rem, 8vw, 5.5rem);
@@ -375,7 +359,6 @@
     margin-right: auto;
   }
   .closed-banner-sub strong { color: var(--text); font-weight: 600; }
-
   .closed-next-open {
     display: inline-flex;
     align-items: center;
@@ -391,7 +374,6 @@
     animation: fadeUp 0.6s 0.2s ease both;
   }
   .closed-next-open .clock-icon { font-size: 1.1rem; }
-
   .closed-schedule-grid {
     display: flex;
     flex-wrap: wrap;
@@ -422,9 +404,7 @@
     border-color: rgba(34,197,94,0.2);
     color: var(--text);
   }
-  .sched-dot {
-    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-  }
+  .sched-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .is-open-day .sched-dot  { background: var(--open-green); }
   .today-sched  .sched-dot { background: var(--closed-red); }
   .sched-day { font-weight: 700; }
@@ -446,8 +426,6 @@
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
   }
-
-  /* Category Card */
   .cat-card {
     position: relative; border-radius: var(--radius);
     overflow: hidden; cursor: pointer;
@@ -469,7 +447,6 @@
     filter: brightness(0.5) saturate(1.1);
   }
   .cat-card:hover img, .cat-card.active img { transform: scale(1.07); filter: brightness(0.42) saturate(1.25); }
-
   .cat-card::before {
     content: ''; position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.35) 50%, rgba(10,10,10,0.05) 100%);
@@ -478,7 +455,6 @@
   .cat-card.active::before {
     background: linear-gradient(to top, rgba(255,69,0,0.6) 0%, rgba(10,10,10,0.45) 55%, rgba(10,10,10,0.1) 100%);
   }
-
   .cat-card-content {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
     padding: 22px 20px 20px;
@@ -496,7 +472,6 @@
     color: rgba(240,236,228,0.6); font-size: 0.76rem; font-weight: 500;
   }
   .cat-meta .dot { width: 3px; height: 3px; background: var(--accent2); border-radius: 50%; }
-
   .cat-arrow {
     position: absolute; top: 14px; right: 14px; z-index: 2;
     width: 32px; height: 32px; border-radius: 50%;
@@ -526,7 +501,6 @@
     from { opacity: 0; transform: translateY(-8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .panel-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 20px 24px;
@@ -545,7 +519,6 @@
     display: flex; align-items: center; justify-content: center; transition: all 0.2s;
   }
   .panel-close:hover { background: rgba(255,69,0,0.15); color: var(--accent); border-color: rgba(255,69,0,0.3); }
-
   .item-row {
     display: flex; align-items: center; gap: 16px;
     padding: 13px 24px;
@@ -554,7 +527,6 @@
   }
   .item-row:last-child { border-bottom: none; }
   .item-row:hover { background: rgba(255,255,255,0.022); }
-
   .item-info { flex: 1; min-width: 0; }
   .item-name {
     font-weight: 600; font-size: 0.93rem; color: var(--text);
@@ -603,7 +575,7 @@
     padding: 1px 5px; margin-left: 1px;
   }
 
-  /* ─── FRIES SIZE SELECTOR (in-item) ─── */
+  /* ─── FRIES SIZE SELECTOR ─── */
   .fries-size-selector {
     display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
     margin-top: 6px;
@@ -725,17 +697,13 @@
     white-space: nowrap;
   }
   .item-badge.gold { background: rgba(245,200,66,0.12); color: var(--gold); border-color: rgba(245,200,66,0.2); }
-
   .item-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-
   .item-price {
     font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem;
     color: var(--gold); letter-spacing: 0.5px; white-space: nowrap; min-width: 60px; text-align: right;
   }
   .item-price small { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; color: var(--text2); font-weight: 400; }
-
   .item-actions { display: flex; align-items: center; gap: 8px; }
-
   .qty-control {
     display: flex; align-items: center;
     background: rgba(255,255,255,0.05);
@@ -749,7 +717,6 @@
   }
   .qty-btn:hover { background: rgba(255,69,0,0.2); color: var(--accent); }
   .qty-num { font-weight: 700; font-size: 0.85rem; min-width: 22px; text-align: center; color: var(--text); }
-
   .add-cart-btn {
     background: var(--accent); color: #fff; border: none;
     padding: 8px 18px; border-radius: 50px;
@@ -888,7 +855,6 @@
   .cart-total-row.final { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px; }
   .cart-total-row.final .label { font-weight: 700; color: var(--text); font-size: 0.95rem; }
   .cart-total-row.final .val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 1px; }
-
   .btn-whatsapp {
     width: 100%; background: #25D366; color: #fff; border: none;
     padding: 14px; border-radius: var(--radius-sm);
@@ -907,7 +873,6 @@
     transition: all 0.2s; text-decoration: none;
   }
   .btn-glovo:hover { background: rgba(255,193,7,0.16); transform: scale(1.01); }
-
   .zone-hint { font-size: 0.72rem; color: var(--accent); text-align: center; margin-bottom: 10px; opacity: 0; height: 0; overflow: hidden; transition: all 0.25s; }
   .zone-hint.show { opacity: 1; height: 20px; }
 
@@ -1077,7 +1042,7 @@
     </h1>
     <p class="hero-sub">Fast, <strong>Delicious</strong> & Affordable — Order fresh food delivered hot to your door</p>
 
-    <!-- ══════════ HOURS BANNER ══════════ -->
+    <!-- HOURS BANNER -->
     <div class="hours-banner">
       <div class="hours-card" id="hoursBannerCard">
         <div class="hours-row-top">
@@ -1091,7 +1056,6 @@
         <div class="hours-today-strip" id="hoursTodayStrip"></div>
       </div>
     </div>
-    <!-- ═══════════════════════════════════ -->
 
     <div class="hero-ctas">
       <a href="#menu" class="btn-primary">🍕 Order Now</a>
@@ -1105,7 +1069,7 @@
   </div>
 </section>
 
-<!-- ══════ BIG CLOSED SECTION (shown between hero and menu when closed) ══════ -->
+<!-- BIG CLOSED SECTION -->
 <div class="closed-overlay-banner" id="closedOverlayBanner">
   <div class="closed-banner-inner">
     <span class="closed-big-emoji">🔴</span>
@@ -1118,7 +1082,6 @@
     <div class="closed-schedule-grid" id="closedScheduleGrid"></div>
   </div>
 </div>
-<!-- ═══════════════════════════════════════════════════════════════════════════ -->
 
 <!-- MENU -->
 <section id="menu">
@@ -1226,32 +1189,47 @@
 
 <script type="module">
 /* ═══════════════════════════════════════════════════════════
-   OPENING HOURS ENGINE
-   Schedule: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+   IMPORTS — declared ONCE at the top of the module
 ═══════════════════════════════════════════════════════════ */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-window.SCHEDULE = {
-  0: { open: '13:30', close: '23:40' }, // Sunday
-  1: { open: '13:30', close: '23:40' }, // Monday
-  2: null,                               // Tuesday — CLOSED
-  3: { open: '13:30', close: '23:40' }, // Wednesday
-  4: { open: '13:30', close: '23:40' }, // Thursday
-  5: { open: '14:45', close: '23:40' }, // Friday
-  6: { open: '13:30', close: '23:40' }, // Saturday
+
+/* ═══════════════════════════════════════════════════════════
+   FIREBASE CONFIG — declared ONCE
+═══════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDCEsEnWjc8h73d4TcT_pI1zdBMLE5kB4U",
+  authDomain: "megamed-snack.firebaseapp.com",
+  databaseURL: "https://megamed-snack-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "megamed-snack",
+  storageBucket: "megamed-snack.firebasestorage.app",
+  messagingSenderId: "630486671195",
+  appId: "1:630486671195:web:943b37c2ca22735d84047e"
 };
 
-const DAY_NAMES   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const DAY_SHORT   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+/* ═══════════════════════════════════════════════════════════
+   OPENING HOURS ENGINE
+   Schedule: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+═══════════════════════════════════════════════════════════ */
+window.SCHEDULE = {
+  0: { open: '13:30', close: '23:40' },
+  1: { open: '13:30', close: '23:40' },
+  2: null,
+  3: { open: '13:30', close: '23:40' },
+  4: { open: '13:30', close: '23:40' },
+  5: { open: '14:45', close: '23:40' },
+  6: { open: '13:30', close: '23:40' },
+};
+
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAY_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 function parseTime(str) {
-  // returns total minutes since midnight
   const [h, m] = str.split(':').map(Number);
   return h * 60 + m;
 }
 
 function formatTime(str) {
-  // e.g. "13:30" → "1:30 PM"
   const [h, m] = str.split(':').map(Number);
   const ampm = h >= 12 ? 'PM' : 'AM';
   const h12  = h > 12 ? h - 12 : h === 0 ? 12 : h;
@@ -1259,14 +1237,12 @@ function formatTime(str) {
 }
 
 function getRestaurantStatus() {
-  const now       = new Date();
-  const day       = now.getDay();
-  const mins      = now.getHours() * 60 + now.getMinutes();
-  const todaySch  = SCHEDULE[day];
+  const now      = new Date();
+  const day      = now.getDay();
+  const mins     = now.getHours() * 60 + now.getMinutes();
+  const todaySch = window.SCHEDULE[day];
 
-  let isOpen = false;
-  let closesAt = null;
-  let opensAt  = null;
+  let isOpen = false, closesAt = null, opensAt = null;
 
   if (todaySch) {
     const openMins  = parseTime(todaySch.open);
@@ -1275,18 +1251,15 @@ function getRestaurantStatus() {
       isOpen   = true;
       closesAt = todaySch.close;
     } else if (mins < openMins) {
-      // opens later today
-      opensAt = { day: day, time: todaySch.open, isToday: true };
+      opensAt = { day, time: todaySch.open, isToday: true };
     }
   }
 
-  // If closed (no schedule today or past closing), find next open slot
   if (!isOpen && !opensAt) {
     for (let d = 1; d <= 7; d++) {
-      const nextDay  = (day + d) % 7;
-      const nextSch  = SCHEDULE[nextDay];
-      if (nextSch) {
-        opensAt = { day: nextDay, time: nextSch.open, isToday: false };
+      const nextDay = (day + d) % 7;
+      if (window.SCHEDULE[nextDay]) {
+        opensAt = { day: nextDay, time: window.SCHEDULE[nextDay].open, isToday: false };
         break;
       }
     }
@@ -1306,26 +1279,23 @@ function getNextOpenText(opensAt) {
 
 function renderHoursBanner() {
   const { isOpen, closesAt, opensAt, day, todaySch } = getRestaurantStatus();
-  const card        = document.getElementById('hoursBannerCard');
-  const mainText    = document.getElementById('statusMainText');
-  const timeBadge   = document.getElementById('statusTimeBadge');
-  const subText     = document.getElementById('statusSubText');
-  const strip       = document.getElementById('hoursTodayStrip');
-  const navDot      = document.getElementById('navStatusDot');
-  const navTxt      = document.getElementById('navStatusText');
-  const closedBanner= document.getElementById('closedOverlayBanner');
-  const closedSub   = document.getElementById('closedBannerSub');
-  const closedNext  = document.getElementById('closedNextOpenText');
-  const schedGrid   = document.getElementById('closedScheduleGrid');
+  const card         = document.getElementById('hoursBannerCard');
+  const mainText     = document.getElementById('statusMainText');
+  const timeBadge    = document.getElementById('statusTimeBadge');
+  const subText      = document.getElementById('statusSubText');
+  const strip        = document.getElementById('hoursTodayStrip');
+  const navDot       = document.getElementById('navStatusDot');
+  const navTxt       = document.getElementById('navStatusText');
+  const closedBanner = document.getElementById('closedOverlayBanner');
+  const closedSub    = document.getElementById('closedBannerSub');
+  const closedNext   = document.getElementById('closedNextOpenText');
+  const schedGrid    = document.getElementById('closedScheduleGrid');
 
-  // ── Card state
   card.classList.toggle('is-open',   isOpen);
   card.classList.toggle('is-closed', !isOpen);
 
-  // ── Main text
   mainText.textContent = isOpen ? 'We Are Open Now' : 'We Are Currently Closed';
 
-  // ── Time badge
   if (isOpen && closesAt) {
     timeBadge.textContent = `Closes at ${formatTime(closesAt)}`;
   } else if (!isOpen && opensAt) {
@@ -1335,46 +1305,38 @@ function renderHoursBanner() {
     timeBadge.textContent = '';
   }
 
-  // ── Sub text
   if (isOpen && todaySch) {
     subText.innerHTML = `Today: <strong>${formatTime(todaySch.open)}</strong> – <strong>${formatTime(closesAt)}</strong>`;
   } else {
     subText.innerHTML = getNextOpenText(opensAt).replace(/Opening/, '<strong>Opening</strong>');
   }
 
-  // ── Week strip
-  const days = Object.entries(SCHEDULE).map(([d, sch]) => {
-    const di    = parseInt(d);
-    const isToday = di === day;
+  const days = Object.entries(window.SCHEDULE).map(([d, sch]) => {
+    const di = parseInt(d);
+    const isToday  = di === day;
     const isClosed = !sch;
     let cls = 'hours-day-pill';
-    if (isToday) cls += ' today';
+    if (isToday)  cls += ' today';
     if (isClosed) cls += ' closed-day';
     const label = sch ? `${DAY_SHORT[di]} ${sch.open.replace(':','ʰ')}` : `${DAY_SHORT[di]} ✕`;
     return `<span class="${cls}">${label}</span>`;
   });
   strip.innerHTML = days.join('');
 
-  // ── Navbar eyebrow
   navDot.textContent = isOpen ? '🟢 ' : '🔴 ';
   navTxt.textContent = isOpen ? 'Open Now' : 'Closed';
 
-  // ── Full closed overlay banner
   if (!isOpen) {
     closedBanner.classList.add('show');
-    const nextText = getNextOpenText(opensAt);
     closedSub.textContent = 'Sorry, we are currently closed. Come back soon!';
-    closedNext.textContent = nextText;
-
-    // Schedule grid
-    schedGrid.innerHTML = Object.entries(SCHEDULE).map(([d, sch]) => {
+    closedNext.textContent = getNextOpenText(opensAt);
+    schedGrid.innerHTML = Object.entries(window.SCHEDULE).map(([d, sch]) => {
       const di = parseInt(d);
       const isToday = di === day;
       let cls = 'closed-sched-item';
       if (isToday) cls += ' today-sched';
       else if (sch) cls += ' is-open-day';
       const hours = sch ? `${sch.open} – ${sch.close}` : 'Closed';
-      const dotCls = sch ? 'sched-dot' : 'sched-dot';
       return `
         <div class="${cls}">
           <span class="sched-dot"></span>
@@ -1387,12 +1349,11 @@ function renderHoursBanner() {
   }
 }
 
-// Run immediately, then re-check every 60 seconds
 renderHoursBanner();
 setInterval(renderHoursBanner, 60000);
 
 /* ═══════════════════════════════════════════════════════════
-   MENU + CART LOGIC (unchanged)
+   MENU DATA
 ═══════════════════════════════════════════════════════════ */
 const SAUCES = [
   { id: 'biggy',    label: 'Biggy',         price: 2 },
@@ -1410,7 +1371,7 @@ let standaloneFriesSize = null;
 let standaloneFriesQty  = 1;
 
 const DELIVERY_ZONES = [
-  { id: 'alliance', name: 'Alliance', fee: 5 },
+  { id: 'alliance', name: 'Alliance', fee: 5  },
   { id: 'kasba',    name: 'Kasba',    fee: 10 },
   { id: 'mehdia',   name: 'Mehdia',   fee: 15 },
 ];
@@ -1485,11 +1446,14 @@ const reviews = [
   { name:'Nora R.',    loc:'Kenitra', stars:5, text:'Ordered via WhatsApp, was super easy. Food arrived in 25 min and everything was perfect. 👏' },
 ];
 
+/* ═══════════════════════════════════════════════════════════
+   CART & MENU STATE
+═══════════════════════════════════════════════════════════ */
 let cart = [];
-let quantities = {};
-let itemSauces = {};
+let quantities    = {};
+let itemSauces    = {};
 let itemFriesSize = {};
-let selectedZone = null;
+let selectedZone  = null;
 let openCategoryId = null;
 
 function getSauces(itemId) {
@@ -1498,7 +1462,7 @@ function getSauces(itemId) {
 }
 function toggleSauce(itemId, sauceId) {
   const set = getSauces(itemId);
-  if (set.has(sauceId)) { set.delete(sauceId); } else { set.add(sauceId); }
+  set.has(sauceId) ? set.delete(sauceId) : set.add(sauceId);
   const chip = document.getElementById(`sauce-${itemId}-${sauceId}`);
   if (chip) chip.classList.toggle('selected', set.has(sauceId));
 }
@@ -1512,7 +1476,7 @@ function getSauceLabels(sauceSet) {
   return [...sauceSet].map(sid => SAUCES.find(x => x.id === sid)?.label).filter(Boolean);
 }
 
-function getFriesSize(itemId) { return itemFriesSize[itemId] || 'small'; }
+function getFriesSize(itemId)  { return itemFriesSize[itemId] || 'small'; }
 function selectFriesSize(itemId, sizeId) {
   itemFriesSize[itemId] = sizeId;
   FRIES_SIZES.forEach(s => {
@@ -1526,13 +1490,11 @@ function selectFriesSize(itemId, sizeId) {
   }
 }
 function getFriesPrice(itemId) {
-  const sizeId = getFriesSize(itemId);
-  const size = FRIES_SIZES.find(x => x.id === sizeId);
+  const size = FRIES_SIZES.find(x => x.id === getFriesSize(itemId));
   return size ? size.price : 7;
 }
 function getFriesSizeLabel(itemId) {
-  const sizeId = getFriesSize(itemId);
-  const size = FRIES_SIZES.find(x => x.id === sizeId);
+  const size = FRIES_SIZES.find(x => x.id === getFriesSize(itemId));
   return size ? size.label : 'Small';
 }
 
@@ -1558,11 +1520,11 @@ function addStandaloneFriesToCart() {
     if (hint) hint.classList.add('show');
     return;
   }
-  const sizeObj = FRIES_SIZES.find(s => s.id === standaloneFriesSize);
-  const qty = standaloneFriesQty;
-  const existing = cart.find(c => c.id === 'fries-standalone' && c.friesSizeLabel === sizeObj.label);
+  const sizeObj   = FRIES_SIZES.find(s => s.id === standaloneFriesSize);
+  const qty       = standaloneFriesQty;
+  const existing  = cart.find(c => c.id === 'fries-standalone' && c.friesSizeLabel === sizeObj.label);
   if (existing) { existing.qty += qty; }
-  else { cart.push({ id: 'fries-standalone', cat: 'fries', name: 'Fries', price: sizeObj.price, qty, sauces: new Set(), sauceCost: 0, friesSizeLabel: sizeObj.label }); }
+  else { cart.push({ id:'fries-standalone', cat:'fries', name:'Fries', price:sizeObj.price, qty, sauces:new Set(), sauceCost:0, friesSizeLabel:sizeObj.label }); }
   standaloneFriesQty = 1;
   const qtyEl = document.getElementById('sf-qty-num');
   if (qtyEl) qtyEl.textContent = 1;
@@ -1617,11 +1579,9 @@ function renderFriesPanel() {
 function renderCategoryGrid() {
   const grid = document.getElementById('categoryGrid');
   let html = '';
-
   CATEGORIES.forEach((cat, idx) => {
     const isFriesCat = cat.id === 'fries';
     const count = isFriesCat ? 2 : menuItems.filter(i => i.cat === cat.id).length;
-
     html += `
       <div class="cat-card reveal" style="animation-delay:${idx * 0.07}s" onclick="toggleCategory('${cat.id}')" id="catcard-${cat.id}" tabindex="0" role="button" aria-label="Open ${cat.label} menu">
         <img src="${cat.img}" alt="${cat.label}" loading="lazy">
@@ -1651,49 +1611,33 @@ function renderCategoryGrid() {
       </div>
     `;
   });
-
   grid.innerHTML = html;
 
   CATEGORIES.forEach(cat => {
     const container = document.getElementById(`items-${cat.id}`);
     if (!container) return;
-
-    if (cat.id === 'fries') {
-      container.innerHTML = renderFriesPanel();
-      return;
-    }
-
+    if (cat.id === 'fries') { container.innerHTML = renderFriesPanel(); return; }
     const items = menuItems.filter(i => i.cat === cat.id);
-    container.innerHTML = items.map((item) => {
+    container.innerHTML = items.map(item => {
       const q = quantities[item.id] || 1;
-      const isGoldBadge = item.badge && (
-        item.badge.includes('🔥') || item.badge === 'Best Seller' ||
-        item.badge === 'Signature' || item.badge === 'Premium'
-      );
-      const badgeHtml = item.badge
-        ? `<span class="item-badge${isGoldBadge ? ' gold' : ''}">${item.badge}</span>`
-        : '';
-
+      const isGoldBadge = item.badge && (item.badge.includes('🔥') || item.badge === 'Best Seller' || item.badge === 'Signature' || item.badge === 'Premium');
+      const badgeHtml = item.badge ? `<span class="item-badge${isGoldBadge ? ' gold' : ''}">${item.badge}</span>` : '';
       let selectorHtml = '';
       if (FRIES_ITEMS.has(item.id)) {
         const defaultSize = getFriesSize(item.id) || 'small';
         const sizeBtns = FRIES_SIZES.map(s => `
           <button class="fries-size-btn${s.id === defaultSize ? ' selected' : ''}" id="fries-size-${item.id}-${s.id}" onclick="selectFriesSize(${item.id},'${s.id}')">
             ${s.label}<span class="fries-size-price">${s.price} DH</span>
-          </button>
-        `).join('');
+          </button>`).join('');
         selectorHtml = `<div class="fries-size-selector"><span class="fries-size-label">Size</span>${sizeBtns}</div>`;
       } else if (cat.id === 'tacos') {
         const sauceChips = SAUCES.map(s => `
           <span class="sauce-chip" id="sauce-${item.id}-${s.id}" onclick="toggleSauce(${item.id},'${s.id}')">
             ${s.label}<span class="sauce-price-tag">+${s.price}</span>
-          </span>
-        `).join('');
+          </span>`).join('');
         selectorHtml = `<div class="sauce-selector"><span class="sauce-label">+ Sauce</span>${sauceChips}</div>`;
       }
-
       const displayPrice = FRIES_ITEMS.has(item.id) ? getFriesPrice(item.id) : item.price;
-
       return `
         <div class="item-row">
           <div class="item-info">
@@ -1712,14 +1656,11 @@ function renderCategoryGrid() {
               <button class="add-cart-btn" id="addbtn-${item.id}" onclick="addToCart(${item.id})">+ Add</button>
             </div>
           </div>
-        </div>
-      `;
+        </div>`;
     }).join('');
   });
 
-  setTimeout(() => {
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  }, 50);
+  setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); }, 50);
 }
 
 function toggleCategory(catId) {
@@ -1731,7 +1672,7 @@ function toggleCategory(catId) {
   if (panel) panel.classList.add('open');
   if (card)  card.classList.add('active');
   if (catId === 'fries') { standaloneFriesSize = null; standaloneFriesQty = 1; }
-  setTimeout(() => { panel && panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
+  setTimeout(() => { panel && panel.scrollIntoView({ behavior:'smooth', block:'nearest' }); }, 60);
 }
 function closeAllPanels() {
   document.querySelectorAll('.items-panel').forEach(p => p.classList.remove('open'));
@@ -1740,10 +1681,8 @@ function closeAllPanels() {
 }
 function closePanel(e, catId) {
   e.stopPropagation();
-  const panel = document.getElementById(`panel-${catId}`);
-  const card  = document.getElementById(`catcard-${catId}`);
-  if (panel) panel.classList.remove('open');
-  if (card)  card.classList.remove('active');
+  document.getElementById(`panel-${catId}`)?.classList.remove('open');
+  document.getElementById(`catcard-${catId}`)?.classList.remove('active');
   if (openCategoryId === catId) openCategoryId = null;
 }
 
@@ -1760,10 +1699,10 @@ function addToCart(id) {
   let effectivePrice = item.price;
 
   if (FRIES_ITEMS.has(id)) {
-    effectivePrice = getFriesPrice(id);
-    friesSizeLabel = getFriesSizeLabel(id);
+    effectivePrice  = getFriesPrice(id);
+    friesSizeLabel  = getFriesSizeLabel(id);
   } else if (item.cat === 'tacos') {
-    sauceSet = new Set(getSauces(id));
+    sauceSet  = new Set(getSauces(id));
     sauceCost = getSauceCost(id);
   }
 
@@ -1782,11 +1721,9 @@ function addToCart(id) {
   itemSauces[id] = new Set();
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) qtyEl.textContent = 1;
-
   if (item.cat === 'tacos' && !FRIES_ITEMS.has(id)) {
     SAUCES.forEach(s => {
-      const chip = document.getElementById(`sauce-${id}-${s.id}`);
-      if (chip) chip.classList.remove('selected');
+      document.getElementById(`sauce-${id}-${s.id}`)?.classList.remove('selected');
     });
   }
 
@@ -1798,20 +1735,20 @@ function addToCart(id) {
   updateCartUI();
 
   let note = '';
-  if (friesSizeLabel) { note = ` · ${friesSizeLabel}`; }
-  else if (sauceSet.size) { note = ` + ${getSauceLabels(sauceSet).join(', ')}`; }
+  if (friesSizeLabel)    note = ` · ${friesSizeLabel}`;
+  else if (sauceSet.size) note = ` + ${getSauceLabels(sauceSet).join(', ')}`;
   showToast(`✓ ${item.name}${note} added`);
 }
 
-function removeFromCart(idx) { cart.splice(idx, 1); updateCartUI(); renderCartItems(); }
+function removeFromCart(idx)  { cart.splice(idx, 1); updateCartUI(); renderCartItems(); }
 function changeCartQty(idx, delta) {
   if (!cart[idx]) return;
   cart[idx].qty = Math.max(1, cart[idx].qty + delta);
   updateCartUI(); renderCartItems();
 }
 
-function getFoodTotal() { return cart.reduce((s, i) => s + (i.price + i.sauceCost) * i.qty, 0); }
-function getDeliveryFee() {
+function getFoodTotal()    { return cart.reduce((s, i) => s + (i.price + i.sauceCost) * i.qty, 0); }
+function getDeliveryFee()  {
   if (!selectedZone) return 0;
   const z = DELIVERY_ZONES.find(x => x.id === selectedZone);
   return z ? z.fee : 0;
@@ -1824,7 +1761,7 @@ function updateCartUI() {
   badge.classList.toggle('show', count > 0);
   const hasItems = cart.length > 0;
   document.getElementById('deliverySection').style.display = hasItems ? 'block' : 'none';
-  document.getElementById('cartFooter').style.display = hasItems ? 'block' : 'none';
+  document.getElementById('cartFooter').style.display      = hasItems ? 'block' : 'none';
   if (hasItems) {
     const foodTotal = getFoodTotal(), deliveryFee = getDeliveryFee(), finalTotal = foodTotal + deliveryFee;
     const zone = DELIVERY_ZONES.find(x => x.id === selectedZone);
@@ -1836,7 +1773,7 @@ function updateCartUI() {
   }
 }
 
-function getCatIcon(catId) { const c = CATEGORIES.find(x => x.id === catId); return c ? c.icon : '🍽️'; }
+function getCatIcon(catId) { return CATEGORIES.find(x => x.id === catId)?.icon || '🍽️'; }
 
 function renderCartItems() {
   const el = document.getElementById('cartItems');
@@ -1845,12 +1782,10 @@ function renderCartItems() {
     return;
   }
   el.innerHTML = cart.map((item, idx) => {
-    const lineTotal = (item.price + item.sauceCost) * item.qty;
-    const sauceLabels = getSauceLabels(item.sauces);
-    const saucesHtml = sauceLabels.length
-      ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>` : '';
-    const friesHtml = item.friesSizeLabel
-      ? `<div class="cart-item-extras"><span>🍟 ${item.friesSizeLabel} — ${item.price} DH</span></div>` : '';
+    const lineTotal    = (item.price + item.sauceCost) * item.qty;
+    const sauceLabels  = getSauceLabels(item.sauces);
+    const saucesHtml   = sauceLabels.length ? `<div class="cart-item-sauces">${sauceLabels.map(l => `<span>${l}</span>`).join('')}</div>` : '';
+    const friesHtml    = item.friesSizeLabel ? `<div class="cart-item-extras"><span>🍟 ${item.friesSizeLabel} — ${item.price} DH</span></div>` : '';
     return `
       <div class="cart-item">
         <div class="cart-item-thumb">${getCatIcon(item.cat)}</div>
@@ -1865,8 +1800,7 @@ function renderCartItems() {
             <button class="cart-rm-btn" onclick="removeFromCart(${idx})">✕</button>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 }
 
@@ -1883,14 +1817,12 @@ function closeCart() {
 }
 
 function renderDeliveryZones() {
-  const container = document.getElementById('deliveryZones');
-  container.innerHTML = DELIVERY_ZONES.map(z => `
+  document.getElementById('deliveryZones').innerHTML = DELIVERY_ZONES.map(z => `
     <div class="delivery-zone-btn${selectedZone === z.id ? ' selected' : ''}" onclick="selectZone('${z.id}')">
       <div class="dz-check">✓</div>
       <span class="dz-name">${z.name}</span>
       <span class="dz-price">${z.fee} DH</span>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function selectZone(zoneId) {
@@ -1906,8 +1838,8 @@ function orderWhatsApp() {
   const foodTotal = getFoodTotal(), deliveryFee = getDeliveryFee(), finalTotal = foodTotal + deliveryFee;
   const lines = cart.map(i => {
     const sauceLabels = getSauceLabels(i.sauces);
-    const saucePart = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
-    const friesPart = i.friesSizeLabel ? `\n   Size: ${i.friesSizeLabel} (${i.price} DH)` : '';
+    const saucePart   = sauceLabels.length ? `\n   Sauces: ${sauceLabels.join(', ')}` : '';
+    const friesPart   = i.friesSizeLabel ? `\n   Size: ${i.friesSizeLabel} (${i.price} DH)` : '';
     return `• ${i.name} x${i.qty}${friesPart}${saucePart} = ${(i.price + i.sauceCost) * i.qty} DH`;
   }).join('\n');
   const msg = encodeURIComponent(
@@ -1926,8 +1858,7 @@ function renderReviews() {
         <div class="review-avatar">${r.name[0]}</div>
         <div><div class="review-name">${r.name}</div><div class="review-location">📍 ${r.loc}</div></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 let toastTimer;
@@ -1947,36 +1878,33 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, { threshold: 0.08 });
 
+/* expose needed functions to inline onclick handlers */
+window.toggleCategory          = toggleCategory;
+window.closePanel              = closePanel;
+window.changeQty               = changeQty;
+window.addToCart               = addToCart;
+window.removeFromCart          = removeFromCart;
+window.changeCartQty           = changeCartQty;
+window.openCart                = openCart;
+window.closeCart               = closeCart;
+window.selectZone              = selectZone;
+window.orderWhatsApp           = orderWhatsApp;
+window.toggleSauce             = toggleSauce;
+window.selectFriesSize         = selectFriesSize;
+window.selectStandaloneFriesSize = selectStandaloneFriesSize;
+window.changeStandaloneFriesQty  = changeStandaloneFriesQty;
+window.addStandaloneFriesToCart  = addStandaloneFriesToCart;
+window.toggleNav               = toggleNav;
+
 renderCategoryGrid();
 renderReviews();
 setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); }, 100);
-// ═══════════════════════════════════════════════════════════════
-// FIREBASE PATCH FOR index.html  —  paste this BEFORE </body>
-// Replace the existing <script type="module"> block at the
-// VERY END of your index.html with this entire block.
-// ═══════════════════════════════════════════════════════════════
 
-/* ── Your existing menu data (keep this exactly as-is) ── */
-// (menuItems, CATEGORIES, SAUCES, FRIES_SIZES, etc. stay the same)
-
-/* ════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    FIREBASE REALTIME SYNC
-   This reads data from Firebase and updates the website.
-════════════════════════════════════════════════════════ */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-// ⚙️ PASTE THE SAME firebaseConfig AS IN admin.html
-const firebaseConfig = {
-  apiKey: "AIzaSyDCEsEnWjc8h73d4TcT_pI1zdBMLE5kB4U",
-  authDomain: "megamed-snack.firebaseapp.com",
-  databaseURL: "https://megamed-snack-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "megamed-snack",
-  storageBucket: "megamed-snack.firebasestorage.app",
-  messagingSenderId: "630486671195",
-  appId: "1:630486671195:web:943b37c2ca22735d84047e"
-};
-
+   Uses the single initializeApp + firebaseConfig declared
+   at the very top of this module — no second import needed.
+═══════════════════════════════════════════════════════════ */
 let firebaseData = {};
 
 function initFirebaseSync() {
@@ -1988,7 +1916,8 @@ function initFirebaseSync() {
       applyFirebaseData();
     });
   } catch(e) {
-    // Firebase not configured yet — website works normally with hardcoded data
+    // Firebase not configured — website works with hardcoded data
+    console.warn('Firebase sync unavailable:', e.message);
   }
 }
 
@@ -2001,37 +1930,29 @@ function applyFirebaseData() {
 
 /* ── 1. OPEN / CLOSED OVERRIDE ── */
 function applyOpenClosed() {
-  const status = firebaseData.status;
+  const status   = firebaseData.status;
   if (!status) return;
-
   const isClosed = (status === 'closed');
 
-  // ── Show / hide the big closed banner ──
-  const banner = document.getElementById('closedOverlayBanner');
-  if (banner) {
-    if (isClosed) {
-      banner.classList.add('show');
-      const sub = document.getElementById('closedBannerSub');
-      if (sub) sub.textContent = 'Nous sommes actuellement fermés. Revenez bientôt !';
-    } else {
-      // Let the schedule engine handle it
-    }
-  }
-
-  // ── Update the hero hours card ──
-  const card = document.getElementById('hoursBannerCard');
-  const mainText = document.getElementById('statusMainText');
+  const card      = document.getElementById('hoursBannerCard');
+  const mainText  = document.getElementById('statusMainText');
   const timeBadge = document.getElementById('statusTimeBadge');
-  const navTxt = document.getElementById('navStatusText');
-  const navDot = document.getElementById('navStatusDot');
+  const navTxt    = document.getElementById('navStatusText');
+  const navDot    = document.getElementById('navStatusDot');
+  const banner    = document.getElementById('closedOverlayBanner');
+  const closedSub = document.getElementById('closedBannerSub');
 
-  if (card && isClosed) {
-    card.classList.remove('is-open');
-    card.classList.add('is-closed');
-    if (mainText) mainText.textContent = 'Nous sommes fermés';
-    if (timeBadge) timeBadge.textContent = 'Fermé par le gérant';
-    if (navDot) navDot.textContent = '🔴 ';
-    if (navTxt) navTxt.textContent = 'Fermé';
+  if (isClosed) {
+    if (card)      { card.classList.remove('is-open'); card.classList.add('is-closed'); }
+    if (mainText)  mainText.textContent  = 'We Are Currently Closed';
+    if (timeBadge) timeBadge.textContent = 'Closed by manager';
+    if (navDot)    navDot.textContent    = '🔴 ';
+    if (navTxt)    navTxt.textContent    = 'Closed';
+    if (banner)    banner.classList.add('show');
+    if (closedSub) closedSub.textContent = 'Sorry, we are currently closed. Come back soon!';
+  } else {
+    // Re-run the schedule engine so open state is calculated correctly
+    renderHoursBanner();
   }
 }
 
@@ -2039,85 +1960,59 @@ function applyOpenClosed() {
 function applyHours() {
   const hours = firebaseData.hours;
   if (!hours) return;
-
-  // Rebuild the SCHEDULE object that renderHoursBanner() uses
-  // We override the global SCHEDULE variable
   Object.entries(hours).forEach(([d, sch]) => {
-    if (sch.closed || !sch.open) {
-      window.SCHEDULE[d] = null;
-    } else {
-      window.SCHEDULE[d] = { open: sch.open, close: sch.close };
-    }
+    window.SCHEDULE[d] = (sch.closed || !sch.open) ? null : { open: sch.open, close: sch.close };
   });
-
-  // Re-render the hours banner with new schedule
   renderHoursBanner();
 }
 
-/* ── 3. PRODUCTS: prices, names, availability ── */
+/* ── 3. PRODUCTS ── */
 function applyProducts() {
   const products = firebaseData.products;
   if (!products || !Array.isArray(products)) return;
-
-  // Update the global menuItems array
   products.forEach(fbItem => {
     const local = menuItems.find(m => m.id === fbItem.id);
     if (local) {
-      local.name  = fbItem.name;
-      local.price = fbItem.price;
-      local.available = fbItem.available !== false; // default true
-      local.badge = local.available ? local.badge : 'Non disponible';
+      local.name      = fbItem.name;
+      local.price     = fbItem.price;
+      local.available = fbItem.available !== false;
     }
   });
-
-  // Re-render the category grid to reflect changes
   renderCategoryGrid();
-
-  // If a panel is currently open, re-apply availability to visible items
   applyAvailabilityUI(products);
 }
 
 function applyAvailabilityUI(products) {
   products.forEach(fbItem => {
     const isAvailable = fbItem.available !== false;
-
-    // Disable add-to-cart button if unavailable
     const btn = document.getElementById(`addbtn-${fbItem.id}`);
     if (btn) {
       if (!isAvailable) {
-        btn.disabled = true;
-        btn.textContent = '❌ Non dispo';
+        btn.disabled        = true;
+        btn.textContent     = '❌ Non dispo';
         btn.style.background = 'rgba(239,68,68,0.12)';
-        btn.style.color = 'var(--red, #ef4444)';
-        btn.style.boxShadow = 'none';
-        btn.style.cursor = 'not-allowed';
+        btn.style.color      = 'var(--closed-red)';
+        btn.style.boxShadow  = 'none';
+        btn.style.cursor     = 'not-allowed';
       } else {
-        btn.disabled = false;
+        btn.disabled    = false;
         btn.textContent = '+ Add';
-        btn.style = '';
+        btn.style.cssText = '';
       }
     }
-
-    // Show / update price if changed
     const priceEl = document.getElementById(`price-display-${fbItem.id}`);
-    if (priceEl) {
-      priceEl.innerHTML = `${fbItem.price} <small>DH</small>`;
-    }
+    if (priceEl) priceEl.innerHTML = `${fbItem.price} <small>DH</small>`;
   });
 }
 
 /* ── 4. OFFERS ── */
 function applyOffers() {
   const offers = firebaseData.offers;
-  if (!offers || !offers.length) return;
-
-  // If there's an existing offers section, update it
-  // Or inject one into the hero if desired
-  // For now, we update the menu items array with any matching offers
-  // and log them (you can display them wherever you like)
-  console.log('Active offers:', offers);
-
-  // Simple approach: show offers as a banner above the menu
+  if (!offers || !offers.length) {
+    const existing = document.getElementById('fb-offer-bar');
+    if (existing) existing.remove();
+    return;
+  }
   let offerBar = document.getElementById('fb-offer-bar');
   if (!offerBar) {
     offerBar = document.createElement('div');
@@ -2133,22 +2028,15 @@ function applyOffers() {
     const menu = document.getElementById('menu');
     if (menu) menu.insertBefore(offerBar, menu.firstChild);
   }
-
   offerBar.innerHTML = `
-    <span style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,200,66,0.6)">🔥 Offres Spéciales</span>
+    <span style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,200,66,0.6)">🔥 Special Offers</span>
     ${offers.map(o => `
-      <span style="
-        background:rgba(245,200,66,0.12);
-        border:1px solid rgba(245,200,66,0.3);
-        color:#f5c842;
-        font-size:0.82rem; font-weight:600;
-        padding:5px 14px; border-radius:50px;
-      ">${o.text} — <strong>${o.price} DH</strong></span>
-    `).join('')}
+      <span style="background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.3);color:#f5c842;font-size:0.82rem;font-weight:600;padding:5px 14px;border-radius:50px;">
+        ${o.text} — <strong>${o.price} DH</strong>
+      </span>`).join('')}
   `;
 }
 
-// Initialise Firebase sync on page load
 initFirebaseSync();
 </script>
 </body>
